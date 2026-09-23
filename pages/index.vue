@@ -21,10 +21,10 @@
             Empowering the Next Generation of Scientists
           </div>
           <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-            The Professional Network for <br class="hidden md:block"/> <span class="text-brand">MLS Interns</span>
+            The Ultimate Network for <br class="hidden md:block"/> <span class="text-brand">MLS Students</span>
           </h1>
           <p class="text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto">
-            Access specialized clinical resources, connect with experienced mentors, and navigate your 24-month internship with absolute confidence.
+            Access specialized study materials, connect with experienced mentors, and navigate your academic journey with absolute confidence.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
             <NuxtLink to="/register" class="bg-brand hover:bg-[#1f4e70] text-white px-8 py-2 rounded-lg text-lg font-medium transition-colors inline-block w-full sm:w-auto text-center border border-transparent">
@@ -55,12 +55,12 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100 text-center">
           <div class="px-4">
-            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">500+</div>
-            <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Verified Interns</div>
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">5k+</div>
+            <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Verified Students</div>
           </div>
           <div class="px-4">
             <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">10k+</div>
-            <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Clinical Resources</div>
+            <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Study Resources</div>
           </div>
           <div class="px-4">
             <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">150+</div>
@@ -79,7 +79,7 @@
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Everything You Need to Succeed</h2>
-          <p class="text-lg text-gray-600">A complete ecosystem designed exclusively for the demands of the modern Medical Laboratory Science internship.</p>
+          <p class="text-lg text-gray-600">A complete ecosystem designed exclusively for the demands of the modern University student.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -94,7 +94,7 @@
                 <Folder class="w-6 h-6" />
               </div>
               <h3 class="text-2xl font-bold text-gray-900 mb-3 mt-4">The Vault</h3>
-              <p class="text-gray-600 flex-1 leading-relaxed">Access curated study materials, past questions, and clinical bench guides maintained and vetted by the community.</p>
+              <p class="text-gray-600 flex-1 leading-relaxed">Access curated study materials, past questions, and academic bench guides maintained and vetted by the community.</p>
             </div>
           </div>
 
@@ -109,7 +109,7 @@
                 <Users class="w-6 h-6" />
               </div>
               <h3 class="text-2xl font-bold text-gray-900 mb-3 mt-4">Expert Mentorship</h3>
-              <p class="text-gray-600 flex-1 leading-relaxed">Connect directly with senior scientists who have navigated the intricacies of the internship and advanced their careers.</p>
+              <p class="text-gray-600 flex-1 leading-relaxed">Connect directly with senior students and professionals who have navigated the intricacies of the exams and lab practicals.</p>
             </div>
           </div>
 
@@ -124,7 +124,7 @@
                 <Briefcase class="w-6 h-6" />
               </div>
               <h3 class="text-2xl font-bold text-gray-900 mb-3 mt-4">Career Hub</h3>
-              <p class="text-gray-600 flex-1 leading-relaxed">Prepare for post-internship life with resume reviews, interview prep, and exclusive job postings from top laboratories.</p>
+              <p class="text-gray-600 flex-1 leading-relaxed">Prepare for graduation with resume reviews, interview prep, and exclusive academic and entry-level postings.</p>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
             Strictly Verified.<br/>Exclusive 2-Year Access.
           </h2>
           <p class="text-lg text-gray-600 leading-relaxed">
-            To maintain the highest quality and relevance of our community, access is strictly verified. We manually review every applicant's credentials to ensure they are actively participating in the Medical Laboratory Science internship.
+            To maintain the highest quality and relevance of our community, access is strictly verified. We manually review every applicant's credentials to ensure they are an actively participating University student.
           </p>
           <ul class="space-y-4 pt-4">
             <li class="flex items-start gap-3">
@@ -167,7 +167,7 @@
         </div>
         <div class="w-full lg:w-1/2">
           <div class="relative rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-            <img src="/images/lab_hero_scientist_1789856614097.jpg" alt="Medical Laboratory Science Verification" class="w-full h-auto object-cover" />
+            <img src="/images/lab_hero_scientist_1789856614097.jpg" alt="University Verification" class="w-full h-auto object-cover" />
             <div class="absolute inset-0 bg-gradient-to-tr from-brand/20 to-transparent mix-blend-multiply"></div>
           </div>
         </div>
@@ -179,7 +179,7 @@
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Hear From Our Interns</h2>
-          <p class="text-lg text-gray-600">See how InternTional has transformed the internship experience for hundreds of medical laboratory scientists.</p>
+          <p class="text-lg text-gray-600">See how UniVerse has transformed the university experience for hundreds of students.</p>
         </div>
         <div class="relative max-w-4xl mx-auto">
           <div class="overflow-hidden relative">
@@ -224,7 +224,7 @@
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16 space-y-4">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h2>
-          <p class="text-lg text-gray-600">Everything you need to know about the InternTional ecosystem.</p>
+          <p class="text-lg text-gray-600">Everything you need to know about the UniVerse ecosystem.</p>
         </div>
         
         <div class="space-y-4">
@@ -261,7 +261,7 @@
         </div>
         
         <div class="text-center">
-          <NuxtLink to="/pricing" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-brand hover:bg-[#1f4e70] rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+          <NuxtLink to="/pricing" class="inline-flex items-center justify-center px-8 py-2.5 text-lg font-medium text-white bg-brand hover:bg-[#1f4e70] rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
             View Subscription Plans
             <ArrowRight class="ml-2 w-5 h-5" />
           </NuxtLink>
@@ -369,10 +369,10 @@ import { Folder, Users, Briefcase, Check, ChevronDown } from 'lucide-vue-next';
 import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
 
 useSeoMeta({
-  title: 'InternTional - Medical Laboratory Science Community',
-  description: 'Connect with mentors, access premium clinical guides, and elevate your MLS internship.',
-  ogTitle: 'InternTional - Medical Laboratory Science Community',
-  ogDescription: 'Connect with mentors, access premium clinical guides, and elevate your MLS internship.',
+  title: 'UniVerse - University Student Community',
+  description: 'The premier ecosystem and community for University Students.',
+  ogTitle: 'UniVerse - University Student Community',
+  ogDescription: 'The premier ecosystem and community for University Students.',
   ogImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop',
   twitterCard: 'summary_large_image',
 })
@@ -411,7 +411,7 @@ const testimonials = [
 // FAQs
 const openFaq = ref<number | null>(null);
 const faqs = [
-  { question: 'Who is eligible to join?', answer: 'Only actively participating Medical Laboratory Science interns are eligible. Access is strictly limited to the 24-month duration of the internship.' },
+  { question: 'Who is eligible to join?', answer: 'Only actively participating University students are eligible. Access is strictly limited to the duration of your study.' },
   { question: 'How does the verification process work?', answer: 'You must upload a copy of your institutional posting letter during registration. Our admin team manually reviews this to verify your status before granting access.' },
   { question: 'What happens after 24 months?', answer: 'Your standard intern access will automatically expire. However, you will have the option to transition to the Mentorship tier if you wish to guide future interns.' },
   { question: 'Is the study material in The Vault updated?', answer: 'Yes, The Vault is actively maintained and crowdsourced by the community, ensuring materials are relevant and up to date.' },

@@ -117,10 +117,10 @@
              <label class="block text-sm font-medium text-gray-700 mb-2">How would you describe yourself?</label>
              <div class="grid grid-cols-2 gap-4">
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Current Intern
+                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Current Student
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Prospective Intern
+                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Prospective Student
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
                  <input type="radio" name="role" class="text-brand focus:ring-brand" /> Mentor
@@ -226,8 +226,8 @@
 import { useSeoMeta, useHead } from '#imports';
 import { Mail, MessageSquare, Phone, MapPin } from 'lucide-vue-next';
 
-useSeoMeta({ title: 'Contact Us | InternTional Ecosystem' });
-useHead({ title: 'Contact Us | InternTional Ecosystem' });
+useSeoMeta({ title: 'Contact Us | UniVerse Ecosystem' });
+useHead({ title: 'Contact Us | UniVerse Ecosystem' });
 
 const scrollToForm = () => {
   document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });

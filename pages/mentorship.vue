@@ -68,7 +68,7 @@
              <Award class="w-5 h-5" />
            </div>
            <h3 class="font-bold text-gray-900 mb-2">Certification guidance</h3>
-           <p class="text-sm text-gray-600">Navigate the certifications that matter and understand what they mean for your career.</p>
+           <p class="text-sm text-gray-600">Navigate the certifications that matter and understand what they mean for your academic progression.</p>
         </div>
       </div>
       
@@ -82,7 +82,7 @@
     <section class="py-12 bg-white flex flex-col md:flex-row items-center justify-between gap-12 max-w-5xl mx-auto border-t border-b border-gray-100">
       <div class="md:w-1/3">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">Real outcomes</h2>
-        <p class="text-gray-600">Interns who found their way.</p>
+        <p class="text-gray-600">Students who found their way.</p>
       </div>
       <div class="md:w-2/3 bg-gray-50 p-8 rounded-xl border border-gray-200">
          <div class="flex text-yellow-400 mb-4">
@@ -93,7 +93,7 @@
            <div class="w-10 h-10 bg-gray-300 rounded-full"></div>
            <div>
              <h4 class="text-sm font-bold text-gray-900">David Mitchell</h4>
-             <p class="text-xs text-gray-500">Laboratory Intern, Clina</p>
+             <p class="text-xs text-gray-500">Laboratory Student, Clina</p>
            </div>
          </div>
       </div>
@@ -141,7 +141,7 @@
           <div class="w-20 h-20 bg-gray-200 rounded-full mb-4 flex items-center justify-center"><User class="text-gray-400 w-8 h-8"/></div>
           <h4 class="font-bold text-gray-900">Michael Barnes</h4>
           <p class="text-xs text-brand font-medium mb-3">Operations Manager</p>
-          <p class="text-xs text-gray-500 text-center">Knows the business side and how to navigate career growth strategically.</p>
+          <p class="text-xs text-gray-500 text-center">Knows the business side and how to navigate academic growth strategically.</p>
         </div>
         <!-- Profile 4 -->
         <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 flex flex-col items-center">
@@ -198,6 +198,6 @@ import { useSeoMeta, useHead } from '#imports';
 import { CheckCircle, ArrowRight, MessageSquare, FileText, Award, Star, User } from 'lucide-vue-next';
 
 definePageMeta({ layout: 'dashboard' });
-useSeoMeta({ title: 'Mentorship Matcher | InternTional Ecosystem' });
-useHead({ title: 'Mentorship Matcher | InternTional Ecosystem' });
+useSeoMeta({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
+useHead({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
 </script>

@@ -5,7 +5,7 @@
       <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop" alt="Microscope" class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0 bg-brand/90 flex flex-col justify-between p-12">
         <NuxtLink to="/">
-          <img src="~/assets/logo.jpg" class="h-10 w-auto rounded-lg" alt="InternTional Logo" />
+          <img src="~/assets/logo.jpg" class="h-10 w-auto rounded-lg" alt="UniVerse Logo" />
         </NuxtLink>
         <div class="text-white space-y-4 max-w-md">
           <h2 class="text-4xl font-medium leading-tight">Join the exclusive community.</h2>
@@ -19,7 +19,7 @@
       <div class="w-full max-w-xl">
         <div class="mb-10 lg:hidden text-center">
           <NuxtLink to="/">
-            <img src="~/assets/logo-icon.png" class="h-8 w-auto mx-auto mb-2" alt="InternTional Logo" />
+            <img src="~/assets/logo-icon.png" class="h-8 w-auto mx-auto mb-2" alt="UniVerse Logo" />
           </NuxtLink>
         </div>
         
@@ -36,7 +36,7 @@
 
         <div v-else>
           <h2 class="text-3xl font-medium text-gray-900 mb-2">Apply for Membership</h2>
-          <p class="text-gray-500 mb-8">InternTional is exclusive to verified MLS interns.</p>
+          <p class="text-gray-500 mb-8">UniVerse is exclusive to verified University Students.</p>
 
           <form @submit.prevent="handleRegister" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -102,10 +102,10 @@
 import { useSeoMeta } from '#imports';
 
 useSeoMeta({
-  title: 'Apply for Membership - InternTional',
-  description: 'Join the exclusive community of verified Medical Laboratory Science interns.',
-  ogTitle: 'Apply for Membership - InternTional',
-  ogDescription: 'Join the exclusive community of verified Medical Laboratory Science interns.',
+  title: 'Apply for Membership - UniVerse',
+  description: 'Join the exclusive community of verified University Students.',
+  ogTitle: 'Apply for Membership - UniVerse',
+  ogDescription: 'Join the exclusive community of verified University Students.',
   ogImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop',
   twitterCard: 'summary_large_image',
 })

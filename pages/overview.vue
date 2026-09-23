@@ -94,7 +94,7 @@
              <img src="/documents_verify.jpg" class="w-full h-full object-cover" />
           </div>
           <div class="p-8 md:w-2/3">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">Career hub</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Academic hub</h3>
             <p class="text-gray-600 mb-4">Analyze listings and discover opportunities tailored to your steps. Start finding and track your progress through each application.</p>
             <NuxtLink to="/career" class="text-brand font-medium text-sm group-hover:underline">View Jobs &rarr;</NuxtLink>
           </div>
@@ -123,6 +123,6 @@ import { useSeoMeta, useHead } from '#imports';
 import { Play, ArrowRight } from 'lucide-vue-next';
 
 definePageMeta({ layout: 'dashboard' });
-useSeoMeta({ title: 'Overview | InternTional Ecosystem' });
-useHead({ title: 'Overview | InternTional Ecosystem' });
+useSeoMeta({ title: 'Overview | UniVerse Ecosystem' });
+useHead({ title: 'Overview | UniVerse Ecosystem' });
 </script>

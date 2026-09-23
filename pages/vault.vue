@@ -150,7 +150,7 @@
             <span class="transition group-open:rotate-180">+</span>
           </summary>
           <div class="px-6 pb-6 text-gray-600">
-            Your plan includes premium storage. Most interns never hit the limit. Upgrade anytime if you need more space for your collection.
+            Your plan includes premium storage. Most students never hit the limit. Upgrade anytime if you need more space for your collection.
           </div>
         </details>
       </div>
@@ -183,6 +183,6 @@ import { useSeoMeta, useHead } from '#imports';
 import { Microscope, Bug } from 'lucide-vue-next';
 
 definePageMeta({ layout: 'dashboard' });
-useSeoMeta({ title: 'The Vault | InternTional Ecosystem' });
-useHead({ title: 'The Vault | InternTional Ecosystem' });
+useSeoMeta({ title: 'The Vault | UniVerse Ecosystem' });
+useHead({ title: 'The Vault | UniVerse Ecosystem' });
 </script>

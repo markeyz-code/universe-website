@@ -5,7 +5,7 @@
       <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop" alt="Laboratory" class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0 bg-brand/90 flex flex-col justify-between p-12">
         <NuxtLink to="/">
-          <img src="~/assets/logo.jpg" class="h-10 w-auto rounded-lg" alt="InternTional Logo" />
+          <img src="~/assets/logo.jpg" class="h-10 w-auto rounded-lg" alt="UniVerse Logo" />
         </NuxtLink>
         <div class="text-white space-y-4 max-w-md">
           <h2 class="text-4xl font-medium leading-tight">Welcome back to the intern ecosystem.</h2>
@@ -19,7 +19,7 @@
       <div class="w-full max-w-md">
         <div class="mb-10 lg:hidden text-center">
           <NuxtLink to="/">
-            <img src="~/assets/logo-icon.png" class="h-8 w-auto mx-auto mb-2" alt="InternTional Logo" />
+            <img src="~/assets/logo-icon.png" class="h-8 w-auto mx-auto mb-2" alt="UniVerse Logo" />
           </NuxtLink>
         </div>
         
@@ -76,10 +76,10 @@
 import { useSeoMeta } from '#imports';
 
 useSeoMeta({
-  title: 'Login - InternTional',
-  description: 'Sign in to access your InternTional account and community resources.',
-  ogTitle: 'Login - InternTional',
-  ogDescription: 'Sign in to access your InternTional account and community resources.',
+  title: 'Login - UniVerse',
+  description: 'Sign in to access your UniVerse account and community resources.',
+  ogTitle: 'Login - UniVerse',
+  ogDescription: 'Sign in to access your UniVerse account and community resources.',
   ogImage: 'https://images.unsplash.com/photo-1579154204601-52ee6c23b202?q=80&w=2000&auto=format&fit=crop',
   twitterCard: 'summary_large_image',
 })

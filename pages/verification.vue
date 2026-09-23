@@ -35,8 +35,8 @@ import { useSeoMeta, useHead } from '#imports';
 import { FileCheck } from 'lucide-vue-next';
 import { useRouter } from 'vue-router';
 
-useSeoMeta({ title: 'Verification Status | InternTional Ecosystem' });
-useHead({ title: 'Verification Status | InternTional Ecosystem' });
+useSeoMeta({ title: 'Verification Status | UniVerse Ecosystem' });
+useHead({ title: 'Verification Status | UniVerse Ecosystem' });
 
 const router = useRouter();
 

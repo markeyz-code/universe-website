@@ -4,7 +4,7 @@
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div class="flex items-center space-x-4">
           <NuxtLink to="/" class="flex items-center gap-2">
-          <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg" alt="InternTional Logo" />
+          <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg" alt="UniVerse Logo" />
           </NuxtLink>
         </div>
         <div class="flex items-center space-x-6">
@@ -23,9 +23,9 @@
     <footer class="bg-white border-t border-gray-200 py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg" alt="InternTional Logo" />
+          <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg" alt="UniVerse Logo" />
           <div class="text-sm text-gray-500">
-            &copy; {{ new Date().getFullYear() }} InternTional Ecosystem. All rights reserved.
+            &copy; {{ new Date().getFullYear() }} UniVerse Ecosystem. All rights reserved.
           </div>
         </div>
       </div>

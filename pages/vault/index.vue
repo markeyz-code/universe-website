@@ -87,10 +87,10 @@
 import { useSeoMeta } from '#imports';
 
 useSeoMeta({
-  title: 'The Vault - InternTional',
-  description: 'Access curated clinical resources and study materials for your MLS internship.',
-  ogTitle: 'The Vault - InternTional',
-  ogDescription: 'Access curated clinical resources and study materials for your MLS internship.',
+  title: 'The Vault - UniVerse',
+  description: 'Access curated clinical resources and study materials for your MLS studies.',
+  ogTitle: 'The Vault - UniVerse',
+  ogDescription: 'Access curated clinical resources and study materials for your MLS studies.',
   ogImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop',
   twitterCard: 'summary_large_image',
 })

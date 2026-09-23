@@ -2,9 +2,9 @@
   <div class="space-y-16">
     <!-- Hero Section -->
     <section class="text-center max-w-3xl mx-auto pt-8">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Start Your Professional Career</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Start Your Academic Journey</h1>
       <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-        Explore internship placements and entry-level scientist roles at top diagnostic centers and hospitals across Nigeria.
+        Explore study groups, research projects, and student placements at top diagnostic centers and universities across Nigeria.
       </p>
       <div class="flex justify-center gap-4">
         <button class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
@@ -21,7 +21,7 @@
       <div class="text-center mb-12">
         <span class="text-sm font-semibold text-gray-500 tracking-wider uppercase mb-2 block">Openings</span>
         <h2 class="text-3xl font-bold text-gray-900 mb-2">Active positions available now</h2>
-        <p class="text-gray-600">Browse internships and entry-level roles across facilities.</p>
+        <p class="text-gray-600">Browse research projects and study groups across facilities.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-6xl mx-auto">
@@ -31,11 +31,11 @@
              <img src="/documents_verify.jpg" class="w-full h-full object-cover" />
           </div>
           <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Research intern at UCH, Ibadan</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Research Assistant (Student) at UCH, Ibadan</h3>
             <p class="text-xs text-gray-500 mb-4">Ibadan. Deadline March 15, 2024.</p>
             <div class="flex flex-wrap gap-2 mb-6">
               <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Research</span>
-              <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Internship</span>
+              <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Study Group</span>
               <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">UCH</span>
             </div>
             <button class="text-sm text-brand font-medium hover:underline">View role &rarr;</button>
@@ -48,7 +48,7 @@
              <img src="/vault_microscope.jpg" class="w-full h-full object-cover" />
           </div>
           <div class="p-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Laboratory Intern at Clina lab</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Student Lab Assistant at Clina lab</h3>
             <p class="text-xs text-gray-500 mb-4">Lagos. Deadline April 1, 2024.</p>
             <div class="flex flex-wrap gap-2 mb-6">
               <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Laboratory</span>
@@ -69,7 +69,7 @@
             <p class="text-xs text-gray-500 mb-4">Abuja. Deadline March 30, 2024.</p>
             <div class="flex flex-wrap gap-2 mb-6">
               <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Diagnostic</span>
-              <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Internship</span>
+              <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Student Placement</span>
               <span class="px-3 py-1 bg-gray-100 text-xs text-gray-600 rounded">Abuja</span>
             </div>
             <button class="text-sm text-brand font-medium hover:underline">View role &rarr;</button>
@@ -82,22 +82,22 @@
       </div>
     </section>
 
-    <!-- Intern feedback -->
+    <!-- Student feedback -->
     <section class="py-12 bg-white flex flex-col md:flex-row items-center justify-between gap-12 max-w-5xl mx-auto border-t border-b border-gray-100">
       <div class="md:w-1/3">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Intern feedback</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Student feedback</h2>
         <p class="text-gray-600">What others say about their experience.</p>
       </div>
       <div class="md:w-2/3 bg-gray-50 p-8 rounded-xl border border-gray-200">
          <div class="flex text-yellow-400 mb-4">
            <Star v-for="i in 5" :key="i" class="w-4 h-4 fill-current" />
          </div>
-         <p class="text-lg text-gray-900 font-medium mb-6">"I found my current placement through this board just two weeks after my induction. The process was seamless."</p>
+         <p class="text-lg text-gray-900 font-medium mb-6">"I found my current study group through this board just two weeks after my exams. The process was seamless."</p>
          <div class="flex items-center gap-3">
            <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 text-xs font-bold">SM</div>
            <div>
              <h4 class="text-sm font-bold text-gray-900">Sarah Mitchell</h4>
-             <p class="text-xs text-gray-500">MLS Intern, UITH, Ilorin.</p>
+             <p class="text-xs text-gray-500">MLS Student, UITH, Ilorin.</p>
            </div>
          </div>
       </div>
@@ -152,7 +152,7 @@
       <div class="absolute inset-0 bg-gray-900/60 z-10 mix-blend-multiply"></div>
       <img src="/community_network.jpg" class="absolute inset-0 w-full h-full object-cover" />
       <div class="relative z-20 py-20 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Ready to start your career?</h2>
+        <h2 class="text-3xl font-bold text-white mb-4">Ready to accelerate your studies?</h2>
         <p class="text-lg text-gray-200 mb-8 max-w-xl mx-auto">Apply now or explore more opportunities in the community.</p>
         <div class="flex justify-center gap-4">
           <button class="px-8 py-3 bg-white text-gray-900 rounded font-bold hover:bg-gray-100 transition-colors">Apply</button>
@@ -168,6 +168,6 @@ import { useSeoMeta, useHead } from '#imports';
 import { Star } from 'lucide-vue-next';
 
 definePageMeta({ layout: 'dashboard' });
-useSeoMeta({ title: 'Career Hub | InternTional Ecosystem' });
-useHead({ title: 'Career Hub | InternTional Ecosystem' });
+useSeoMeta({ title: 'Academic Hub | UniVerse Ecosystem' });
+useHead({ title: 'Academic Hub | UniVerse Ecosystem' });
 </script>

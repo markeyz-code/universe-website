@@ -28,7 +28,7 @@
             <span class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 block">01 Discussions</span>
             <h2 class="text-3xl font-bold text-gray-900 mb-4">Where ideas meet real experience</h2>
             <p class="text-lg text-gray-600 mb-8">
-              Post questions, start debates, and learn from those further down their career path. See what experts in Medical Laboratory science are talking about.
+              Post questions, start debates, and learn from those further down their academic path. See what experts in Medical Laboratory science are talking about.
             </p>
             <NuxtLink to="/register" class="text-brand font-medium hover:text-[#1f4e70] flex items-center gap-2">
               Browse <ArrowRight class="w-4 h-4" />
@@ -109,7 +109,7 @@
                 <span class="flex items-center"><Video class="w-4 h-4 mr-1"/> Virtual</span>
               </div>
               <h3 class="font-bold text-gray-900 mb-2">Find your summer mentor</h3>
-              <p class="text-sm text-gray-600 mb-4">Hear how top labs select their interns and what they look for.</p>
+              <p class="text-sm text-gray-600 mb-4">Hear how top labs select their student groups and what they look for.</p>
               <NuxtLink to="/register" class="text-brand text-sm font-medium">RSVP &rarr;</NuxtLink>
             </div>
           </div>
@@ -170,7 +170,7 @@
     <section class="bg-gray-900 py-24 relative overflow-hidden">
       <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
         <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to find your people?</h2>
-        <p class="text-xl text-gray-300 mb-10">Join thousands of professionals building their careers today.</p>
+        <p class="text-xl text-gray-300 mb-10">Join thousands of students building their studies today.</p>
         <NuxtLink to="/register" class="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition-colors inline-block">
           Join Now
         </NuxtLink>
@@ -184,6 +184,6 @@
 import { useSeoMeta, useHead } from '#imports';
 import { ArrowRight, Calendar, Video, MapPin } from 'lucide-vue-next';
 
-useSeoMeta({ title: 'Community | InternTional Ecosystem' });
-useHead({ title: 'Community | InternTional Ecosystem' });
+useSeoMeta({ title: 'Community | UniVerse Ecosystem' });
+useHead({ title: 'Community | UniVerse Ecosystem' });
 </script>

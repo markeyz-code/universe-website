@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <aside class="w-64 bg-white border-r border-gray-200 flex-shrink-0 hidden lg:flex flex-col z-20">
       <div class="h-16 flex items-center px-6 border-b border-gray-200">
-        <img src="~/assets/logo-icon.png" class="h-8 w-auto" alt="InternTional Logo" />
+        <img src="~/assets/logo-icon.png" class="h-8 w-auto" alt="UniVerse Logo" />
       </div>
       
       <div class="px-4 py-6">
@@ -48,7 +48,7 @@
     <div class="flex-1 flex flex-col min-w-0">
       <!-- Mobile Header -->
       <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:hidden">
-        <img src="~/assets/logo-icon.png" class="h-8 w-auto" alt="InternTional Logo" />
+        <img src="~/assets/logo-icon.png" class="h-8 w-auto" alt="UniVerse Logo" />
         <button class="p-2 text-gray-600 hover:bg-gray-100 rounded">
           <Menu class="w-6 h-6" />
         </button>

@@ -3,7 +3,7 @@ import axios from 'axios';
 const getBaseUrl = () => {
   return process.env.NODE_ENV === 'production'
     ? 'https://api.interntional.medlabconvo.com/api/v1'
-    : 'http://localhost:3001/api/v1';
+    : 'http://localhost:4000/api/v1';
 };
 
 // Public endpoint – no auth header needed

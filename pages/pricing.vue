@@ -4,9 +4,9 @@
     <section class="pt-24 pb-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-3 block">Plans</span>
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Intern membership</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Student membership</h1>
         <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-          Choose the plan that fits your needs.
+          Choose the plan that fits your academic needs.
         </p>
 
         <!-- Toggle (Monthly/Yearly visual only for now as requested by mockup) -->
@@ -104,8 +104,8 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-16 max-w-2xl">
           <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-2 block">Included</span>
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need to build your career</h2>
-          <p class="text-lg text-gray-600 mb-6">Comprehensive tools, resources, and connections to get you through the internship program and into a successful career.</p>
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need to succeed in your studies</h2>
+          <p class="text-lg text-gray-600 mb-6">Comprehensive tools, resources, and connections to get you through exams, lab practicals, and into a successful academic program.</p>
           <NuxtLink to="/register" class="text-brand font-medium hover:text-[#1f4e70] flex items-center gap-2">
             Explore <ArrowRight class="w-4 h-4" />
           </NuxtLink>
@@ -119,7 +119,7 @@
             </div>
             <div class="md:w-1/2">
               <h3 class="text-2xl font-bold text-gray-900 mb-4">Vault access</h3>
-              <p class="text-gray-600">Downloadable resources, templates, and frameworks. From CV writing guides to lab protocols and internship logs.</p>
+              <p class="text-gray-600">Downloadable resources, templates, and frameworks. From study guides to lab protocols and practical logs.</p>
             </div>
           </div>
           
@@ -130,7 +130,7 @@
             </div>
             <div class="md:w-1/2">
               <h3 class="text-2xl font-bold text-gray-900 mb-4">Mentorship connections</h3>
-              <p class="text-gray-600">Connect with senior professionals in the field. Get guidance on your career trajectory, advice on navigating the hospital environment, and more.</p>
+              <p class="text-gray-600">Connect with senior professionals in the field. Get guidance on your academic trajectory, advice on navigating the university environment, and more.</p>
             </div>
           </div>
           
@@ -140,8 +140,8 @@
               <div class="rounded-xl shadow-md w-full h-64 bg-gray-200"></div>
             </div>
             <div class="md:w-1/2">
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">Job Board listings</h3>
-              <p class="text-gray-600">Exclusive access to specific roles across hospitals, clinics, and labs that are actively seeking trained professionals.</p>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">Academic & Entry-level listings</h3>
+              <p class="text-gray-600">Exclusive access to specific research assistant positions and study groups across top institutions.</p>
             </div>
           </div>
         </div>
@@ -219,8 +219,8 @@ import { useSubscriptions } from '@/composables/modules/subscriptions/useSubscri
 import { usePayments } from '@/composables/modules/payments/usePayments';
 import { useAuth } from '@/composables/core/useAuth';
 
-useSeoMeta({ title: 'Intern Membership | InternTional Ecosystem' });
-useHead({ title: 'Intern Membership | InternTional Ecosystem' });
+useSeoMeta({ title: 'Student Membership | UniVerse Ecosystem' });
+useHead({ title: 'Student Membership | UniVerse Ecosystem' });
 
 const router = useRouter();
 const route = useRoute();

@@ -6,7 +6,7 @@
         <span class="text-sm font-semibold text-brand uppercase tracking-wider mb-4 block">Begin</span>
         <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight">Start your journey</h1>
         <p class="text-xl text-gray-600 mb-10">
-          Everything you need to get started as an intern in our community.
+          Everything you need to get started as a student in our community.
         </p>
         <div class="flex justify-center gap-4">
           <NuxtLink to="/register" class="bg-brand text-white px-8 py-3 rounded-lg font-medium hover:bg-[#1f4e70] transition-colors">
@@ -118,7 +118,7 @@
               <span class="transition group-open:rotate-180">+</span>
             </summary>
             <div class="px-6 pb-6 text-gray-600">
-              You need a clear photo of your intern ID, and/or a scanned copy of your internship posting letter from the hospital.
+              You need a clear photo of your student ID, and/or a scanned copy of your admission letter from the university.
             </div>
           </details>
           <details class="group bg-gray-50 rounded-lg open:bg-white open:ring-1 open:ring-gray-200">
@@ -148,6 +148,6 @@
 <script setup lang="ts">
 import { useSeoMeta, useHead } from '#imports';
 
-useSeoMeta({ title: 'Getting Started | InternTional Ecosystem' });
-useHead({ title: 'Getting Started | InternTional Ecosystem' });
+useSeoMeta({ title: 'Getting Started | UniVerse Ecosystem' });
+useHead({ title: 'Getting Started | UniVerse Ecosystem' });
 </script>
