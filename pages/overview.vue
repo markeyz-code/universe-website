@@ -28,15 +28,24 @@
       <div class="flex flex-col md:flex-row items-center gap-12">
         <div class="md:w-1/3 space-y-8 pl-8">
           <div>
-            <div class="text-5xl font-black text-gray-900 mb-1">12</div>
+            <div class="text-5xl font-black text-gray-900 mb-1">
+              <span v-if="loading" class="animate-pulse bg-gray-200 text-transparent rounded">--</span>
+              <span v-else>{{ stats.documentsUploaded }}</span>
+            </div>
             <div class="text-sm font-medium text-gray-500 uppercase tracking-wide">Documents uploaded</div>
           </div>
           <div>
-            <div class="text-5xl font-black text-gray-900 mb-1">8</div>
+            <div class="text-5xl font-black text-gray-900 mb-1">
+              <span v-if="loading" class="animate-pulse bg-gray-200 text-transparent rounded">--</span>
+              <span v-else>{{ stats.mentorshipSessions }}</span>
+            </div>
             <div class="text-sm font-medium text-gray-500 uppercase tracking-wide">Mentorship sessions</div>
           </div>
           <div>
-            <div class="text-5xl font-black text-gray-900 mb-1">5</div>
+            <div class="text-5xl font-black text-gray-900 mb-1">
+              <span v-if="loading" class="animate-pulse bg-gray-200 text-transparent rounded">--</span>
+              <span v-else>{{ stats.jobsApplied }}</span>
+            </div>
             <div class="text-sm font-medium text-gray-500 uppercase tracking-wide">Jobs applied for</div>
           </div>
         </div>
@@ -121,8 +130,16 @@
 <script setup lang="ts">
 import { useSeoMeta, useHead } from '#imports';
 import { Play, ArrowRight } from 'lucide-vue-next';
+import { onMounted } from 'vue';
+import { useDashboardStats } from '@/composables/modules/dashboard/useDashboardStats';
 
 definePageMeta({ layout: 'dashboard' });
 useSeoMeta({ title: 'Overview | UniVerse Ecosystem' });
 useHead({ title: 'Overview | UniVerse Ecosystem' });
+
+const { loading, stats, fetchStats } = useDashboardStats();
+
+onMounted(() => {
+  fetchStats();
+});
 </script>

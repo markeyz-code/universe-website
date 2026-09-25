@@ -47,5 +47,11 @@ export const useAuth = () => {
   const isAlumni = computed(() => user.value?.role === 'ALUMNI_MEMBER');
   const isSuperAdmin = computed(() => user.value?.role === 'SUPER_ADMIN');
 
-  return { token, user, isLoggedIn, isIntern, isAlumni, isSuperAdmin, initAuth, setAuth, clearAuth };
+  const getToken = () => {
+    if (token.value) return token.value;
+    if (import.meta.client) return localStorage.getItem('intern_token');
+    return null;
+  };
+
+  return { token, user, isLoggedIn, isIntern, isAlumni, isSuperAdmin, initAuth, setAuth, clearAuth, getToken };
 };

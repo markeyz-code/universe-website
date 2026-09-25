@@ -87,7 +87,7 @@
           <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
             <div class="h-48 overflow-hidden relative">
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
-              <img src="/images/lab_feature_vault_1789856633645.jpg" alt="Clinical Resources" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+              <img src="/images/black_african_medical_students.jpg" alt="Clinical Resources" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
             <div class="p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
@@ -102,7 +102,7 @@
           <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
             <div class="h-48 overflow-hidden relative">
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
-              <img src="/images/lab_feature_mentorship_1789856647200.jpg" alt="Mentorship" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+              <img src="/images/black_african_medical_mentorship.jpg" alt="Mentorship" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
             <div class="p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
@@ -117,7 +117,7 @@
           <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
             <div class="h-48 overflow-hidden relative">
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
-              <img src="/images/lab_feature_career_1789856657816.jpg" alt="Career Hub" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+              <img src="/images/black_african_medical_career.jpg" alt="Career Hub" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
             <div class="p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
@@ -167,7 +167,7 @@
         </div>
         <div class="w-full lg:w-1/2">
           <div class="relative rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-            <img src="/images/lab_hero_scientist_1789856614097.jpg" alt="University Verification" class="w-full h-auto object-cover" />
+            <img src="/images/black_african_medical_students.jpg" alt="University Verification" class="w-full h-auto object-cover" />
             <div class="absolute inset-0 bg-gradient-to-tr from-brand/20 to-transparent mix-blend-multiply"></div>
           </div>
         </div>
@@ -214,6 +214,49 @@
               :class="currentTestimonial === index ? 'bg-brand scale-125' : 'bg-gray-300 hover:bg-gray-400'"
               aria-label="Go to testimonial"
             ></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-brand text-white">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2">
+          <h2 class="text-3xl md:text-5xl font-bold mb-6">Our Mission & Vision</h2>
+          <p class="text-lg text-blue-100 leading-relaxed mb-4">
+            We believe that every Medical Laboratory Science student deserves access to world-class resources, guidance, and professional networks, regardless of their background.
+          </p>
+          <p class="text-lg text-blue-100 leading-relaxed">
+            Our vision is to empower the next generation of African medical scientists to innovate, excel, and lead on a global scale.
+          </p>
+        </div>
+        <div class="md:w-1/2 relative rounded-xl overflow-hidden shadow-2xl">
+          <img src="/images/black_african_lab_scientist.jpg" alt="Mission" class="w-full h-auto object-cover" />
+          <div class="absolute inset-0 bg-brand/20 mix-blend-multiply"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Highlights Section -->
+    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Community Highlights</h2>
+          <p class="text-lg text-gray-600 mt-4">Join our webinars, seminars, and networking events.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow">
+            <span class="bg-blue-100 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Upcoming Webinar</span>
+            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2">Mastering Laboratory Diagnostics</h3>
+            <p class="text-gray-600 mb-4">Join Dr. Osei as he walks through the latest methodologies in modern clinical diagnostics. Exclusive to members.</p>
+            <p class="text-sm font-semibold text-gray-500">Starts: Friday, 4:00 PM</p>
+          </div>
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow">
+            <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Career Fair</span>
+            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2">Annual MLS Networking Event</h3>
+            <p class="text-gray-600 mb-4">Connect with top pathology labs and hospitals looking for fresh, talented graduates to join their teams.</p>
+            <p class="text-sm font-semibold text-gray-500">Location: Virtual Hub</p>
           </div>
         </div>
       </div>
@@ -381,9 +424,9 @@ const currentSlide = ref(0);
 let slideInterval: ReturnType<typeof setInterval> | null = null;
 
 const heroImages = [
-  { url: '/images/lab_hero_microscope_1789856601443.jpg', alt: 'Microscope in Lab' },
-  { url: '/images/lab_hero_scientist_1789856614097.jpg', alt: 'Scientist Working' },
-  { url: '/images/lab_hero_equipment_1789856622798.jpg', alt: 'Lab Equipment and Samples' }
+  { url: '/images/black_african_lab_scientist.jpg', alt: 'Microscope in Lab' },
+  { url: '/images/black_african_medical_students.jpg', alt: 'Scientist Working' },
+  { url: '/images/black_african_medical_career.jpg', alt: 'Lab Equipment and Samples' }
 ];
 
 const nextSlide = () => {
