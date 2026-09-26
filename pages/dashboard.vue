@@ -159,8 +159,10 @@ const subscription = computed(() => {
 });
 
 const handleLogout = () => {
-  clearAuth();
-  router.push('/login');
+  if (window.confirm("Are you sure you want to log out of your session?")) {
+    clearAuth();
+    router.push('/login');
+  }
 };
 
 const fetchProfile = async () => {
