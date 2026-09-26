@@ -21,7 +21,7 @@ export const useLogin = () => {
       // Optionally decode or fetch /auth/me for full user object
       setAuth(data.access_token, { email: credentials.email });
       showToast({ title: 'Welcome back!', message: 'You have signed in successfully.', type: 'success' });
-      await router.push('/vault');
+      await router.push('/dashboard');
       return data;
     } catch (err: any) {
       error.value = err.response?.data?.message || err.message || 'Login failed. Please check your credentials.';
