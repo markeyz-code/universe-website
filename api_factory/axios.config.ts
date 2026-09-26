@@ -1,24 +1,159 @@
-import axios from 'axios';
+import axios, { type AxiosResponse } from "axios";
+import { useCustomToast } from '@/composables/core/useCustomToast'
 
 const getBaseUrl = () => {
-  return process.env.NODE_ENV === 'production'
-    ? process.env.NUXT_PUBLIC_API_BASE
-    : 'http://localhost:4000/api/v1';
+  return import.meta.env.VITE_BASE_URL as string;
 };
 
-// Public endpoint – no auth header needed
+const getToken = () => {
+  if (typeof localStorage === 'undefined') return null;
+  return localStorage.getItem('intern_token');
+};
+
+const logOut = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('intern_token');
+    localStorage.removeItem('intern_user');
+  }
+};
+
+const $GATEWAY_ENDPOINT_WITHOUT_VERSION = getBaseUrl() as string;
+const $GATEWAY_ENDPOINT = getBaseUrl() as string;
+const $GATEWAY_ENDPOINT_V2 = getBaseUrl() + "/v2";
+const $IMAGE_UPLOAD_ENDPOINT = getBaseUrl(); 
+
 export const GATEWAY_ENDPOINT = axios.create({
-  baseURL: getBaseUrl(),
-  withCredentials: true,
-  timeout: 15000,
+  baseURL: $GATEWAY_ENDPOINT,
 });
 
-// Auth-protected endpoint – auto-injects Bearer token
-export const GATEWAY_ENDPOINT_WITH_AUTH = axios.create({
-  baseURL: getBaseUrl(),
-  withCredentials: true,
-  timeout: 15000,
+export const GATEWAY_ENDPOINT_V2 = axios.create({
+  baseURL: $GATEWAY_ENDPOINT_V2
 });
+
+export const GATEWAY_ENDPOINT_WITH_AUTH = axios.create({
+  baseURL: $GATEWAY_ENDPOINT,
+});
+
+export const GATEWAY_ENDPOINT_WITH_AUTH_FORM_DATA = axios.create({
+  baseURL: $GATEWAY_ENDPOINT,
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
+
+export const GATEWAY_ENDPOINT_WITHOUT_VERSION = axios.create({
+  baseURL: $GATEWAY_ENDPOINT_WITHOUT_VERSION,
+});
+export const GATEWAY_ENDPOINT_WITHOUT_VERSION_WITH_AUTH = axios.create({
+  baseURL: $GATEWAY_ENDPOINT_WITHOUT_VERSION,
+});
+export const IMAGE_UPLOAD_ENDPOINT = axios.create({
+  baseURL: $IMAGE_UPLOAD_ENDPOINT,
+});
+export interface CustomAxiosResponse extends AxiosResponse {
+  value?: any;
+  type?: string;
+}
+
+const instanceArray = [
+  GATEWAY_ENDPOINT,
+  GATEWAY_ENDPOINT_V2,
+  GATEWAY_ENDPOINT_WITH_AUTH,
+  GATEWAY_ENDPOINT_WITH_AUTH_FORM_DATA,
+  GATEWAY_ENDPOINT_WITHOUT_VERSION,
+  GATEWAY_ENDPOINT_WITHOUT_VERSION_WITH_AUTH,
+];
+
+instanceArray.forEach((instance) => {
+  instance.interceptors.request.use((config: any) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+
+  instance.interceptors.response.use(
+    (response: CustomAxiosResponse) => {
+      return response;
+    },
+    (err: any) => {
+      const { showToast } = useCustomToast();
+      if (typeof err.response === "undefined") {
+        showToast({
+          title: "Error",
+          message: "kindly check your network connection",
+          toastType: "error",
+          duration: 3000
+        });
+        return Promise.reject({
+          type: "ERROR",
+          ...err,
+        });
+      }
+      if (err.response.status === 401) {
+        console.log(err.response.data?.error)
+        logOut();
+        showToast({
+          title: "Error",
+          message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+          toastType: "error",
+          duration: 3000
+        });
+        return Promise.reject({
+          type: "ERROR",
+          ...err.response,
+        });
+      } else if (statusCodeStartsWith(err.response.status, 4)) {
+        if (err.response.data?.message || err.response.data?.error) {
+          showToast({
+            title: "Error",
+            message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+            toastType: "error",
+            duration: 3000
+          });
+        }
+        return Promise.reject({
+          type: "ERROR",
+          ...err.response,
+        });
+      } else if (err.response.status === 500) {
+        showToast({
+          title: "Error",
+          message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+          toastType: "error",
+          duration: 3000
+        });
+        return Promise.reject({
+          type: "ERROR",
+          ...err.response,
+        });
+      } else if (err.response.status === 409) {
+        showToast({
+          title: "Error",
+          message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+          toastType: "error",
+          duration: 3000
+        });
+        return Promise.reject({
+          type: "ERROR",
+          ...err.response,
+        });
+      }
+      return Promise.reject(err);
+    }
+  );
+});
+
+const statusCodeStartsWith = (
+  statusCode: number,
+  startNumber: number
+): boolean => {
+  const statusCodeString = statusCode.toString();
+  const startNumberString = startNumber.toString();
+
+  return statusCodeString.startsWith(startNumberString);
+};
 
 // Lightweight in-memory cache for GET requests
 const cache = new Map<string, { data: any; expiry: number }>();
@@ -42,34 +177,3 @@ GATEWAY_ENDPOINT_WITH_AUTH.interceptors.request.use((config) => {
   }
   return config;
 });
-
-const getToken = () => {
-  if (typeof localStorage === 'undefined') return null;
-  return localStorage.getItem('intern_token');
-};
-
-// Inject token on every request
-GATEWAY_ENDPOINT_WITH_AUTH.interceptors.request.use(
-  (config) => {
-    const token = getToken();
-    if (token && config.headers) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Handle global 401 – clear auth and let caller decide what to do
-GATEWAY_ENDPOINT_WITH_AUTH.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('intern_token');
-        localStorage.removeItem('intern_user');
-      }
-    }
-    return Promise.reject(error);
-  }
-);
