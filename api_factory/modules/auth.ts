@@ -17,6 +17,11 @@ export const authApi = {
     return GATEWAY_ENDPOINT.post('/auth/login', data);
   },
 
+  /** Setup Password after approval */
+  setupPassword(data: { token: string; password: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/setup-password', data);
+  },
+
   /** Get the current logged-in user's profile */
   me() {
     return GATEWAY_ENDPOINT_WITH_AUTH.get('/auth/me');
