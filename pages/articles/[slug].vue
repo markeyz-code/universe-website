@@ -70,7 +70,7 @@ const fetchArticle = async () => {
     const id = parts[parts.length - 1];
     
     // We fetch directly from backend API for articles
-    const response = await axios.get(`http://localhost:4000/api/v1/articles/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/articles/${id}`);
     
     // If it's a draft, don't show it on public site
     if (response.data.status !== 'published') {

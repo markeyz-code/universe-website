@@ -124,7 +124,7 @@ const fetchEvent = async () => {
   try {
     const parts = slugParam.split('-');
     const id = parts[parts.length - 1];
-    const response = await axios.get(`http://localhost:4000/api/v1/events/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/events/${id}`);
     event.value = response.data;
     
     useSeoMeta({
@@ -147,7 +147,7 @@ const submitRegistration = async () => {
   try {
     const parts = slugParam.split('-');
     const id = parts[parts.length - 1];
-    await axios.post(`http://localhost:4000/api/v1/events/${id}/register`, regForm.value);
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/events/${id}/register`, regForm.value);
     registered.value = true;
   } catch (err: any) {
     regError.value = err.response?.data?.message || 'Registration failed. Please try again.';
