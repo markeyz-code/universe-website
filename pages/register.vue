@@ -15,7 +15,7 @@
     </div>
 
     <!-- Form Side -->
-    <div class="w-full lg:w-1/2 flex justify-center p-8 sm:p-12 overflow-y-auto h-screen">
+    <div class="w-full lg:w-1/2 flex justify-center p-6 sm:p-8 md:p-12 overflow-y-auto h-screen">
       <div class="w-full max-w-xl my-auto py-8">
         <div class="mb-10 lg:hidden text-center">
           <NuxtLink to="/">

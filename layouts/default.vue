@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gray-50 flex flex-col font-sans selection:bg-brand/20">
     <!-- Creative Floating Glassmorphism Navbar -->
     <div class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6 pointer-events-none transition-all duration-500">
-      <header class="pointer-events-auto flex items-center justify-between px-6 py-3 md:px-8 md:py-4 rounded-full bg-white/80 backdrop-blur-xl border border-white/40 shadow-lg shadow-brand/5 transition-all duration-500 w-full max-w-5xl">
+      <header class="pointer-events-auto flex items-center justify-between px-4 py-3 md:px-8 md:py-4 rounded-full bg-white/80 backdrop-blur-xl border border-white/40 shadow-lg shadow-brand/5 transition-all duration-500 w-full max-w-5xl">
         <!-- Logo -->
         <div class="flex items-center shrink-0">
           <NuxtLink to="/" class="flex items-center gap-3 group">

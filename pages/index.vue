@@ -53,7 +53,7 @@
     <!-- Impact / Statistics Section -->
     <section class="border-y border-gray-200 bg-white py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100 text-center">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:p-8 divide-x divide-gray-100 text-center">
           <div class="px-4">
             <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">5k+</div>
             <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">Verified Students</div>
@@ -82,14 +82,14 @@
           <p class="text-lg text-gray-600">A complete ecosystem designed exclusively for the demands of the modern University student.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:p-8">
           <!-- Vault Feature -->
           <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
             <div class="h-48 overflow-hidden relative">
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
               <img src="/images/black_african_medical_students.jpg" alt="Clinical Resources" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
-            <div class="p-8 flex-1 flex flex-col relative">
+            <div class="p-5 md:p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
                 <Folder class="w-6 h-6" />
               </div>
@@ -104,7 +104,7 @@
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
               <img src="/images/black_african_medical_mentorship.jpg" alt="Mentorship" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
-            <div class="p-8 flex-1 flex flex-col relative">
+            <div class="p-5 md:p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
                 <Users class="w-6 h-6" />
               </div>
@@ -119,7 +119,7 @@
               <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
               <img src="/images/black_african_medical_career.jpg" alt="Career Hub" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
             </div>
-            <div class="p-8 flex-1 flex flex-col relative">
+            <div class="p-5 md:p-8 flex-1 flex flex-col relative">
               <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
                 <Briefcase class="w-6 h-6" />
               </div>
@@ -188,8 +188,8 @@
               :style="{ transform: `translateX(-${currentTestimonial * 100}%)` }"
             >
               <div v-for="(testimonial, index) in testimonials" :key="index" class="w-full flex-shrink-0 px-4">
-                <div class="bg-white p-8 md:p-12 rounded-xl shadow-sm border border-gray-100 text-center relative">
-                  <div class="absolute top-8 left-1/2 -translate-x-1/2 text-gray-200 opacity-50">
+                <div class="bg-white p-5 md:p-8 md:p-12 rounded-xl shadow-sm border border-gray-100 text-center relative">
+                  <div class="absolute top-5 md:p-8 left-1/2 -translate-x-1/2 text-gray-200 opacity-50">
                     <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
                   </div>
                   <p class="text-xl md:text-2xl text-gray-700 italic relative z-10 mb-8 mt-6">"{{ testimonial.text }}"</p>
@@ -254,8 +254,8 @@
           No upcoming events at the moment.
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div v-for="event in events.slice(0, 4)" :key="event._id" @click="openEventModal(event)" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden group">
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5 md:p-8">
+          <div v-for="event in events.slice(0, 4)" :key="event._id" @click="openEventModal(event)" class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 md:p-8 hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden group">
             <span class="bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ event.category || 'Event' }}</span>
             <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2 group-hover:text-brand transition-colors">{{ event.title }}</h3>
             <p class="text-gray-600 mb-4 line-clamp-2">{{ event.description }}</p>
@@ -275,7 +275,7 @@
     <div v-if="selectedEvent" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" @click="closeEventModal"></div>
       <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
-        <div class="p-6 md:p-8 overflow-y-auto">
+        <div class="p-6 md:p-5 md:p-8 overflow-y-auto">
           <button @click="closeEventModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
             <X class="w-5 h-5" />
           </button>
@@ -324,7 +324,7 @@
           No articles published yet.
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-5 md:p-8">
           <NuxtLink :to="'/articles/' + article._id" v-for="article in articles.slice(0, 3)" :key="article._id" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all flex flex-col group cursor-pointer">
             <div class="h-48 bg-gray-200 w-full overflow-hidden" v-if="article.coverImage">
                <img :src="article.coverImage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -410,7 +410,7 @@
         </div>
         
         <div class="w-full lg:w-1/2">
-          <div class="bg-white rounded-xl shadow-2xl p-8 md:p-10 text-gray-900">
+          <div class="bg-white rounded-xl shadow-2xl p-6 md:p-10 text-gray-900">
             <h3 class="text-2xl font-bold mb-6">Send an Enquiry</h3>
             
             <div v-if="success" class="bg-green-50 border border-green-200 text-green-700 rounded-lg p-6 text-center space-y-3">
