@@ -77,7 +77,37 @@
           <p class="text-gray-600 mt-2">See what each tier includes.</p>
         </div>
 
-        <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+        <!-- Mobile: Vertical cards per plan -->
+        <div class="md:hidden space-y-6">
+          <div v-for="plan in filteredSubscriptions" :key="'mobile-'+plan._id" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="p-6 bg-gray-50 border-b border-gray-200 text-center">
+              <h4 class="font-bold text-gray-900 text-lg mb-1">{{ plan.name }}</h4>
+              <div class="text-3xl font-extrabold text-gray-900 mb-1">₦{{ (plan.price / 100).toLocaleString() }}</div>
+              <p class="text-sm text-gray-500 mb-4">Per {{ plan.durationMonths > 1 ? plan.durationMonths + ' months' : 'month' }}</p>
+              <button 
+                @click="handleSubscribe(plan)" 
+                :disabled="paymentLoading"
+                class="w-full py-3 bg-brand text-white text-sm font-bold rounded-lg hover:bg-[#1f4e70] transition-colors"
+              >
+                Select {{ plan.name }}
+              </button>
+            </div>
+            <div class="p-6">
+              <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">Features included</p>
+              <ul class="space-y-3">
+                <li v-for="feature in plan.features" :key="plan._id+'-m-'+feature" class="flex items-start gap-3">
+                  <div class="flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center mt-0.5">
+                    <Check class="h-3 w-3 text-brand" />
+                  </div>
+                  <span class="text-sm text-gray-700 font-medium">{{ feature }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop: Full comparison table -->
+        <div class="hidden md:block overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr>
@@ -100,7 +130,6 @@
               <tr>
                 <td colspan="4" class="p-4 bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider">Features included</td>
               </tr>
-              <!-- Since we don't have a strict feature matrix in the DB schema, we'll extract unique features from all plans -->
               <tr v-for="feature in allUniqueFeatures" :key="feature">
                 <td class="p-4 text-sm text-gray-700 font-medium">{{ feature }}</td>
                 <td v-for="plan in filteredSubscriptions" :key="plan._id+'-'+feature" class="p-4 text-center border-l border-gray-100">

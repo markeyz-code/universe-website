@@ -21,9 +21,9 @@
             Empowering the Next Generation of Scientists
           </div>
           <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-            The Ultimate Network for <br class="hidden md:block"/> <span class="text-brand">MLS Students</span>
+            The Ultimate Network for <br class="hidden md:block"/> <span class="text-cyan-300">MLS Students</span>
           </h1>
-          <p class="text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto">
+          <p class="text-lg md:text-xl text-gray-200 font-light max-w-3xl mx-auto">
             Access specialized study materials, connect with experienced mentors, and navigate your academic journey with absolute confidence.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
@@ -38,7 +38,7 @@
       </div>
       
       <!-- Carousel Indicators -->
-      <div class="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-20">
+      <div class="absolute bottom-8 left-0 right-0 hidden md:flex justify-center gap-3 z-20">
         <button 
           v-for="(_, index) in heroImages" 
           :key="'indicator-'+index"
