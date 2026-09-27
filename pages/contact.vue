@@ -80,36 +80,36 @@
       </div>
       
       <div class="md:w-2/3 bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
-        <form @submit.prevent="submitForm" class="space-y-6">
+        <form @submit.prevent="submitContactForm" class="space-y-6">
           <div class="grid grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">First name</label>
-              <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50" />
+              <label class="block text-sm font-medium text-gray-700 mb-1">First name *</label>
+              <input v-model="form.firstName" type="text" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading" />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Last name</label>
-              <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50" />
+              <label class="block text-sm font-medium text-gray-700 mb-1">Last name *</label>
+              <input v-model="form.lastName" type="text" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading" />
             </div>
           </div>
           <div class="grid grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50" />
+              <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+              <input v-model="form.email" type="email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Phone number</label>
-              <input type="tel" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50" />
+              <input v-model="form.phone" type="tel" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading" />
             </div>
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">What can we help with?</label>
-            <select class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50">
-              <option>Select topic</option>
-              <option>Account Issues</option>
-              <option>Billing & Subscriptions</option>
-              <option>Document Verification</option>
-              <option>Technical Support</option>
+            <label class="block text-sm font-medium text-gray-700 mb-1">What can we help with? *</label>
+            <select v-model="form.topic" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading">
+              <option value="" disabled>Select topic</option>
+              <option value="Account Issues">Account Issues</option>
+              <option value="Billing & Subscriptions">Billing & Subscriptions</option>
+              <option value="Document Verification">Document Verification</option>
+              <option value="Technical Support">Technical Support</option>
             </select>
           </div>
 
@@ -117,40 +117,48 @@
              <label class="block text-sm font-medium text-gray-700 mb-2">How would you describe yourself?</label>
              <div class="grid grid-cols-2 gap-4">
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Current Student
+                 <input type="radio" v-model="form.userType" value="Current Student" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Current Student
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Prospective Student
+                 <input type="radio" v-model="form.userType" value="Prospective Student" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Prospective Student
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Mentor
+                 <input type="radio" v-model="form.userType" value="Mentor" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Mentor
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Employer
+                 <input type="radio" v-model="form.userType" value="Employer" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Employer
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Administrator
+                 <input type="radio" v-model="form.userType" value="Administrator" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Administrator
                </label>
                <label class="flex items-center gap-2 text-sm text-gray-700">
-                 <input type="radio" name="role" class="text-brand focus:ring-brand" /> Other
+                 <input type="radio" v-model="form.userType" value="Other" class="text-brand focus:ring-brand disabled:opacity-50" :disabled="loading" /> Other
                </label>
              </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea rows="4" placeholder="Tell us what's on your mind..." class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50"></textarea>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+            <textarea v-model="form.message" rows="4" required placeholder="Tell us what's on your mind..." class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading"></textarea>
           </div>
 
           <div>
              <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-               <input type="checkbox" class="text-brand focus:ring-brand rounded border-gray-300" />
+               <input v-model="form.agree" type="checkbox" required class="text-brand focus:ring-brand rounded border-gray-300 disabled:opacity-50" :disabled="loading" />
                I agree to the terms
              </label>
           </div>
 
-          <button type="submit" class="px-8 py-3 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
-            Send
+          <div v-if="success" class="p-4 bg-green-50 text-green-700 rounded-md text-sm font-medium">
+            Thank you! Your message has been sent. We'll be in touch soon.
+          </div>
+          <div v-if="error" class="p-4 bg-red-50 text-red-700 rounded-md text-sm font-medium">
+            {{ error }}
+          </div>
+
+          <button type="submit" :disabled="loading || !form.agree" class="px-8 py-3 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors disabled:opacity-50 flex items-center gap-2">
+            <span v-if="loading" class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
+            Send Message
           </button>
         </form>
       </div>
@@ -223,11 +231,26 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useSeoMeta, useHead } from '#imports';
 import { Mail, MessageSquare, Phone, MapPin } from 'lucide-vue-next';
+import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
 
 useSeoMeta({ title: 'Contact Us | UniVerse Ecosystem' });
 useHead({ title: 'Contact Us | UniVerse Ecosystem' });
+
+const { loading, error, success, createEnquiry } = useCreateEnquiry();
+
+const form = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  topic: '',
+  userType: '',
+  message: '',
+  agree: false
+});
 
 const scrollToForm = () => {
   document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -237,7 +260,34 @@ const scrollToFaq = () => {
   document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
 };
 
-const submitForm = () => {
-  alert('Thank you for reaching out! We will get back to you shortly.');
+const submitContactForm = async () => {
+  if (!form.value.agree) return;
+  const name = `${form.value.firstName} ${form.value.lastName}`.trim();
+  
+  await createEnquiry({
+    name,
+    firstName: form.value.firstName,
+    lastName: form.value.lastName,
+    email: form.value.email,
+    phone: form.value.phone,
+    topic: form.value.topic,
+    userType: form.value.userType,
+    message: form.value.message,
+    application: 'universe'
+  });
+
+  if (success.value) {
+    form.value = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      topic: '',
+      userType: '',
+      message: '',
+      agree: false
+    };
+    setTimeout(() => { success.value = false; }, 5000);
+  }
 };
 </script>

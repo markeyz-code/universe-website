@@ -26,4 +26,24 @@ export const authApi = {
   me() {
     return GATEWAY_ENDPOINT_WITH_AUTH.get('/auth/me');
   },
+
+  /** Send OTP for email verification */
+  sendOtp(data: { email: string; firstName: string; source?: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/send-otp', data);
+  },
+
+  /** Verify OTP */
+  verifyOtp(data: { email: string; otp: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/verify-otp', data);
+  },
+
+  /** Forgot Password */
+  forgotPassword(data: { email: string; source?: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/forgot-password', data);
+  },
+
+  /** Reset Password */
+  resetPassword(data: { token: string; password: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/reset-password', data);
+  },
 };

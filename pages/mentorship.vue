@@ -1,20 +1,39 @@
 <template>
   <div class="space-y-16">
-    <!-- Hero Section -->
     <section class="text-center max-w-2xl mx-auto pt-8">
       <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-2 block">Exclusive</span>
       <h1 class="text-4xl font-bold text-gray-900 mb-4">Find your mentor</h1>
       <p class="text-lg text-gray-600">
         Connect with experienced MLS professionals who understand your path forward.
       </p>
-      <div class="mt-8 flex justify-center gap-4">
-        <button class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
-          Match
-        </button>
-        <button class="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors">
-          Learn
-        </button>
+      
+      <div v-if="successMessage" class="mt-8 p-4 bg-green-50 text-green-700 rounded-lg max-w-md mx-auto">
+        {{ successMessage }}
       </div>
+
+      <form v-else @submit.prevent="submitMentorshipRequest" class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-gray-100 max-w-md mx-auto text-left">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <input v-model="form.name" required type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand outline-none" placeholder="John Doe" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+          <input v-model="form.email" required type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand outline-none" placeholder="john@example.com" />
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Area of Interest</label>
+          <select v-model="form.interest" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand outline-none">
+            <option value="" disabled>Select specialization</option>
+            <option value="Lab Management">Lab Management</option>
+            <option value="Clinical Chemistry">Clinical Chemistry</option>
+            <option value="Operations">Operations</option>
+            <option value="Quality Assurance">Quality Assurance</option>
+          </select>
+        </div>
+        <button type="submit" :disabled="loading" class="w-full px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors disabled:opacity-50">
+          {{ loading ? 'Submitting...' : 'Request a Mentor' }}
+        </button>
+      </form>
     </section>
 
     <!-- Directory Filter -->
@@ -194,10 +213,32 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useSeoMeta, useHead } from '#imports';
 import { CheckCircle, ArrowRight, MessageSquare, FileText, Award, Star, User } from 'lucide-vue-next';
+import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
 
-definePageMeta({ layout: 'dashboard' });
+const { createEnquiry, loading } = useCreateEnquiry();
+
+const form = ref({
+  name: '',
+  email: '',
+  interest: ''
+});
+
+const successMessage = ref('');
+
+const submitMentorshipRequest = async () => {
+  const payload = {
+    name: form.value.name,
+    email: form.value.email,
+    message: `Mentorship Request for Specialization: ${form.value.interest}`
+  };
+  await createEnquiry(payload);
+  successMessage.value = 'Your mentorship request has been received! Our team will match you shortly.';
+};
+
+definePageMeta({ layout: 'default' });
 useSeoMeta({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
 useHead({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
 </script>

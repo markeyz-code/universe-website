@@ -55,6 +55,7 @@ export const useRegister = () => {
     password: string;
     universityId?: string;
     programmeId?: string;
+    planId?: string;
     file: File;
   }) => {
     loading.value = true;
@@ -69,6 +70,7 @@ export const useRegister = () => {
         password: payload.password,
         universityId: payload.universityId,
         programmeId: payload.programmeId,
+        planId: payload.planId,
         verificationFileUrl,
       });
       showToast({
@@ -78,13 +80,42 @@ export const useRegister = () => {
       });
       return data;
     } catch (err: any) {
-      error.value = err.response?.data?.message || err.message || 'Registration failed. Please try again.';
-      showToast({ title: 'Registration Failed', message: error.value!, type: 'error' });
+      error.value = err?.data?.message || err?.data?.error || err?.message || 'Registration failed. Please try again.';
       return null;
     } finally {
       loading.value = false;
     }
   };
 
-  return { loading, uploadProgress, error, register };
+  const sendOtp = async (email: string, firstName: string, source: string) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      await authApi.sendOtp({ email, firstName, source });
+      showToast({ title: 'OTP Sent', message: 'Please check your email for the verification code.', type: 'success' });
+      return true;
+    } catch (err: any) {
+      error.value = err?.data?.message || err?.data?.error || err?.message || 'Failed to send OTP.';
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const verifyOtp = async (email: string, otp: string) => {
+    loading.value = true;
+    error.value = null;
+    try {
+      await authApi.verifyOtp({ email, otp });
+      showToast({ title: 'Email Verified', message: 'You can now proceed to the next step.', type: 'success' });
+      return true;
+    } catch (err: any) {
+      error.value = err?.data?.message || err?.data?.error || err?.message || 'Invalid or expired OTP.';
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  return { loading, uploadProgress, error, register, sendOtp, verifyOtp };
 };

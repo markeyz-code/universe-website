@@ -24,8 +24,7 @@ export const useLogin = () => {
       await router.push('/dashboard');
       return data;
     } catch (err: any) {
-      error.value = err.response?.data?.message || err.message || 'Login failed. Please check your credentials.';
-      showToast({ title: 'Login Failed', message: error.value!, type: 'error' });
+      error.value = err?.data?.message || err?.data?.error || err?.message || 'Login failed. Please check your credentials.';
       return null;
     } finally {
       loading.value = false;

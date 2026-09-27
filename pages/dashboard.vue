@@ -1,24 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex flex-col">
-    <!-- Navbar -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center gap-3">
-            <h1 class="text-xl font-bold bg-gradient-to-r from-brand to-blue-600 bg-clip-text text-transparent">
-              Portal
-            </h1>
-          </div>
-          <div class="flex items-center gap-4">
-            <button @click="handleLogout" class="text-sm font-medium text-gray-500 hover:text-red-600 transition-colors">
-              Log Out
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+  <div>
+    <div class="w-full space-y-8">
       
       <!-- Welcome Header -->
       <div v-if="!loading && profile" class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm relative overflow-hidden">
@@ -135,7 +117,7 @@
 
       </div>
       
-    </main>
+    </div>
   </div>
 </template>
 
@@ -147,6 +129,7 @@ import { useAuth } from '@/composables/core/useAuth';
 import { useSeoMeta } from '#imports';
 
 useSeoMeta({ title: 'Dashboard | Portal' });
+definePageMeta({ layout: 'dashboard' });
 
 const router = useRouter();
 const { clearAuth } = useAuth();

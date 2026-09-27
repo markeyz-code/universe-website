@@ -19,7 +19,7 @@
       <div class="w-full max-w-md">
         <div class="mb-10 lg:hidden text-center">
           <NuxtLink to="/">
-            <img src="~/assets/logo-icon.png" class="h-8 w-auto mx-auto mb-2" alt="UniVerse Logo" />
+            <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg mx-auto mb-2" alt="UniVerse Logo" />
           </NuxtLink>
         </div>
         
@@ -36,14 +36,21 @@
             placeholder="you@example.com"
           />
 
-          <UiInput
-            id="password"
-            label="Password"
-            type="password"
-            v-model="form.password"
-            required
-            placeholder="••••••••"
-          />
+          <div>
+            <UiInput
+              id="password"
+              label="Password"
+              type="password"
+              v-model="form.password"
+              required
+              placeholder="••••••••"
+            />
+            <div class="mt-2 text-right">
+              <NuxtLink to="/forgot-password" class="text-sm text-brand font-medium hover:underline">
+                Forgot Password?
+              </NuxtLink>
+            </div>
+          </div>
 
           <div v-if="error" class="text-red-700 text-sm p-4 bg-red-50 border border-red-200 flex items-start gap-3 rounded">
             <Lock class="w-5 h-5 flex-shrink-0 mt-0.5" />

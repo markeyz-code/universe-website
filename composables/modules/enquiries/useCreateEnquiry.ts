@@ -7,7 +7,7 @@ export const useCreateEnquiry = () => {
   const error = ref<string | null>(null);
   const success = ref(false);
 
-  const createEnquiry = async (data: { name: string; email: string; message: string }) => {
+  const createEnquiry = async (data: { name?: string; firstName?: string; lastName?: string; phone?: string; topic?: string; userType?: string; email: string; message: string; application?: string }) => {
     loading.value = true;
     error.value = null;
     success.value = false;

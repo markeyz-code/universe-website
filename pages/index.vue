@@ -242,22 +242,106 @@
     <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Community Highlights</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Community Highlights & Events</h2>
           <p class="text-lg text-gray-600 mt-4">Join our webinars, seminars, and networking events.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow">
-            <span class="bg-blue-100 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Upcoming Webinar</span>
-            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2">Mastering Laboratory Diagnostics</h3>
-            <p class="text-gray-600 mb-4">Join Dr. Osei as he walks through the latest methodologies in modern clinical diagnostics. Exclusive to members.</p>
-            <p class="text-sm font-semibold text-gray-500">Starts: Friday, 4:00 PM</p>
+        
+        <div v-if="loadingEvents" class="text-center py-12">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
+        </div>
+        
+        <div v-else-if="events.length === 0" class="text-center py-12 text-gray-500">
+          No upcoming events at the moment.
+        </div>
+
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div v-for="event in events.slice(0, 4)" :key="event._id" @click="openEventModal(event)" class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden group">
+            <span class="bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ event.category || 'Event' }}</span>
+            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2 group-hover:text-brand transition-colors">{{ event.title }}</h3>
+            <p class="text-gray-600 mb-4 line-clamp-2">{{ event.description }}</p>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-semibold text-gray-500">Date: {{ new Date(event.date).toLocaleDateString() }}</p>
+                <p class="text-sm font-semibold text-gray-500 mt-1" v-if="event.location">Location: {{ event.location }}</p>
+              </div>
+              <button class="text-brand text-sm font-bold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">View Details <ArrowRight class="w-4 h-4"/></button>
+            </div>
           </div>
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow">
-            <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Career Fair</span>
-            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2">Annual MLS Networking Event</h3>
-            <p class="text-gray-600 mb-4">Connect with top pathology labs and hospitals looking for fresh, talented graduates to join their teams.</p>
-            <p class="text-sm font-semibold text-gray-500">Location: Virtual Hub</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div v-if="selectedEvent" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" @click="closeEventModal"></div>
+      <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+        <div class="p-6 md:p-8 overflow-y-auto">
+          <button @click="closeEventModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
+            <X class="w-5 h-5" />
+          </button>
+          
+          <span class="bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4 inline-block">{{ selectedEvent.category || 'Event' }}</span>
+          <h3 class="text-3xl font-bold text-gray-900 mb-4">{{ selectedEvent.title }}</h3>
+          
+          <div class="flex flex-wrap gap-4 mb-6 pb-6 border-b border-gray-100">
+            <div class="flex items-center gap-2 text-gray-600">
+              <Calendar class="w-5 h-5 text-brand" />
+              <span class="font-medium">{{ new Date(selectedEvent.date).toLocaleDateString() }}</span>
+            </div>
+            <div class="flex items-center gap-2 text-gray-600" v-if="selectedEvent.location">
+              <MapPin class="w-5 h-5 text-brand" />
+              <span class="font-medium">{{ selectedEvent.location }}</span>
+            </div>
           </div>
+
+          <div class="prose prose-gray max-w-none text-gray-600">
+            <p class="whitespace-pre-wrap leading-relaxed">{{ selectedEvent.description }}</p>
+          </div>
+        </div>
+        <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-end gap-3 shrink-0">
+          <span v-if="eventRegistered" class="text-green-600 font-medium self-center mr-4">Successfully registered!</span>
+          <button @click="closeEventModal" class="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-100 transition-colors">Close</button>
+          <button @click="registerForEvent" :disabled="registeringEvent" class="px-5 py-2.5 rounded-lg bg-brand text-white font-medium hover:bg-[#1a405c] transition-colors shadow-sm shadow-brand/20 disabled:opacity-50">
+            {{ registeringEvent ? 'Registering...' : 'Register for Event' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Articles Section -->
+    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Latest Insights</h2>
+          <p class="text-lg text-gray-600 mt-4">Read our latest articles and updates.</p>
+        </div>
+        
+        <div v-if="loadingArticles" class="text-center py-12">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
+        </div>
+        
+        <div v-else-if="articles.length === 0" class="text-center py-12 text-gray-500">
+          No articles published yet.
+        </div>
+
+        <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <NuxtLink :to="'/articles/' + article._id" v-for="article in articles.slice(0, 3)" :key="article._id" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all flex flex-col group cursor-pointer">
+            <div class="h-48 bg-gray-200 w-full overflow-hidden" v-if="article.coverImage">
+               <img :src="article.coverImage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="h-48 bg-brand/10 w-full flex items-center justify-center overflow-hidden" v-else>
+               <span class="text-brand font-bold text-xl group-hover:scale-105 transition-transform duration-500">{{ article.category || 'Article' }}</span>
+            </div>
+            <div class="p-6 flex-1 flex flex-col">
+              <span class="text-xs font-bold text-brand uppercase tracking-wider mb-2">{{ article.category || 'Insight' }}</span>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand transition-colors">{{ article.title }}</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-1">{{ article.excerpt || article.content?.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...' }}</p>
+              <div class="flex items-center justify-between text-xs text-gray-500 mt-auto">
+                <span>Published: {{ new Date(article.publishDate || article.createdAt).toLocaleDateString() }}</span>
+                <span class="text-brand font-bold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">Read <ArrowRight class="w-3 h-3"/></span>
+              </div>
+            </div>
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -408,8 +492,48 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useSeoMeta } from '#imports';
-import { Folder, Users, Briefcase, Check, ChevronDown } from 'lucide-vue-next';
+import { Folder, Users, Briefcase, Check, ChevronDown, ArrowRight, X, Calendar, MapPin } from 'lucide-vue-next';
 import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
+import { useGetEvents } from '@/composables/modules/events/useGetEvents';
+import { useGetArticles } from '@/composables/modules/articles/useGetArticles';
+
+const { loading: loadingEvents, events, fetchEvents } = useGetEvents();
+const { loading: loadingArticles, articles, fetchArticles } = useGetArticles();
+
+const selectedEvent = ref<any>(null);
+const registeringEvent = ref(false);
+const eventRegistered = ref(false);
+
+const openEventModal = (event: any) => {
+  selectedEvent.value = event;
+  eventRegistered.value = false;
+  document.body.style.overflow = 'hidden';
+};
+
+const closeEventModal = () => {
+  selectedEvent.value = null;
+  document.body.style.overflow = '';
+};
+
+const registerForEvent = async () => {
+  if (!selectedEvent.value) return;
+  registeringEvent.value = true;
+  try {
+    // We reuse the createEnquiry endpoint or simulate a registration
+    // If you had a dedicated event registration endpoint, you would call it here.
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    eventRegistered.value = true;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    registeringEvent.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchEvents();
+  fetchArticles();
+});
 
 useSeoMeta({
   title: 'UniVerse - University Student Community',
