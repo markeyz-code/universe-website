@@ -28,6 +28,9 @@ export const useRegister = () => {
     formData.append('timestamp', sigData.timestamp.toString());
     formData.append('signature', sigData.signature);
     formData.append('folder', sigData.folder);
+    if (sigData.eager) {
+      formData.append('eager', sigData.eager);
+    }
 
     // 3. Upload to Cloudinary
     const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${sigData.cloudName}/auto/upload`;
