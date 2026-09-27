@@ -41,14 +41,36 @@
           </NuxtLink>
         </nav>
 
-        <!-- Auth Actions -->
-        <div class="flex items-center space-x-4 shrink-0">
+        <!-- Auth Actions & Mobile Toggle -->
+        <div class="flex items-center space-x-2 sm:space-x-4 shrink-0">
           <NuxtLink to="/login" class="hidden sm:block text-sm font-bold text-gray-500 hover:text-brand transition-colors">Sign In</NuxtLink>
-          <NuxtLink to="/register" class="group relative inline-flex items-center justify-center bg-brand text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[#1a405c] transition-all overflow-hidden shadow-sm shadow-brand/20 hover:shadow-md hover:shadow-brand/30 hover:-translate-y-0.5">
-            <span class="relative z-10 flex items-center gap-2">Apply Now <span class="group-hover:translate-x-1 transition-transform">→</span></span>
+          <NuxtLink to="/register" class="group relative inline-flex items-center justify-center bg-brand text-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold hover:bg-[#1a405c] transition-all overflow-hidden shadow-sm shadow-brand/20 hover:shadow-md hover:shadow-brand/30 hover:-translate-y-0.5">
+            <span class="relative z-10 flex items-center gap-1 sm:gap-2">Apply Now <span class="group-hover:translate-x-1 transition-transform">→</span></span>
           </NuxtLink>
+
+          <!-- Hamburger button for mobile -->
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 text-gray-600 hover:text-brand transition-colors rounded-full hover:bg-gray-100">
+            <svg v-if="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <svg v-else class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
         </div>
       </header>
+
+      <!-- Mobile Menu Dropdown -->
+      <transition enter-active-class="transition duration-200 ease-out" enter-from-class="transform -translate-y-4 opacity-0" enter-to-class="transform translate-y-0 opacity-100" leave-active-class="transition duration-150 ease-in" leave-from-class="transform translate-y-0 opacity-100" leave-to-class="transform -translate-y-4 opacity-0">
+        <div v-if="mobileMenuOpen" class="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden md:hidden pointer-events-auto">
+          <nav class="flex flex-col p-4">
+            <NuxtLink to="/" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Home</NuxtLink>
+            <NuxtLink to="/community" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Community</NuxtLink>
+            <NuxtLink to="/vault" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Vault</NuxtLink>
+            <NuxtLink to="/career" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Career</NuxtLink>
+            <NuxtLink to="/mentorship" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Mentors</NuxtLink>
+            <NuxtLink to="/pricing" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Pricing</NuxtLink>
+            <div class="border-t border-gray-100 my-2"></div>
+            <NuxtLink to="/login" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-bold text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl">Sign In</NuxtLink>
+          </nav>
+        </div>
+      </transition>
     </div>
 
     <main :class="['flex-grow flex flex-col', $route.path === '/' ? 'pt-0' : 'pt-32']">
@@ -129,6 +151,7 @@
 import { ref } from 'vue';
 import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
 
+const mobileMenuOpen = ref(false);
 const newsletterEmail = ref('');
 const { loading, error, success, createEnquiry } = useCreateEnquiry();
 

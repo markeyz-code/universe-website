@@ -15,7 +15,7 @@
       </div>
 
       <!-- Hero Content -->
-      <div class="absolute inset-0 flex items-center justify-center">
+      <div class="absolute inset-0 flex items-center justify-center pt-28 md:pt-32">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 relative z-10">
           <div class="inline-block bg-brand/20 border border-brand/30 text-blue-100 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-2 uppercase backdrop-blur-sm">
             Empowering the Next Generation of Scientists
