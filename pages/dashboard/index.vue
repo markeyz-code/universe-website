@@ -100,15 +100,15 @@
             <h3 class="text-xl font-bold mb-2">Ready to explore?</h3>
             <p class="text-brand-50 text-sm mb-6">Take advantage of your active plan and start networking, reading, or attending events.</p>
             <div class="space-y-3 relative z-10">
-              <NuxtLink to="/events" class="flex items-center justify-between px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors group">
+              <NuxtLink to="/dashboard/events" class="flex items-center justify-between px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors group">
                 <span class="font-medium">Browse Events</span>
                 <span class="group-hover:translate-x-1 transition-transform">→</span>
               </NuxtLink>
-              <NuxtLink to="/vault" v-if="subscription?.canAccessVault" class="flex items-center justify-between px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors group">
+              <NuxtLink to="/dashboard/vault" v-if="subscription?.canAccessVault" class="flex items-center justify-between px-4 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors group">
                 <span class="font-medium">Enter The Vault</span>
                 <span class="group-hover:translate-x-1 transition-transform">→</span>
               </NuxtLink>
-              <NuxtLink to="/pricing" v-if="!subscription" class="flex items-center justify-between px-4 py-3 bg-white text-brand hover:bg-gray-50 rounded-lg transition-colors font-bold text-center justify-center">
+              <NuxtLink to="/dashboard/pricing" v-if="!subscription" class="flex items-center justify-between px-4 py-3 bg-white text-brand hover:bg-gray-50 rounded-lg transition-colors font-bold text-center justify-center">
                 Get a Subscription
               </NuxtLink>
             </div>

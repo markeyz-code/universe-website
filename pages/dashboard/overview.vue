@@ -8,10 +8,10 @@
         Your account is activated and verified. Everything is ready to go.
       </p>
       <div class="mt-8 flex justify-center gap-4">
-        <NuxtLink to="/vault" class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
+        <NuxtLink to="/dashboard/vault" class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
           Explore
         </NuxtLink>
-        <NuxtLink to="/mentorship" class="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors">
+        <NuxtLink to="/dashboard/mentorship" class="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors">
           Learn
         </NuxtLink>
       </div>
@@ -70,7 +70,7 @@
           Access core resources, connect with mentors, explore opportunities, and stay informed. The tools that matter are organized and ready.
         </p>
         <div class="flex gap-4">
-           <NuxtLink to="/vault" class="px-5 py-2 bg-white border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50">Browse</NuxtLink>
+           <NuxtLink to="/dashboard/vault" class="px-5 py-2 bg-white border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50">Browse</NuxtLink>
            <NuxtLink to="/community" class="px-5 py-2 text-brand text-sm font-medium hover:text-[#1f4e70] flex items-center gap-1">Steps <ArrowRight class="w-4 h-4"/></NuxtLink>
         </div>
       </div>
@@ -83,7 +83,7 @@
           <div class="p-8 md:w-2/3">
             <h3 class="text-xl font-bold text-gray-900 mb-3">The vault</h3>
             <p class="text-gray-600 mb-4">Core and targeted advice documents in one secure place. Keep lectures, protocols, and verification documents whenever you need them.</p>
-            <NuxtLink to="/vault" class="text-brand font-medium text-sm group-hover:underline">Open Vault &rarr;</NuxtLink>
+            <NuxtLink to="/dashboard/vault" class="text-brand font-medium text-sm group-hover:underline">Open Vault &rarr;</NuxtLink>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
           <div class="p-8 md:w-2/3">
             <h3 class="text-xl font-bold text-gray-900 mb-3">Mentorship match</h3>
             <p class="text-gray-600 mb-4">Get paired with experienced professionals who understand your path. Learn from those who have walked it before and build relationships that matter.</p>
-            <NuxtLink to="/mentorship" class="text-brand font-medium text-sm group-hover:underline">Find Mentor &rarr;</NuxtLink>
+            <NuxtLink to="/dashboard/mentorship" class="text-brand font-medium text-sm group-hover:underline">Find Mentor &rarr;</NuxtLink>
           </div>
         </div>
 
@@ -105,7 +105,7 @@
           <div class="p-8 md:w-2/3">
             <h3 class="text-xl font-bold text-gray-900 mb-3">Academic hub</h3>
             <p class="text-gray-600 mb-4">Analyze listings and discover opportunities tailored to your steps. Start finding and track your progress through each application.</p>
-            <NuxtLink to="/career" class="text-brand font-medium text-sm group-hover:underline">View Jobs &rarr;</NuxtLink>
+            <NuxtLink to="/dashboard/career" class="text-brand font-medium text-sm group-hover:underline">View Jobs &rarr;</NuxtLink>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@
         <p class="text-lg text-gray-200 mb-8 max-w-xl mx-auto">Join our community group to share experiences and grow together.</p>
         <div class="flex justify-center gap-4">
           <NuxtLink to="/community" class="px-8 py-3 bg-white text-gray-900 rounded font-bold hover:bg-gray-100 transition-colors">Join</NuxtLink>
-          <NuxtLink to="/events" class="px-8 py-3 bg-transparent border border-white text-white rounded font-bold hover:bg-white/10 transition-colors">Learn</NuxtLink>
+          <NuxtLink to="/dashboard/events" class="px-8 py-3 bg-transparent border border-white text-white rounded font-bold hover:bg-white/10 transition-colors">Learn</NuxtLink>
         </div>
       </div>
     </section>

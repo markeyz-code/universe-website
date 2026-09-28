@@ -1,4 +1,6 @@
 <template>
+  <NuxtLayout :name="isAuthenticated ? 'dashboard' : 'default'">
+
   <div class="bg-gray-50 min-h-screen pb-24">
     <!-- Hero / Main Pricing Intro -->
     <section class="pt-24 pb-16">
@@ -144,7 +146,7 @@
     </section>
 
     <!-- Everything you need to build your career -->
-    <section class="py-24 bg-white border-t border-gray-200">
+    <section v-if="!isAuthenticated" class="py-24 bg-white border-t border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-16 max-w-2xl">
           <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-2 block">Included</span>
@@ -193,7 +195,7 @@
     </section>
 
     <!-- Bottom CTA -->
-    <section class="bg-gray-900 py-24">
+    <section v-if="!isAuthenticated" class="bg-gray-900 py-24">
       <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">What comes next</h2>
         <p class="text-xl text-gray-300 mb-10">A life worth living involves building your network and learning from the best.</p>
@@ -204,7 +206,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="py-24 bg-gray-50 border-t border-gray-200">
+    <section v-if="!isAuthenticated" class="py-24 bg-gray-50 border-t border-gray-200">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-3xl font-bold text-gray-900 mb-4">Questions</h2>
@@ -252,9 +254,12 @@
       </div>
     </div>
   </div>
+  </NuxtLayout>
+
 </template>
 
 <script setup lang="ts">
+
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useSeoMeta, useHead } from '#imports';

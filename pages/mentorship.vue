@@ -1,4 +1,6 @@
 <template>
+  <NuxtLayout :name="isAuthenticated ? 'dashboard' : 'default'">
+
   <div class="space-y-16">
     <section class="text-center max-w-2xl mx-auto pt-8">
       <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-2 block">Exclusive</span>
@@ -60,7 +62,7 @@
     </section>
 
     <!-- What your mentor provides -->
-    <section class="py-16 text-center max-w-5xl mx-auto">
+    <section v-if="!isAuthenticated" class="py-16 text-center max-w-5xl mx-auto">
       <span class="text-sm font-semibold text-brand tracking-wider uppercase mb-2 block">Support</span>
       <h2 class="text-3xl font-bold text-gray-900 mb-4">What your mentor provides</h2>
       <p class="text-lg text-gray-600 mb-16 max-w-2xl mx-auto">
@@ -98,7 +100,7 @@
     </section>
 
     <!-- Real Outcomes / Testimonial -->
-    <section class="py-12 bg-white flex flex-col md:flex-row items-center justify-between gap-12 max-w-5xl mx-auto border-t border-b border-gray-100">
+    <section v-if="!isAuthenticated" class="py-12 bg-white flex flex-col md:flex-row items-center justify-between gap-12 max-w-5xl mx-auto border-t border-b border-gray-100">
       <div class="md:w-1/3">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">Real outcomes</h2>
         <p class="text-gray-600">Students who found their way.</p>
@@ -119,7 +121,7 @@
     </section>
 
     <!-- Bottom CTA -->
-    <section class="rounded-2xl overflow-hidden relative shadow-lg my-16 max-w-6xl mx-auto">
+    <section v-if="!isAuthenticated" class="rounded-2xl overflow-hidden relative shadow-lg my-16 max-w-6xl mx-auto">
       <div class="absolute inset-0 bg-gray-900/50 z-10 mix-blend-multiply"></div>
       <img src="/community_network.jpg" class="absolute inset-0 w-full h-full object-cover" />
       <div class="relative z-20 py-20 text-center">
@@ -173,7 +175,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="py-16 max-w-3xl mx-auto">
+    <section v-if="!isAuthenticated" class="py-16 max-w-3xl mx-auto">
       <div class="text-center mb-12">
         <h2 class="text-2xl font-bold text-gray-900 mb-2">Questions</h2>
         <p class="text-gray-600">Everything you need to know about finding and working with a mentor.</p>
@@ -210,9 +212,15 @@
       </div>
     </section>
   </div>
+  </NuxtLayout>
+
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '@/composables/core/useAuth';
+const { isAuthenticated } = useAuth();
+
+
 import { ref } from 'vue';
 import { useSeoMeta, useHead } from '#imports';
 import { CheckCircle, ArrowRight, MessageSquare, FileText, Award, Star, User } from 'lucide-vue-next';
@@ -238,7 +246,7 @@ const submitMentorshipRequest = async () => {
   successMessage.value = 'Your mentorship request has been received! Our team will match you shortly.';
 };
 
-definePageMeta({ layout: 'default' });
+definePageMeta({ layout: false });
 useSeoMeta({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
 useHead({ title: 'Mentorship Matcher | UniVerse Ecosystem' });
 </script>
