@@ -2,8 +2,8 @@ import { GATEWAY_ENDPOINT_WITH_AUTH, cachedGet } from '../axios.config';
 
 export const jobsApi = {
   /** Get all jobs */
-  getJobs() {
-    return cachedGet('/jobs');
+  getJobs(params?: any) {
+    return cachedGet('/jobs', params);
   },
 
   /** Create a job (Admin) */
@@ -20,5 +20,10 @@ export const jobsApi = {
   /** Delete a job (Admin) */
   deleteJob(id: string) {
     return GATEWAY_ENDPOINT_WITH_AUTH.delete(`/jobs/${id}`);
+  },
+
+  /** Apply for a job */
+  applyJob(data: any) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.post('/jobs/apply', data);
   },
 };

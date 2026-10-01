@@ -32,7 +32,7 @@
             <option value="Quality Assurance">Quality Assurance</option>
           </select>
         </div>
-        <button type="submit" :disabled="loading" class="w-full px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors disabled:opacity-50">
+        <button type="submit" :disabled="loading" class="w-full px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-violet-700 transition-colors disabled:opacity-50">
           {{ loading ? 'Submitting...' : 'Request a Mentor' }}
         </button>
       </form>
@@ -53,7 +53,7 @@
         </ul>
         <div class="flex gap-4">
            <button class="px-5 py-2 border border-gray-300 bg-white rounded text-sm font-medium text-gray-700 hover:bg-gray-50">Search</button>
-           <button class="px-5 py-2 text-brand text-sm font-medium hover:text-[#1f4e70] flex items-center gap-1">Browse <ArrowRight class="w-4 h-4"/></button>
+           <button class="px-5 py-2 text-brand text-sm font-medium hover:text-violet-700 flex items-center gap-1">Browse <ArrowRight class="w-4 h-4"/></button>
         </div>
       </div>
       <div class="md:w-1/2">
@@ -95,7 +95,7 @@
       
       <div class="mt-12">
         <button class="px-5 py-2 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 mr-2">Explore</button>
-        <button class="px-5 py-2 text-brand text-sm font-medium hover:text-[#1f4e70]">FAQ &rarr;</button>
+        <button class="px-5 py-2 text-brand text-sm font-medium hover:text-violet-700">FAQ &rarr;</button>
       </div>
     </section>
 

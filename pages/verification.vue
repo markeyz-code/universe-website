@@ -8,7 +8,7 @@
       </p>
       
       <div class="flex justify-center gap-4 mb-16">
-        <NuxtLink to="/" class="bg-brand text-white px-6 py-2.5 rounded font-medium hover:bg-[#1f4e70] transition-colors">
+        <NuxtLink to="/" class="bg-brand text-white px-6 py-2.5 rounded font-medium hover:bg-violet-700 transition-colors">
           Go to Home
         </NuxtLink>
         <button @click="contactSupport" class="bg-white border border-gray-300 text-gray-700 px-6 py-2.5 rounded font-medium hover:bg-gray-50 transition-colors">

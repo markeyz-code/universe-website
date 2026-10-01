@@ -5,4 +5,8 @@ export const mentorsApi = {
   getMentors() {
     return cachedGet('/users/mentors');
   },
+  /** Request a mentor */
+  requestMentorship(payload: any) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.post('/mentorship/request', payload);
+  }
 };

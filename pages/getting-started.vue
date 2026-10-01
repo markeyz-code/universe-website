@@ -9,7 +9,7 @@
           Everything you need to get started as a student in our community.
         </p>
         <div class="flex justify-center gap-4">
-          <NuxtLink to="/register" class="bg-brand text-white px-8 py-3 rounded-lg font-medium hover:bg-[#1f4e70] transition-colors">
+          <NuxtLink to="/register" class="bg-brand text-white px-8 py-3 rounded-lg font-medium hover:bg-violet-700 transition-colors">
             Apply Now
           </NuxtLink>
           <NuxtLink to="/pricing" class="bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">

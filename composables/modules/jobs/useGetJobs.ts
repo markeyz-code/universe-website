@@ -10,8 +10,9 @@ export const useGetJobs = () => {
   const fetchJobs = async () => {
     loading.value = true;
     try {
-      const { data } = await jobsApi.getJobs();
-      jobs.value = data;
+      const res = await jobsApi.getJobs();
+      // res.data could be { data, metadata } due to pagination
+      jobs.value = res?.data?.data || res?.data || [];
     } catch (error: any) {
       showToast({ title: 'Error', message: 'Failed to fetch job postings.', type: 'error' });
     } finally {

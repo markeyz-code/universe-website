@@ -8,7 +8,7 @@
         We're here to help you navigate the MLS community and answer your questions.
       </p>
       <div class="mt-8 flex justify-center gap-4">
-        <button @click="scrollToForm" class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
+        <button @click="scrollToForm" class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-violet-700 transition-colors">
           Message
         </button>
         <button @click="scrollToFaq" class="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors">
@@ -156,7 +156,7 @@
             {{ error }}
           </div>
 
-          <button type="submit" :disabled="loading || !form.agree" class="px-8 py-3 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors disabled:opacity-50 flex items-center gap-2">
+          <button type="submit" :disabled="loading || !form.agree" class="px-8 py-3 bg-brand text-white rounded font-medium hover:bg-violet-700 transition-colors disabled:opacity-50 flex items-center gap-2">
             <span v-if="loading" class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
             Send Message
           </button>

@@ -9,7 +9,7 @@
         Explore study groups, research projects, and student placements at top diagnostic centers and universities across Nigeria.
       </p>
       <div class="flex justify-center gap-4">
-        <button class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-[#1f4e70] transition-colors">
+        <button class="px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-violet-700 transition-colors">
           Browse all jobs
         </button>
         <button class="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 rounded font-medium hover:bg-gray-50 transition-colors">

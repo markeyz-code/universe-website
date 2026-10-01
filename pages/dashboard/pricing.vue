@@ -1,109 +1,186 @@
 <template>
-  <div class="space-y-6">
-    <div>
-      <h1 class="text-2xl font-bold text-gray-900">Subscription</h1>
-      <p class="text-gray-600 mt-1">Choose the plan that fits your academic needs.</p>
-    </div>
+  <div class="space-y-6 pb-12">
+    <!-- Header & Billing Cycle Selector -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Subscription Plans</h1>
+        <p class="text-gray-500 text-sm mt-0.5">Choose the plan that fits your clinical and academic needs.</p>
+      </div>
 
-    <!-- Toggle -->
-    <div class="inline-flex bg-gray-200 rounded-lg p-1">
-      <button @click="billingCycle = 'monthly'" :class="['px-6 py-2 rounded-md font-medium text-sm', billingCycle === 'monthly' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900']">Monthly</button>
-      <button @click="billingCycle = 'yearly'" :class="['px-6 py-2 rounded-md font-medium text-sm', billingCycle === 'yearly' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900']">Yearly</button>
-    </div>
-
-    <div v-if="loading" class="text-center py-12">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
-      <p class="text-gray-500 mt-4">Loading plans...</p>
-    </div>
-
-    <div v-else-if="filteredSubscriptions.length === 0" class="text-center py-12">
-      <p class="text-gray-500 text-lg">No subscription plans available for this billing cycle.</p>
-    </div>
-
-    <!-- Plan Cards -->
-    <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div v-for="plan in filteredSubscriptions" :key="plan._id" class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all relative overflow-hidden group">
-        <div class="absolute top-0 right-0 w-48 h-48 bg-brand/5 rounded-full blur-3xl -mr-24 -mt-24 pointer-events-none group-hover:bg-brand/10 transition-colors"></div>
-        
-        <div class="relative z-10">
-          <span class="inline-block bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3">{{ plan.durationMonths === 1 ? 'Monthly' : 'Annual' }}</span>
-          <h3 class="text-2xl font-extrabold text-gray-900 mb-1">{{ plan.name }}</h3>
-          <p class="text-sm text-gray-500 mb-6">{{ plan.description }}</p>
-          
-          <div class="mb-6 flex items-baseline gap-2 border-b border-gray-100 pb-6">
-            <span class="text-4xl font-black text-gray-900">₦{{ (plan.price / 100).toLocaleString() }}</span>
-            <span class="text-gray-500 font-medium">/{{ plan.durationMonths === 1 ? 'mo' : 'yr' }}</span>
-          </div>
-
-          <button 
-            @click="handleSubscribe(plan)" 
-            :disabled="paymentLoading"
-            class="w-full bg-gray-900 text-white hover:bg-brand py-3 rounded-xl font-bold transition-colors flex justify-center items-center gap-2 mb-6 shadow-md disabled:opacity-50"
+      <!-- Billing Cycle Toggle -->
+      <div class="flex items-center gap-3 self-start sm:self-auto">
+        <div class="inline-flex bg-gray-100 p-1 rounded-xl border border-gray-200/80 shadow-inner">
+          <button
+            @click="billingCycle = 'monthly'"
+            :class="billingCycle === 'monthly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900 font-medium'"
+            class="px-5 py-2 rounded-lg text-xs transition-all"
           >
-            <span v-if="paymentLoading && selectedPlanId === plan._id">
-              <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-            </span>
-            <span v-else>Select {{ plan.name }}</span>
+            Monthly Billing
           </button>
-
-          <div class="space-y-3">
-            <p class="text-sm font-bold text-gray-900 uppercase tracking-wider">What's included</p>
-            <ul class="space-y-2">
-              <li v-for="(feature, idx) in plan.features" :key="idx" class="flex items-start">
-                <div class="flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 flex items-center justify-center mr-3 mt-0.5">
-                  <Check class="h-3 w-3 text-brand" />
-                </div>
-                <span class="text-sm text-gray-600">{{ feature }}</span>
-              </li>
-            </ul>
-          </div>
+          <button
+            @click="billingCycle = 'yearly'"
+            :class="billingCycle === 'yearly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900 font-medium'"
+            class="px-5 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5"
+          >
+            <span>Annual Billing</span>
+            <span class="bg-green-100 text-green-700 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full">Save 20%</span>
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- Comparison Table (Desktop) -->
-    <div v-if="filteredSubscriptions.length > 1" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hidden md:block">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr>
-            <th class="p-6 bg-gray-50 border-b border-gray-200 w-1/4"></th>
-            <th v-for="plan in filteredSubscriptions" :key="'head-'+plan._id" class="p-6 bg-gray-50 border-b border-gray-200 border-l w-1/4 text-center">
-              <h4 class="font-bold text-gray-900 mb-1">{{ plan.name }}</h4>
-              <div class="text-2xl font-extrabold text-gray-900 mb-1">₦{{ (plan.price / 100).toLocaleString() }}</div>
-              <p class="text-xs text-gray-500 mb-4">Per {{ plan.durationMonths > 1 ? plan.durationMonths + ' months' : 'month' }}</p>
-              <button 
-                @click="handleSubscribe(plan)" 
-                :disabled="paymentLoading"
-                class="w-full py-2 bg-brand text-white text-sm font-medium rounded hover:bg-[#1f4e70] transition-colors"
+    <!-- Loading State -->
+    <div v-if="loading" class="text-center py-20 bg-white rounded-2xl border border-gray-200/80 shadow-sm">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
+      <p class="text-gray-500 text-sm mt-4 font-medium">Loading subscription tiers...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div v-else-if="filteredSubscriptions.length === 0" class="text-center py-16 bg-white rounded-2xl border border-gray-200/80 shadow-sm">
+      <div class="w-16 h-16 bg-brand/5 text-brand rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <CreditCard class="w-8 h-8 text-brand" />
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-1">No plans available</h3>
+      <p class="text-gray-500 text-sm max-w-sm mx-auto mb-4">There are currently no active plans available for the selected billing cycle.</p>
+      <button @click="billingCycle = billingCycle === 'monthly' ? 'yearly' : 'monthly'" class="px-4 py-2 bg-brand text-white rounded-xl text-xs font-bold hover:bg-brand/90 transition-all">
+        Switch to {{ billingCycle === 'monthly' ? 'Annual' : 'Monthly' }}
+      </button>
+    </div>
+
+    <!-- Unified Comparison Matrix -->
+    <div v-else class="bg-white rounded-2xl shadow-sm border border-gray-200/90 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse min-w-[700px]">
+          <!-- Plan Headers -->
+          <thead>
+            <tr class="divide-x divide-gray-100">
+              <!-- Empty Corner / Context Column -->
+              <th class="p-6 bg-gray-50/70 w-1/4 align-bottom border-b border-gray-200">
+                <span class="text-xs font-extrabold text-violet-600 uppercase tracking-wider block mb-1">UniVerse Membership</span>
+                <h3 class="text-lg font-bold text-gray-900">Compare Plans</h3>
+                <p class="text-xs text-gray-500 mt-1 leading-relaxed">Select the subscription level with the exact resource access you require.</p>
+              </th>
+
+              <!-- Plan Header Columns -->
+              <th
+                v-for="(plan, index) in filteredSubscriptions"
+                :key="'head-' + plan._id"
+                class="p-6 bg-gray-50/70 border-b border-gray-200 text-center relative group transition-colors"
+                :class="[
+                  index === 1 ? 'bg-brand/[0.02]' : '',
+                  'w-1/' + (filteredSubscriptions.length + 1)
+                ]"
               >
-                Select plan
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100">
-          <tr>
-            <td colspan="4" class="p-4 bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider">Features included</td>
-          </tr>
-          <tr v-for="feature in allUniqueFeatures" :key="feature">
-            <td class="p-4 text-sm text-gray-700 font-medium">{{ feature }}</td>
-            <td v-for="plan in filteredSubscriptions" :key="plan._id+'-'+feature" class="p-4 text-center border-l border-gray-100">
-              <Check v-if="plan.features.includes(feature)" class="w-5 h-5 text-gray-900 mx-auto" />
-              <span v-else class="text-gray-300">-</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                <!-- Popular Badge (for middle / recommended plan) -->
+                <div v-if="index === 1 || plan.name.toLowerCase().includes('basic') || plan.name.toLowerCase().includes('popular')" class="mb-2">
+                  <span class="inline-flex bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                    Recommended
+                  </span>
+                </div>
+                <div v-else class="h-6"></div>
+
+                <h4 class="text-lg font-bold text-gray-900 mb-1">{{ plan.name }}</h4>
+                <p class="text-xs text-gray-500 mb-3 min-h-[32px] line-clamp-2 px-2">{{ plan.description || 'Full platform access' }}</p>
+
+                <!-- Pricing Display -->
+                <div class="mb-4">
+                  <div class="flex items-baseline justify-center gap-1">
+                    <span class="text-3xl font-extrabold text-gray-900 tracking-tight">₦{{ (plan.price / 100).toLocaleString() }}</span>
+                    <span class="text-xs font-semibold text-gray-500">/{{ plan.durationMonths > 1 ? plan.durationMonths + ' mos' : 'mo' }}</span>
+                  </div>
+                  <p class="text-[11px] text-gray-400 mt-0.5 font-medium">Billed {{ plan.durationMonths === 1 ? 'monthly' : 'annually' }}</p>
+                </div>
+
+                <!-- Action Button -->
+                <button
+                  @click="handleSubscribe(plan)"
+                  :disabled="paymentLoading"
+                  class="w-full py-2.5 px-4 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+                >
+                  <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-2">
+                    <div class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                    <span>Processing...</span>
+                  </span>
+                  <span v-else>Select {{ plan.name }}</span>
+                </button>
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Feature Comparison Matrix -->
+          <tbody class="divide-y divide-gray-100">
+            <!-- Section Title -->
+            <tr class="bg-gray-50/90">
+              <td :colspan="filteredSubscriptions.length + 1" class="px-6 py-3 text-xs font-extrabold text-gray-500 uppercase tracking-wider border-y border-gray-200">
+                Features & Resource Inclusions
+              </td>
+            </tr>
+
+            <!-- Feature Rows -->
+            <tr
+              v-for="feature in allUniqueFeatures"
+              :key="feature"
+              class="divide-x divide-gray-100 hover:bg-gray-50/50 transition-colors"
+            >
+              <td class="px-6 py-4 text-xs font-semibold text-gray-700">
+                {{ feature }}
+              </td>
+
+              <td
+                v-for="(plan, index) in filteredSubscriptions"
+                :key="plan._id + '-' + feature"
+                class="px-6 py-4 text-center"
+                :class="index === 1 ? 'bg-brand/[0.01]' : ''"
+              >
+                <div v-if="plan.features && plan.features.includes(feature)" class="flex justify-center items-center">
+                  <div class="w-6 h-6 rounded-full bg-brand/10 text-brand flex items-center justify-center">
+                    <Check class="w-4 h-4 text-brand stroke-[2.5]" />
+                  </div>
+                </div>
+                <div v-else class="text-gray-300 font-bold text-sm">
+                  —
+                </div>
+              </td>
+            </tr>
+
+            <!-- Bottom CTA Row -->
+            <tr class="divide-x divide-gray-100 bg-gray-50/40">
+              <td class="p-6 align-middle font-bold text-xs text-gray-500 uppercase tracking-wider">
+                Ready to get started?
+              </td>
+
+              <td
+                v-for="plan in filteredSubscriptions"
+                :key="'foot-' + plan._id"
+                class="p-5 text-center"
+              >
+                <button
+                  @click="handleSubscribe(plan)"
+                  :disabled="paymentLoading"
+                  class="w-full py-2.5 px-4 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 transition-all shadow-sm hover:shadow flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+                >
+                  <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-1.5">
+                    <div class="animate-spin rounded-full h-3.5 w-3.5 border-2 border-white border-t-transparent"></div>
+                  </span>
+                  <span v-else>Get {{ plan.name }}</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Verification Modal -->
-    <div v-if="verifying" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto mb-4"></div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Verifying Payment</h3>
-        <p class="text-gray-500 text-sm">Please wait while we confirm your transaction...</p>
+    <Teleport to="body">
+      <div v-if="verifying" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl border border-gray-100">
+          <div class="animate-spin rounded-full h-12 w-12 border-2 border-brand border-t-transparent mx-auto mb-4"></div>
+          <h3 class="text-xl font-bold text-gray-900 mb-1">Verifying Payment</h3>
+          <p class="text-gray-500 text-xs">Please wait while we confirm your transaction with Paystack...</p>
+        </div>
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 
@@ -111,10 +188,11 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useSeoMeta, useHead } from '#imports';
-import { Check } from 'lucide-vue-next';
+import { Check, CreditCard } from 'lucide-vue-next';
 import { useSubscriptions } from '@/composables/modules/subscriptions/useSubscriptions';
 import { usePayments } from '@/composables/modules/payments/usePayments';
 import { useAuth } from '@/composables/core/useAuth';
+import { useCustomModal } from '@/composables/core/useCustomModal';
 
 definePageMeta({ layout: 'dashboard' });
 useSeoMeta({ title: 'Subscription | Dashboard' });
@@ -122,9 +200,10 @@ useHead({ title: 'Subscription | Dashboard' });
 
 const router = useRouter();
 const route = useRoute();
-const { isAuthenticated, user } = useAuth();
+const { isAuthenticated, user, initAuth } = useAuth();
 const { loading, subscriptions, fetchActive } = useSubscriptions();
 const { loading: paymentLoading, initializePayment, verifyPayment } = usePayments();
+const { confirm, alert: modalAlert } = useCustomModal();
 
 const selectedPlanId = ref<string | null>(null);
 const verifying = ref(false);
@@ -142,7 +221,7 @@ const allUniqueFeatures = computed(() => {
   if (!filteredSubscriptions.value) return [];
   const features = new Set<string>();
   filteredSubscriptions.value.forEach(plan => {
-    if(plan.features) {
+    if (plan.features) {
       plan.features.forEach((f: string) => features.add(f));
     }
   });
@@ -150,6 +229,7 @@ const allUniqueFeatures = computed(() => {
 });
 
 onMounted(async () => {
+  initAuth();
   await fetchActive();
 
   if (route.query.reference) {
@@ -157,13 +237,25 @@ onMounted(async () => {
     try {
       const result = await verifyPayment(route.query.reference as string);
       if (result && result.verified) {
-        alert('Payment successful! Your subscription is now active.');
-        router.push('/dashboard');
+        await modalAlert({
+          title: 'Subscription Active! 🎉',
+          message: 'Payment verified successfully! Your subscription privileges are now live.',
+          type: 'success',
+        });
+        router.push('/dashboard/overview');
       } else {
-        alert('Payment verification failed or is still pending.');
+        await modalAlert({
+          title: 'Verification Pending',
+          message: 'Payment verification failed or is still being processed.',
+          type: 'warning',
+        });
       }
     } catch (e) {
-      alert('An error occurred during verification.');
+      await modalAlert({
+        title: 'Verification Error',
+        message: 'An error occurred during payment verification. Please check your transaction.',
+        type: 'danger',
+      });
     } finally {
       verifying.value = false;
       router.replace('/dashboard/pricing');
@@ -178,24 +270,67 @@ const handleSubscribe = async (plan: any) => {
   }
 
   if (user.value?.activeSubscription) {
-    if (user.value.activeSubscription === plan._id || user.value.activeSubscription._id === plan._id) {
-      alert('You are already subscribed to this plan.');
+    const activeSubId = typeof user.value.activeSubscription === 'object'
+      ? user.value.activeSubscription._id
+      : user.value.activeSubscription;
+
+    if (activeSubId === plan._id) {
+      await modalAlert({
+        title: 'Current Plan',
+        message: 'You are already subscribed to this plan.',
+        type: 'info',
+      });
       return;
     }
-    const confirmUpgrade = confirm(`You currently have an active plan. Do you want to upgrade/switch to ${plan.name}?`);
+
+    const confirmUpgrade = await confirm({
+      title: 'Switch Subscription Plan',
+      message: `You currently have an active plan. Do you want to upgrade/switch to "${plan.name}"?`,
+      confirmText: 'Yes, Switch Plan',
+      cancelText: 'Cancel',
+      type: 'info',
+    });
     if (!confirmUpgrade) return;
   }
 
   selectedPlanId.value = plan._id;
   const callbackUrl = `${window.location.origin}/dashboard/pricing`;
-  
+
   const result = await initializePayment(plan._id, callbackUrl);
-  
-  if (result && result.authorization_url) {
-    window.location.href = result.authorization_url;
-  } else {
-    alert('Failed to initialize payment. Please try again.');
+
+  if (result) {
+    // If it's a free plan or auto-activated
+    if (result.isFree || !result.authorization_url) {
+      await modalAlert({
+        title: 'Plan Activated! 🎉',
+        message: result.message || `"${plan.name}" has been activated successfully!`,
+        type: 'success',
+      });
+      router.push('/dashboard/overview');
+      return;
+    }
+
+    if (result.authorization_url) {
+      window.location.href = result.authorization_url;
+      return;
+    }
   }
+
   selectedPlanId.value = null;
 };
 </script>
+
+<style scoped>
+.text-brand {
+  color: #6D28D9;
+}
+.bg-brand {
+  background-color: #6D28D9;
+}
+.border-brand {
+  border-color: #6D28D9;
+}
+.ring-brand {
+  --tw-ring-color: #6D28D9;
+}
+</style>

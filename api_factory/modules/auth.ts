@@ -12,9 +12,19 @@ export const authApi = {
     return GATEWAY_ENDPOINT.post('/auth/register', data);
   },
 
-  /** Login – returns { access_token } */
-  login(data: { email: string; password: string }) {
+  /** Login – validates credentials, triggers OTP */
+  login(data: { email: string; password: string; source?: string }) {
     return GATEWAY_ENDPOINT.post('/auth/login', data);
+  },
+
+  /** Verify Login OTP – returns { access_token, user } */
+  verifyLoginOtp(data: { email: string; otp: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/login/verify-otp', data);
+  },
+
+  /** Resend Login OTP */
+  resendLoginOtp(data: { email: string; source?: string }) {
+    return GATEWAY_ENDPOINT.post('/auth/login/resend-otp', data);
   },
 
   /** Setup Password after approval */

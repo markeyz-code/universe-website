@@ -1,32 +1,25 @@
 import { ref } from 'vue';
-import { useRuntimeConfig } from '#app';
-import { useCookie } from '#app';
+import { paymentsApi } from '@/api_factory/modules/payments';
+import { useCustomToast } from '@/composables/core/useCustomToast';
 
 export const usePayments = () => {
-  const config = useRuntimeConfig();
+  const { showToast } = useCustomToast();
   const loading = ref(false);
   const error = ref<string | null>(null);
-  const token = useCookie('auth_token');
 
   const initializePayment = async (subscriptionId: string, callbackUrl: string) => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await fetch(`${config.public.apiBase}/payments/initialize`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token.value}`,
-        },
-        body: JSON.stringify({ subscriptionId, callbackUrl }),
-      });
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.message || 'Failed to initialize payment');
-      }
-      return await response.json();
+      const response = await paymentsApi.initialize({ subscriptionId, callbackUrl });
+      return response.data;
     } catch (err: any) {
-      error.value = err.message;
+      error.value = err.response?.data?.message || err.message || 'Failed to initialize payment';
+      showToast({
+        title: 'Payment Error',
+        message: error.value!,
+        toastType: 'error',
+      });
       return null;
     } finally {
       loading.value = false;
@@ -37,16 +30,10 @@ export const usePayments = () => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await fetch(`${config.public.apiBase}/payments/verify/${reference}`, {
-        headers: { 'Authorization': `Bearer ${token.value}` },
-      });
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}));
-        throw new Error(errData.message || 'Failed to verify payment');
-      }
-      return await response.json();
+      const response = await paymentsApi.verify(reference);
+      return response.data;
     } catch (err: any) {
-      error.value = err.message;
+      error.value = err.response?.data?.message || err.message || 'Failed to verify payment';
       return null;
     } finally {
       loading.value = false;

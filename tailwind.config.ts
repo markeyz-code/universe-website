@@ -7,7 +7,7 @@ export default <Partial<Config>>{
         sans: ['Outfit', 'sans-serif'],
       },
       colors: {
-        brand: '#27628C',
+        brand: '#6D28D9',
       }
     }
   }

@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     prerender: {
-      ignore: ['/events']
+      ignore: ['/events', '/forms']
     }
   },
   modules: ['@nuxtjs/tailwindcss'],

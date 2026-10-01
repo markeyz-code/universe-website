@@ -10,14 +10,11 @@ export const useAccessResource = () => {
    * Fetches a time-limited signed URL from the backend and opens it.
    * Opens the file in a new tab for download/viewing.
    */
-  const accessResource = async (resourceId: string) => {
-    loading.value = resourceId;
-    try {
-      const { data } = await vaultApi.getSignedUrl(resourceId);
-      if (data?.signedUrl) {
-        window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
-      }
-      return data?.signedUrl;
+    const accessResource = async (resourceId: string) => {
+      loading.value = resourceId;
+      try {
+        const { data } = await vaultApi.getSignedUrl(resourceId);
+        return data?.signedUrl;
     } catch (err: any) {
       const message = err.response?.data?.message || 'Could not open resource. Please try again.';
       showToast({ title: 'Access Failed', message, type: 'error' });

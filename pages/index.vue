@@ -17,17 +17,17 @@
       <!-- Hero Content -->
       <div class="absolute inset-0 flex items-center justify-center pt-28 md:pt-32">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 relative z-10">
-          <div class="inline-block bg-brand/20 border border-brand/30 text-blue-100 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-2 uppercase backdrop-blur-sm">
+          <div class="inline-block bg-violet-500/20 border border-violet-400/30 text-violet-200 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-2 uppercase backdrop-blur-sm">
             Empowering the Next Generation of Scientists
           </div>
           <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-            The Ultimate Network for <br class="hidden md:block"/> <span class="text-cyan-300">MLS Students</span>
+            The Ultimate Network for <br class="hidden md:block"/> <span class="text-violet-300">MLS Students</span>
           </h1>
           <p class="text-lg md:text-xl text-gray-200 font-light max-w-3xl mx-auto">
             Access specialized study materials, connect with experienced mentors, and navigate your academic journey with absolute confidence.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
-            <NuxtLink to="/register" class="bg-brand hover:bg-[#1f4e70] text-white px-8 py-2 rounded-lg text-lg font-medium transition-colors inline-block w-full sm:w-auto text-center border border-transparent">
+            <NuxtLink to="/register" class="bg-violet-600 hover:bg-violet-700 text-white px-8 py-2 rounded-lg text-lg font-medium transition-colors inline-block w-full sm:w-auto text-center border border-transparent">
               Apply for Access
             </NuxtLink>
             <NuxtLink to="/login" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 px-8 py-2 rounded-lg text-lg font-medium transition-colors inline-block w-full sm:w-auto text-center">
@@ -82,7 +82,7 @@
           <p class="text-lg text-gray-600">A complete ecosystem designed exclusively for the demands of the modern University student.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:p-8">
           <!-- Vault Feature -->
           <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
             <div class="h-48 overflow-hidden relative">
@@ -125,6 +125,20 @@
               </div>
               <h3 class="text-2xl font-bold text-gray-900 mb-3 mt-4">Career Hub</h3>
               <p class="text-gray-600 flex-1 leading-relaxed">Prepare for graduation with resume reviews, interview prep, and exclusive academic and entry-level postings.</p>
+            </div>
+          </div>
+          <!-- Events Feature -->
+          <div class="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col group hover:border-brand/50 transition-colors duration-300 shadow-sm">
+            <div class="h-48 overflow-hidden relative">
+              <div class="absolute inset-0 bg-brand/10 group-hover:bg-transparent transition-colors duration-300 z-10"></div>
+              <img src="/images/black_african_medical_students.jpg" alt="Events" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
+            </div>
+            <div class="p-5 md:p-8 flex-1 flex flex-col relative">
+              <div class="w-12 h-12 bg-white border border-gray-100 rounded-lg flex items-center justify-center text-brand absolute -top-6 left-8 shadow-sm">
+                <Calendar class="w-6 h-6" />
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-3 mt-4">Events & Webinars</h3>
+              <p class="text-gray-600 flex-1 leading-relaxed">Join exclusive seminars, workshops, and networking events to build connections and enhance your skills.</p>
             </div>
           </div>
         </div>
@@ -254,17 +268,24 @@
           No upcoming events at the moment.
         </div>
 
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-5 md:p-8">
-          <div v-for="event in events.slice(0, 4)" :key="event._id" @click="openEventModal(event)" class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 md:p-8 hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden group">
-            <span class="bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{{ event.category || 'Event' }}</span>
-            <h3 class="text-2xl font-bold text-gray-900 mt-4 mb-2 group-hover:text-brand transition-colors">{{ event.title }}</h3>
-            <p class="text-gray-600 mb-4 line-clamp-2">{{ event.description }}</p>
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-semibold text-gray-500">Date: {{ new Date(event.date).toLocaleDateString() }}</p>
-                <p class="text-sm font-semibold text-gray-500 mt-1" v-if="event.location">Location: {{ event.location }}</p>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-8">
+          <div v-for="event in events.slice(0, 3)" :key="event._id" @click="openEventModal(event)" class="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer relative overflow-hidden group flex flex-col">
+            <div v-if="event.coverImage" class="w-full h-48 bg-gray-100 relative overflow-hidden shrink-0">
+              <img :src="event.coverImage" :alt="event.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <span class="absolute bottom-3 left-3 bg-violet-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wide shadow-sm">{{ event.category || 'Event' }}</span>
+            </div>
+            <div class="p-5 md:p-6 flex-1 flex flex-col">
+              <span v-if="!event.coverImage" class="bg-violet-100 text-violet-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide w-fit mb-3">{{ event.category || 'Event' }}</span>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-violet-600 transition-colors line-clamp-2">{{ event.title }}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-2 text-sm flex-1">{{ event.description }}</p>
+              <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                <div>
+                  <p class="text-xs font-semibold text-gray-500 flex items-center gap-1.5"><Calendar class="w-3.5 h-3.5"/> {{ new Date(event.date).toLocaleDateString() }}</p>
+                  <p class="text-xs font-semibold text-gray-500 mt-1 flex items-center gap-1.5 truncate max-w-[150px]" v-if="event.location"><MapPin class="w-3.5 h-3.5"/> {{ event.location }}</p>
+                </div>
+                <button class="text-violet-600 text-xs font-bold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-violet-50 px-2.5 py-1.5 rounded-lg">View <ArrowRight class="w-3.5 h-3.5"/></button>
               </div>
-              <button class="text-brand text-sm font-bold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">View Details <ArrowRight class="w-4 h-4"/></button>
             </div>
           </div>
         </div>
@@ -273,15 +294,32 @@
 
     <!-- Event Details Modal -->
     <div v-if="selectedEvent" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div class="absolute inset-0 bg-gray-900/50 backdrop-blur-sm" @click="closeEventModal"></div>
-      <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
-        <div class="p-6 md:p-5 md:p-8 overflow-y-auto">
-          <button @click="closeEventModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
+      <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="closeEventModal"></div>
+      <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+        
+        <!-- Cover Image -->
+        <div v-if="selectedEvent.coverImage" class="w-full h-56 md:h-72 relative shrink-0">
+          <img :src="selectedEvent.coverImage" :alt="selectedEvent.title" class="w-full h-full object-cover"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <button @click="closeEventModal" class="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/40 text-white backdrop-blur-md rounded-full transition-colors z-10 shadow-sm">
             <X class="w-5 h-5" />
           </button>
           
-          <span class="bg-brand/10 text-brand text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4 inline-block">{{ selectedEvent.category || 'Event' }}</span>
-          <h3 class="text-3xl font-bold text-gray-900 mb-4">{{ selectedEvent.title }}</h3>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="bg-violet-600 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wide mb-3 inline-block shadow-sm">{{ selectedEvent.category || 'Event' }}</span>
+            <h3 class="text-2xl md:text-3xl font-bold text-white leading-tight drop-shadow-md">{{ selectedEvent.title }}</h3>
+          </div>
+        </div>
+
+        <div class="p-6 md:p-8 overflow-y-auto flex-1">
+          <button v-if="!selectedEvent.coverImage" @click="closeEventModal" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors z-10">
+            <X class="w-5 h-5" />
+          </button>
+          
+          <template v-if="!selectedEvent.coverImage">
+            <span class="bg-violet-100 text-violet-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-4 inline-block">{{ selectedEvent.category || 'Event' }}</span>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">{{ selectedEvent.title }}</h3>
+          </template>
           
           <div class="flex flex-wrap gap-4 mb-6 pb-6 border-b border-gray-100">
             <div class="flex items-center gap-2 text-gray-600">
@@ -388,7 +426,7 @@
         </div>
         
         <div class="text-center">
-          <NuxtLink to="/pricing" class="inline-flex items-center justify-center px-8 py-2.5 text-lg font-medium text-white bg-brand hover:bg-[#1f4e70] rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+          <NuxtLink to="/pricing" class="inline-flex items-center justify-center px-8 py-2.5 text-lg font-medium text-white bg-brand hover:bg-violet-700 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
             View Subscription Plans
             <ArrowRight class="ml-2 w-5 h-5" />
           </NuxtLink>
@@ -459,7 +497,7 @@
               <button 
                 type="submit" 
                 :disabled="loading"
-                class="w-full bg-brand hover:bg-[#1f4e70] text-white py-3.5 rounded-lg font-medium transition-colors disabled:opacity-70 flex justify-center items-center gap-2"
+                class="w-full bg-brand hover:bg-violet-700 text-white py-3.5 rounded-lg font-medium transition-colors disabled:opacity-70 flex justify-center items-center gap-2"
               >
                 <span v-if="loading">Sending...</span>
                 <span v-else>Send Message</span>
@@ -480,7 +518,7 @@
           Join hundreds of other verified interns who are building their careers and mastering the bench.
         </p>
         <div class="pt-4">
-          <NuxtLink to="/register" class="bg-brand hover:bg-[#1f4e70] text-white px-10 py-2.5 rounded-lg text-lg font-bold transition-colors inline-block border border-transparent">
+          <NuxtLink to="/register" class="bg-brand hover:bg-violet-700 text-white px-10 py-2.5 rounded-lg text-lg font-bold transition-colors inline-block border border-transparent">
             Apply for Access Now
           </NuxtLink>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <main class="min-h-screen bg-gray-50 flex flex-col pt-24 pb-20">
     <div v-if="loading" class="flex-1 flex justify-center items-center">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1f4e70]"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6D28D9]"></div>
     </div>
     
     <div v-else-if="error || !event" class="flex-1 flex flex-col items-center justify-center text-center px-4">
@@ -12,7 +12,7 @@
       </div>
       <h1 class="text-4xl font-bold text-gray-900 mb-4">Event Not Found</h1>
       <p class="text-gray-500 mb-8 max-w-md text-lg">The event you are looking for does not exist or has been removed.</p>
-      <NuxtLink to="/" class="px-8 py-3.5 bg-[#1f4e70] text-white rounded-xl hover:bg-[#153a56] transition-colors font-medium shadow-lg shadow-[#1f4e70]/20">Return Home</NuxtLink>
+      <NuxtLink to="/" class="px-8 py-3.5 bg-[#6D28D9] text-white rounded-xl hover:bg-[#5B21B6] transition-colors font-medium shadow-lg shadow-[#6D28D9]/20">Return Home</NuxtLink>
     </div>
 
     <div v-else class="max-w-4xl mx-auto w-full px-4 sm:px-6">
@@ -24,20 +24,20 @@
       <div class="flex flex-col lg:flex-row gap-10">
         <!-- Event Details -->
         <div class="flex-1">
-          <span class="inline-block px-4 py-1.5 bg-[#1f4e70]/10 text-[#1f4e70] text-xs font-black rounded-full uppercase tracking-widest mb-4 border border-[#1f4e70]/20">{{ event.type || 'Event' }}</span>
+          <span class="inline-block px-4 py-1.5 bg-[#6D28D9]/10 text-[#6D28D9] text-xs font-black rounded-full uppercase tracking-widest mb-4 border border-[#6D28D9]/20">{{ event.type || 'Event' }}</span>
           <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-6 tracking-tight">{{ event.title }}</h1>
           
           <div class="space-y-3 mb-8">
             <div class="flex items-center gap-3 text-gray-600">
-              <svg class="w-5 h-5 text-[#1f4e70] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <svg class="w-5 h-5 text-[#6D28D9] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <span class="font-medium">{{ new Date(event.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) }} at {{ new Date(event.date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) }}</span>
             </div>
             <div v-if="event.location" class="flex items-center gap-3 text-gray-600">
-              <svg class="w-5 h-5 text-[#1f4e70] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <svg class="w-5 h-5 text-[#6D28D9] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span class="font-medium">{{ event.location }}</span>
             </div>
             <div v-if="event.speaker" class="flex items-center gap-3 text-gray-600">
-              <svg class="w-5 h-5 text-[#1f4e70] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+              <svg class="w-5 h-5 text-[#6D28D9] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
               <span class="font-medium">{{ event.speaker }}</span>
             </div>
           </div>
@@ -64,26 +64,26 @@
             <form v-else-if="event.registrationOpen && event.status === 'upcoming'" @submit.prevent="submitRegistration" class="space-y-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
-                <input v-model="regForm.fullName" required type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#1f4e70] focus:border-[#1f4e70] text-sm" placeholder="John Doe" />
+                <input v-model="regForm.fullName" required type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#6D28D9] focus:border-[#6D28D9] text-sm" placeholder="John Doe" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-                <input v-model="regForm.email" required type="email" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#1f4e70] focus:border-[#1f4e70] text-sm" placeholder="john@university.edu" />
+                <input v-model="regForm.email" required type="email" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#6D28D9] focus:border-[#6D28D9] text-sm" placeholder="john@university.edu" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                <input v-model="regForm.phone" type="tel" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#1f4e70] focus:border-[#1f4e70] text-sm" placeholder="+234..." />
+                <input v-model="regForm.phone" type="tel" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#6D28D9] focus:border-[#6D28D9] text-sm" placeholder="+234..." />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">University</label>
-                <input v-model="regForm.university" type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#1f4e70] focus:border-[#1f4e70] text-sm" placeholder="University of Lagos" />
+                <input v-model="regForm.university" type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#6D28D9] focus:border-[#6D28D9] text-sm" placeholder="University of Lagos" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Programme</label>
-                <input v-model="regForm.programme" type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#1f4e70] focus:border-[#1f4e70] text-sm" placeholder="Medical Laboratory Science" />
+                <input v-model="regForm.programme" type="text" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-[#6D28D9] focus:border-[#6D28D9] text-sm" placeholder="Medical Laboratory Science" />
               </div>
               <p v-if="regError" class="text-sm text-red-600 font-medium">{{ regError }}</p>
-              <button type="submit" :disabled="submitting" class="w-full py-3 bg-[#1f4e70] text-white rounded-xl hover:bg-[#153a56] transition-all font-bold text-sm shadow-lg shadow-[#1f4e70]/20 disabled:opacity-50 disabled:cursor-not-allowed">
+              <button type="submit" :disabled="submitting" class="w-full py-3 bg-[#6D28D9] text-white rounded-xl hover:bg-[#5B21B6] transition-all font-bold text-sm shadow-lg shadow-[#6D28D9]/20 disabled:opacity-50 disabled:cursor-not-allowed">
                 {{ submitting ? 'Registering...' : 'Register Now' }}
               </button>
             </form>

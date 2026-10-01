@@ -9,7 +9,7 @@
       <div v-else-if="error" class="text-center py-24">
         <h2 class="text-2xl font-bold text-gray-900 mb-4">Article Not Found</h2>
         <p class="text-gray-600 mb-8">{{ error }}</p>
-        <NuxtLink to="/" class="bg-brand text-white px-6 py-3 rounded-lg font-medium hover:bg-[#1f4e70] transition-colors">
+        <NuxtLink to="/" class="bg-brand text-white px-6 py-3 rounded-lg font-medium hover:bg-violet-700 transition-colors">
           Return Home
         </NuxtLink>
       </div>

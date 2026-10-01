@@ -6,14 +6,23 @@ const getBaseUrl = () => {
 };
 
 const getToken = () => {
-  if (typeof localStorage === 'undefined') return null;
-  return localStorage.getItem('intern_token');
+  if (typeof localStorage !== 'undefined') {
+    const t = localStorage.getItem('intern_token');
+    if (t) return t;
+  }
+  if (typeof document !== 'undefined') {
+    const match = document.cookie.match(/(?:^|; )intern_token=([^;]*)/);
+    if (match) return decodeURIComponent(match[1]);
+  }
+  return null;
 };
 
 const logOut = () => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('intern_token');
     localStorage.removeItem('intern_user');
+    document.cookie = 'intern_token=; path=/; max-age=0;';
+    document.cookie = 'intern_user=; path=/; max-age=0;';
   }
 };
 

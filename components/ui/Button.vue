@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 const variantStyles: Record<string, string> = {
-  primary: 'bg-brand text-white hover:bg-[#1f4e70] focus:ring-brand',
+  primary: 'bg-brand text-white hover:bg-violet-700 focus:ring-brand',
   secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-500',
   outline: 'border border-gray-300 bg-transparent text-gray-700 hover:bg-gray-50 focus:ring-gray-300',
   ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-500',

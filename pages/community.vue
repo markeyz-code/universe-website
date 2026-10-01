@@ -9,7 +9,7 @@
           Connect with peers, search for mentors, and give or seek advice.
         </p>
         <div class="flex justify-center gap-4">
-          <NuxtLink to="/register" class="bg-brand hover:bg-[#1f4e70] text-white px-8 py-3 rounded-lg font-medium transition-colors">
+          <NuxtLink to="/register" class="bg-brand hover:bg-violet-700 text-white px-8 py-3 rounded-lg font-medium transition-colors">
             Join
           </NuxtLink>
           <NuxtLink to="/login" class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 rounded-lg font-medium transition-colors">
@@ -30,7 +30,7 @@
             <p class="text-lg text-gray-600 mb-8">
               Post questions, start debates, and learn from those further down their academic path. See what experts in Medical Laboratory science are talking about.
             </p>
-            <NuxtLink to="/register" class="text-brand font-medium hover:text-[#1f4e70] flex items-center gap-2">
+            <NuxtLink to="/register" class="text-brand font-medium hover:text-violet-700 flex items-center gap-2">
               Browse <ArrowRight class="w-4 h-4" />
             </NuxtLink>
           </div>
@@ -47,7 +47,7 @@
             <p class="text-lg text-gray-600 mb-8">
               Find the guides and insider tips shared by the community. Build the path you want without reinventing the wheel.
             </p>
-            <NuxtLink to="/register" class="text-brand font-medium hover:text-[#1f4e70] flex items-center gap-2">
+            <NuxtLink to="/register" class="text-brand font-medium hover:text-violet-700 flex items-center gap-2">
               Explore <ArrowRight class="w-4 h-4" />
             </NuxtLink>
           </div>
