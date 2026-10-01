@@ -104,13 +104,19 @@
           
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">What can we help with? *</label>
-            <select v-model="form.topic" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand bg-gray-50 disabled:opacity-50" :disabled="loading">
-              <option value="" disabled>Select topic</option>
-              <option value="Account Issues">Account Issues</option>
-              <option value="Billing & Subscriptions">Billing & Subscriptions</option>
-              <option value="Document Verification">Document Verification</option>
-              <option value="Technical Support">Technical Support</option>
-            </select>
+            <UiSelect
+              id="topic"
+              v-model="form.topic"
+              :required="true"
+              :disabled="loading"
+              placeholder="Select topic"
+              :options="[
+                { label: 'Account Issues', value: 'Account Issues' },
+                { label: 'Billing & Subscriptions', value: 'Billing & Subscriptions' },
+                { label: 'Document Verification', value: 'Document Verification' },
+                { label: 'Technical Support', value: 'Technical Support' }
+              ]"
+            />
           </div>
 
           <div>

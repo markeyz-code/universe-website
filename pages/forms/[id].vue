@@ -101,9 +101,8 @@
             <textarea v-else-if="field.type === 'textarea'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" rows="4"
               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white resize-y"></textarea>
 
-            <!-- Rich Text (rendered as textarea for public form) -->
-            <textarea v-else-if="field.type === 'rich-text'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" rows="8"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white resize-y font-mono"></textarea>
+            <!-- Rich Text -->
+            <UiRichTextEditor v-else-if="field.type === 'rich-text'" v-model="formValues[field.label]" :placeholder="field.placeholder" />
 
             <!-- Select / Dropdown -->
             <UiSelect v-else-if="field.type === 'select'"
@@ -137,12 +136,27 @@
 
             <!-- File Upload -->
             <div v-else-if="field.type === 'file'" class="relative">
-              <div class="border-2 border-dashed border-gray-300 rounded-xl px-4 py-8 text-center hover:border-brand/50 hover:bg-brand/5 transition-all cursor-pointer"
+              <div class="border-2 border-dashed border-gray-300 rounded-xl px-4 py-8 text-center hover:border-brand/50 hover:bg-brand/5 transition-all cursor-pointer overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center group"
                 @click="($refs[`file-${idx}`] as HTMLInputElement[])?.[0]?.click()">
-                <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                <p class="text-sm font-medium text-gray-600" v-if="!fileNames[field.label]">Click to upload or drag and drop</p>
-                <p class="text-sm font-medium text-brand" v-else>{{ fileNames[field.label] }}</p>
-                <p class="text-xs text-gray-400 mt-1">{{ field.accept || 'Any file' }} {{ field.maxFileSize ? `• Max ${field.maxFileSize}MB` : '' }}</p>
+                
+                <template v-if="filePreviews[field.label]">
+                  <img :src="filePreviews[field.label]" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity" />
+                  <div class="relative z-10 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-sm border border-gray-200 flex flex-col items-center">
+                    <img :src="filePreviews[field.label]" class="w-auto h-24 mx-auto rounded object-contain mb-2" />
+                    <p class="text-xs font-bold text-brand truncate max-w-[200px]">{{ fileNames[field.label] }}</p>
+                    <p class="text-[10px] text-gray-500 mt-0.5">Click to change image</p>
+                  </div>
+                </template>
+                <template v-else>
+                  <svg class="w-10 h-10 text-gray-300 mx-auto mb-3 group-hover:text-brand/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                  <p class="text-sm font-medium text-gray-600" v-if="!fileNames[field.label]">Click to upload or drag and drop</p>
+                  <p class="text-sm font-medium text-brand" v-else>{{ fileNames[field.label] }}</p>
+                  <p class="text-xs text-gray-400 mt-1">{{ field.accept || 'Any file' }} {{ field.maxFileSize ? `• Max ${field.maxFileSize}MB` : '' }}</p>
+                </template>
+                <div v-if="uploadingFiles[field.label]" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex flex-col items-center justify-center z-20">
+                  <svg class="w-8 h-8 animate-spin text-brand mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  <span class="text-xs font-bold text-brand">Uploading...</span>
+                </div>
               </div>
               <input :ref="`file-${idx}`" type="file" :accept="field.accept" :required="field.required" class="hidden"
                 @change="handleFileChange(field, $event)" />
@@ -151,11 +165,12 @@
 
           <!-- Submit Button -->
           <div class="pt-4">
-            <button type="submit" :disabled="submitting" class="w-full py-4 bg-brand text-white rounded-xl font-bold text-base hover:bg-[#1a405c] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand/20 hover:shadow-xl hover:shadow-brand/30 hover:-translate-y-0.5 active:translate-y-0">
+            <button type="submit" :disabled="submitting || isAnyFileUploading" class="w-full py-4 bg-brand text-white rounded-xl font-bold text-base hover:bg-[#1a405c] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-brand/20 hover:shadow-xl hover:shadow-brand/30 hover:-translate-y-0.5 active:translate-y-0">
               <span v-if="submitting" class="inline-flex items-center gap-2">
                 <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 Submitting...
               </span>
+              <span v-else-if="isAnyFileUploading">Uploading Files...</span>
               <span v-else>Submit Response →</span>
             </button>
           </div>
@@ -180,12 +195,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useSeoMeta } from '#imports';
 import { formsApi } from '@/api_factory/modules/forms';
+import { storageApi } from '@/api_factory/modules/storage';
 import { useCustomModal } from '@/composables/core/useCustomModal';
 import UiSelect from '@/components/ui/Select.vue';
+import UiRichTextEditor from '@/components/ui/RichTextEditor.vue';
+import axios from 'axios';
 
 definePageMeta({ layout: false });
 
@@ -202,6 +220,10 @@ const submitterName = ref('');
 const submitterEmail = ref('');
 const formValues = ref<Record<string, any>>({});
 const fileNames = ref<Record<string, string>>({});
+const filePreviews = ref<Record<string, string>>({});
+const uploadingFiles = ref<Record<string, boolean>>({});
+
+const isAnyFileUploading = computed(() => Object.values(uploadingFiles.value).some((v) => v));
 
 // Extract form ID from the route param (format: slug-id or just id)
 const getFormId = () => {
@@ -249,7 +271,7 @@ const toggleCheckbox = (label: string, value: string) => {
   else arr.push(value);
 };
 
-const handleFileChange = (field: any, event: Event) => {
+const handleFileChange = async (field: any, event: Event) => {
   const input = event.target as HTMLInputElement;
   const file = input.files?.[0];
   if (!file) return;
@@ -265,7 +287,48 @@ const handleFileChange = (field: any, event: Event) => {
   }
 
   fileNames.value[field.label] = file.name;
-  formValues.value[field.label] = `[File: ${file.name}]`;
+  
+  if (file.type.startsWith('image/')) {
+    filePreviews.value[field.label] = URL.createObjectURL(file);
+  } else {
+    delete filePreviews.value[field.label];
+  }
+
+  try {
+    uploadingFiles.value[field.label] = true;
+    const { data: sigData } = await storageApi.getUploadSignature({ folder: 'interntional/form_uploads' });
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('api_key', sigData.apiKey);
+    fd.append('timestamp', sigData.timestamp.toString());
+    fd.append('signature', sigData.signature);
+    fd.append('folder', sigData.folder);
+    if (sigData.eager) fd.append('eager', sigData.eager);
+
+    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${sigData.cloudName}/auto/upload`;
+    const { data: uploadResult } = await axios.post(cloudinaryUrl, fd, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
+    if (file.type.startsWith('image/')) {
+      formValues.value[field.label] = `<a href="${uploadResult.secure_url}" target="_blank"><img src="${uploadResult.secure_url}" alt="${file.name}" style="max-width:300px; max-height:300px; border-radius: 8px;" /></a>`;
+    } else {
+      formValues.value[field.label] = `<a href="${uploadResult.secure_url}" target="_blank" style="color:#2563eb; text-decoration:underline;">📁 Download: ${file.name}</a>`;
+    }
+  } catch (err) {
+    console.error('File upload failed:', err);
+    modalAlert({
+      title: 'Upload Failed',
+      message: 'There was an error uploading your file. Please try again.',
+      type: 'danger'
+    });
+    delete fileNames.value[field.label];
+    delete filePreviews.value[field.label];
+    formValues.value[field.label] = '';
+    input.value = '';
+  } finally {
+    uploadingFiles.value[field.label] = false;
+  }
 };
 
 const handleSubmit = async () => {

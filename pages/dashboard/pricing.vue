@@ -94,12 +94,26 @@
                 <!-- Action Button -->
                 <button
                   @click="handleSubscribe(plan)"
-                  :disabled="paymentLoading"
-                  class="w-full py-2.5 px-4 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+                  :disabled="paymentLoading || getPlanStatus(plan, index) !== 'upgrade'"
+                  class="w-full py-2.5 px-4 text-xs font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                  :class="[
+                    getPlanStatus(plan, index) === 'current'
+                      ? 'bg-green-100 text-green-700 cursor-default'
+                      : getPlanStatus(plan, index) === 'downgrade'
+                      ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                      : 'bg-violet-600 text-white hover:bg-violet-700 hover:shadow-md active:scale-95'
+                  ]"
                 >
                   <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-2">
                     <div class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                     <span>Processing...</span>
+                  </span>
+                  <span v-else-if="getPlanStatus(plan, index) === 'current'" class="flex items-center gap-1.5">
+                    <Check class="w-4 h-4" />
+                    <span>Current Plan</span>
+                  </span>
+                  <span v-else-if="getPlanStatus(plan, index) === 'downgrade'">
+                    Unavailable
                   </span>
                   <span v-else>Select {{ plan.name }}</span>
                 </button>
@@ -156,11 +170,25 @@
               >
                 <button
                   @click="handleSubscribe(plan)"
-                  :disabled="paymentLoading"
-                  class="w-full py-2.5 px-4 bg-violet-600 text-white text-xs font-bold rounded-xl hover:bg-violet-700 transition-all shadow-sm hover:shadow flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95"
+                  :disabled="paymentLoading || getPlanStatus(plan, index) !== 'upgrade'"
+                  class="w-full py-2.5 px-4 text-xs font-bold rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                  :class="[
+                    getPlanStatus(plan, index) === 'current'
+                      ? 'bg-green-100 text-green-700 cursor-default'
+                      : getPlanStatus(plan, index) === 'downgrade'
+                      ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
+                      : 'bg-violet-600 text-white hover:bg-violet-700 hover:shadow-md active:scale-95'
+                  ]"
                 >
                   <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-1.5">
                     <div class="animate-spin rounded-full h-3.5 w-3.5 border-2 border-white border-t-transparent"></div>
+                  </span>
+                  <span v-else-if="getPlanStatus(plan, index) === 'current'" class="flex items-center gap-1.5">
+                    <Check class="w-4 h-4" />
+                    <span>Current Plan</span>
+                  </span>
+                  <span v-else-if="getPlanStatus(plan, index) === 'downgrade'">
+                    Unavailable
                   </span>
                   <span v-else>Get {{ plan.name }}</span>
                 </button>
@@ -208,6 +236,24 @@ const { confirm, alert: modalAlert } = useCustomModal();
 const selectedPlanId = ref<string | null>(null);
 const verifying = ref(false);
 const billingCycle = ref<'monthly' | 'yearly'>('monthly');
+
+const activeSubscriptionId = computed(() => {
+  if (!user.value?.activeSubscription) return null;
+  return typeof user.value.activeSubscription === 'object'
+    ? user.value.activeSubscription._id
+    : user.value.activeSubscription;
+});
+
+const getPlanStatus = (plan: any, index: number) => {
+  if (!activeSubscriptionId.value) return 'upgrade'; // If no sub, they can buy any
+  
+  const activePlanIndex = filteredSubscriptions.value.findIndex(p => p._id === activeSubscriptionId.value);
+  if (activePlanIndex === -1) return 'upgrade';
+
+  if (plan._id === activeSubscriptionId.value) return 'current';
+  if (index < activePlanIndex) return 'downgrade';
+  return 'upgrade';
+};
 
 const filteredSubscriptions = computed(() => {
   if (!subscriptions.value) return [];

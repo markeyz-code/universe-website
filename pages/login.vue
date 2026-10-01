@@ -205,6 +205,24 @@
         </div>
       </div>
     </div>
+    <!-- Approval Pending Modal -->
+    <div v-if="showApprovalModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 animate-in fade-in zoom-in duration-200">
+        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+          <Clock class="w-6 h-6" />
+        </div>
+        <h3 class="text-xl font-semibold text-center text-gray-900 mb-2">Account Pending Approval</h3>
+        <p class="text-center text-gray-600 mb-6">
+          Your account is currently under review by our administrators. You will receive an email once your verification document is approved and your account is activated.
+        </p>
+        <button 
+          @click="showApprovalModal = false" 
+          class="w-full bg-gray-900 text-white rounded-lg py-2.5 font-medium hover:bg-gray-800 transition-colors"
+        >
+          Understood
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -237,6 +255,7 @@ const {
   resendCountdown,
   otpTimeRemaining,
   isOtpExpired,
+  showApprovalModal,
   login,
   verifyOtp,
   resendOtp,
@@ -260,6 +279,7 @@ const formatTime = (seconds: number) => {
 const handleLogin = async () => {
   const result = await login(form.value);
   if (result?.requireOtp) {
+    step.value = 'otp';
     otpValues.value = Array(6).fill('');
     await nextTick();
     setTimeout(() => {

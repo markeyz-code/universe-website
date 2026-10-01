@@ -1,11 +1,11 @@
 
 <template>
   <div class="max-w-6xl mx-auto space-y-4">
-    <!-- Hero Banner (UniVerse Purple Theme) -->
-    <div class="bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white rounded-2xl px-6 py-6 sm:px-8 sm:py-8 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+    <!-- Hero Banner (Aligned with Platform Aesthetic) -->
+    <div class="bg-brand text-white rounded-2xl px-6 py-6 sm:px-8 sm:py-8 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
       <!-- Decorative background glow orbs -->
-      <div class="absolute -right-20 -top-20 w-64 h-64 bg-fuchsia-400/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute right-48 -bottom-12 w-48 h-48 bg-violet-400/15 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute right-48 -bottom-12 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
 
       <div class="relative z-10 max-w-xl">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-white/90 text-xs font-semibold mb-3">
@@ -19,9 +19,51 @@
       </div>
     </div>
 
-    <!-- Request Form -->
-    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
-      <div v-if="successMessage" class="p-3 bg-green-50 border border-green-200 text-green-800 rounded-md flex items-center gap-2">
+    <!-- Dynamic Mentorship Status Section -->
+    <div v-if="statusLoading" class="bg-white rounded-lg shadow-sm border border-gray-100 p-8 flex justify-center">
+      <Loader2 class="w-6 h-6 animate-spin text-brand" />
+    </div>
+
+    <!-- State 3: Matched -->
+    <div v-else-if="myStatus === 'matched' && myMentor" class="bg-white rounded-lg shadow-sm border border-brand/20 p-6">
+      <div class="flex flex-col sm:flex-row items-center gap-6">
+        <div class="w-20 h-20 bg-brand/10 rounded-full flex items-center justify-center shrink-0">
+          <User class="text-brand w-10 h-10"/>
+        </div>
+        <div class="text-center sm:text-left flex-1">
+          <div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-green-100 text-green-700 text-[10px] font-bold mb-2">
+            <Check class="w-3 h-3" />
+            Active Mentor
+          </div>
+          <h2 class="text-xl font-bold text-gray-900">{{ myMentor.firstName }} {{ myMentor.lastName }}</h2>
+          <p class="text-brand font-semibold text-sm">{{ myMentor.jobTitle || 'Senior Professional' }}</p>
+          <p class="text-gray-500 text-sm mt-2 line-clamp-2 max-w-2xl">{{ myMentor.bio || 'Your matched mentor is ready to help you navigate your professional journey.' }}</p>
+        </div>
+        <div class="flex flex-col gap-2 w-full sm:w-auto mt-4 sm:mt-0">
+          <button class="px-5 py-2.5 bg-brand text-white text-sm font-bold rounded-lg hover:bg-opacity-90 transition-all w-full text-center shadow-sm">
+            Message Mentor
+          </button>
+          <button class="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 text-sm font-bold rounded-lg hover:bg-gray-50 transition-all w-full text-center">
+            Book Session
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- State 2: Pending -->
+    <div v-else-if="myStatus === 'pending'" class="bg-white rounded-lg shadow-sm border border-orange-200 p-8 text-center bg-orange-50/30">
+      <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Loader2 class="w-8 h-8 text-orange-500 animate-spin" />
+      </div>
+      <h3 class="text-lg font-bold text-gray-900 mb-2">Match in Progress</h3>
+      <p class="text-gray-600 text-sm max-w-md mx-auto">
+        We are carefully reviewing your profile and finding the absolute best mentor for your goals. We'll notify you as soon as you're paired!
+      </p>
+    </div>
+
+    <!-- State 1: Request Form (No active/pending request) -->
+    <div v-else class="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
+      <div v-if="successMessage" class="p-3 bg-green-50 border border-green-200 text-green-800 rounded-md flex items-center gap-2 mb-4">
         <Check class="text-green-600 w-4 h-4 shrink-0"/>
         <p class="text-xs font-medium">{{ successMessage }}</p>
       </div>
@@ -124,10 +166,11 @@ definePageMeta({ layout: 'dashboard' });
 useSeoMeta({ title: 'Mentorship Matcher | Dashboard' });
 useHead({ title: 'Mentorship Matcher | Dashboard' });
 
-const { requestMentorship, loading } = useRequestMentorship();
+const { requestMentorship, loading, statusLoading, myStatus, myMentor, fetchMyStatus } = useRequestMentorship();
 const { mentors, loading: mentorsLoading, fetchMentors } = useGetMentors();
 
-onMounted(() => {
+onMounted(async () => {
+  await fetchMyStatus('universe');
   fetchMentors();
 });
 

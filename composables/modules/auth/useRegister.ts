@@ -80,7 +80,7 @@ export const useRegister = () => {
       });
       return data;
     } catch (err: any) {
-      error.value = err?.data?.message || err?.data?.error || err?.message || 'Registration failed. Please try again.';
+      error.value = err?.data?.message || err?.response?.data?.message || err?.message || 'Registration failed. Please try again.';
       return null;
     } finally {
       loading.value = false;
@@ -95,7 +95,7 @@ export const useRegister = () => {
       showToast({ title: 'OTP Sent', message: 'Please check your email for the verification code.', type: 'success' });
       return true;
     } catch (err: any) {
-      error.value = err?.data?.message || err?.data?.error || err?.message || 'Failed to send OTP.';
+      error.value = err?.data?.message || err?.response?.data?.message || err?.message || 'Failed to send OTP.';
       return false;
     } finally {
       loading.value = false;
@@ -110,7 +110,7 @@ export const useRegister = () => {
       showToast({ title: 'Email Verified', message: 'You can now proceed to the next step.', type: 'success' });
       return true;
     } catch (err: any) {
-      error.value = err?.data?.message || err?.data?.error || err?.message || 'Invalid or expired OTP.';
+      error.value = err?.data?.message || err?.response?.data?.message || err?.message || 'Invalid or expired OTP.';
       return false;
     } finally {
       loading.value = false;

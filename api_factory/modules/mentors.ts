@@ -8,5 +8,9 @@ export const mentorsApi = {
   /** Request a mentor */
   requestMentorship(payload: any) {
     return GATEWAY_ENDPOINT_WITH_AUTH.post('/mentorship/request', payload);
+  },
+  /** Get current user mentorship status */
+  getMyStatus(application: string) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.get(`/mentorship/my-status?application=${application}`);
   }
 };

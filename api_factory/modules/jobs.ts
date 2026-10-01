@@ -22,6 +22,11 @@ export const jobsApi = {
     return GATEWAY_ENDPOINT_WITH_AUTH.delete(`/jobs/${id}`);
   },
 
+  /** Update a job (Admin) */
+  updateJob(id: string, payload: any) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.patch(`/jobs/${id}`, payload);
+  },
+
   /** Apply for a job */
   applyJob(data: any) {
     return GATEWAY_ENDPOINT_WITH_AUTH.post('/jobs/apply', data);

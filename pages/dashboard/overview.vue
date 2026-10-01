@@ -144,6 +144,21 @@
               </div>
             </NuxtLink>
 
+            <NuxtLink to="/dashboard/courses" class="flex items-center justify-between p-3 rounded-xl border border-violet-100 hover:border-violet-300 hover:bg-violet-50/50 transition-all group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                  <BookOpen class="w-4 h-4" />
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-900">Access Courses</h4>
+                  <p class="text-[11px] text-gray-500">Premium Subscription Content</p>
+                </div>
+              </div>
+              <div class="w-8 h-8 rounded-full bg-white border border-violet-200 flex items-center justify-center group-hover:border-violet-400 group-hover:text-violet-600 transition-colors shadow-sm">
+                <ArrowRight class="w-3 h-3" />
+              </div>
+            </NuxtLink>
+
             <NuxtLink to="/dashboard/career" class="flex items-center justify-between p-3 rounded-xl border border-violet-100 hover:border-violet-300 hover:bg-violet-50/50 transition-all group">
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-fuchsia-100 text-fuchsia-600 flex items-center justify-center">
@@ -192,7 +207,7 @@
 
 <script setup lang="ts">
 import { useSeoMeta, useHead } from '#imports';
-import { Play, ArrowRight, Folder, Users, Briefcase, Sparkles, ExternalLink, X } from 'lucide-vue-next';
+import { Play, ArrowRight, Folder, Users, Briefcase, Sparkles, ExternalLink, X, BookOpen } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
 import { useDashboardStats } from '@/composables/modules/dashboard/useDashboardStats';
 import { useGetResources } from '@/composables/modules/vault/useGetResources';

@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: '#27628C',
+        brand: '#7c3aed', // violet-600
         black: '#000000',
       }
     },

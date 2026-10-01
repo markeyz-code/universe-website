@@ -14,15 +14,33 @@ export const useAccessResource = () => {
       loading.value = resourceId;
       try {
         const { data } = await vaultApi.getSignedUrl(resourceId);
-        return data?.signedUrl;
-    } catch (err: any) {
-      const message = err.response?.data?.message || 'Could not open resource. Please try again.';
-      showToast({ title: 'Access Failed', message, type: 'error' });
-      return null;
-    } finally {
-      loading.value = null;
-    }
-  };
+        return { url: data?.signedUrl, needsPayment: false };
+      } catch (err: any) {
+        if (err.response?.status === 403) {
+          return { url: null, needsPayment: true };
+        }
+        const message = err.response?.data?.message || 'Could not open resource. Please try again.';
+        showToast({ title: 'Access Failed', message, type: 'error' });
+        return { url: null, needsPayment: false };
+      } finally {
+        loading.value = null;
+      }
+    };
 
-  return { loading, accessResource };
+    const buyResource = async (resourceId: string, reference: string) => {
+      loading.value = resourceId;
+      try {
+        const { data } = await vaultApi.buyPremiumResource(resourceId, reference);
+        showToast({ title: 'Success', message: 'Premium resource purchased!', type: 'success' });
+        return data?.signedUrl;
+      } catch (err: any) {
+        const message = err.response?.data?.message || 'Payment verification failed.';
+        showToast({ title: 'Purchase Failed', message, type: 'error' });
+        return null;
+      } finally {
+        loading.value = null;
+      }
+    };
+
+  return { loading, accessResource, buyResource };
 };

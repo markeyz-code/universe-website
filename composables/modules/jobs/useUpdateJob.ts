@@ -1,14 +1,13 @@
 import { ref } from 'vue';
-import { useCoreFetch } from '@/composables/core/useCoreFetch';
+import { jobsApi } from '@/api_factory/modules/jobs';
 
 export const useUpdateJob = () => {
   const loading = ref(false);
-  const { $api } = useCoreFetch();
 
   const updateJob = async (id: string, payload: any) => {
     loading.value = true;
     try {
-      await $api.patch(`/jobs/${id}`, payload);
+      await jobsApi.updateJob(id, payload);
       loading.value = false;
       return true;
     } catch (error) {

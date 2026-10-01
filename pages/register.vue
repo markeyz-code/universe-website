@@ -46,7 +46,7 @@
           </div>
 
           <form @submit.prevent="submitStep" class="space-y-6">
-            <div v-show="step === 1" class="space-y-6">
+            <div v-if="step === 1" class="space-y-6">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <UiInput id="firstName" label="First Name" v-model="form.firstName" required placeholder="Jane" />
                 <UiInput id="lastName" label="Last Name" v-model="form.lastName" required placeholder="Doe" />
@@ -55,7 +55,7 @@
               <UiInput id="password" label="Password" type="password" v-model="form.password" required minlength="8" placeholder="Minimum 8 characters" />
             </div>
 
-            <div v-show="step === 2" class="space-y-6">
+            <div v-else-if="step === 2" class="space-y-6">
               <div class="text-center">
                 <div class="w-16 h-16 bg-blue-50 text-brand rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail class="w-8 h-8" />
@@ -89,21 +89,27 @@
               </div>
             </div>
 
-            <div v-show="step === 3" class="space-y-6">
+            <div v-else-if="step === 3" class="space-y-6">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">University</label>
-                  <select v-model="form.universityId" required class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-brand focus:border-brand">
-                    <option value="" disabled>Select University</option>
-                    <option v-for="uni in universities" :key="uni._id" :value="uni._id">{{ uni.name }}</option>
-                  </select>
+                  <UiSelect
+                    id="university"
+                    v-model="form.universityId"
+                    :required="step === 3"
+                    placeholder="Select University"
+                    :options="universities.map(u => ({ label: u.name, value: u._id }))"
+                  />
                 </div>
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-1">Programme</label>
-                  <select v-model="form.programmeId" required class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-brand focus:border-brand">
-                    <option value="" disabled>Select Programme</option>
-                    <option v-for="prog in filteredProgrammes" :key="prog._id" :value="prog._id">{{ prog.name }}</option>
-                  </select>
+                  <UiSelect
+                    id="programme"
+                    v-model="form.programmeId"
+                    :required="step === 3"
+                    placeholder="Select Programme"
+                    :options="filteredProgrammes.map(p => ({ label: p.name, value: p._id }))"
+                  />
                 </div>
               </div>
 
@@ -229,7 +235,7 @@ const step = ref(1);
 
 const otpArray = ref(['', '', '', '']);
 const otpRefs = ref<HTMLInputElement[]>([]);
-const countdown = ref(600);
+const countdown = ref(0);
 let countdownInterval: any;
 
 const formattedCountdown = computed(() => {

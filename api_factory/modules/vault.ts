@@ -15,4 +15,14 @@ export const vaultApi = {
   getSignedUrl(resourceId: string) {
     return GATEWAY_ENDPOINT_WITH_AUTH.get(`/resources/${resourceId}/signed-url`);
   },
+
+  /** Buy a premium resource */
+  buyPremiumResource(resourceId: string, reference: string) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.post(`/resources/${resourceId}/buy`, { reference });
+  },
+
+  /** Create a new resource */
+  createResource(data: any) {
+    return GATEWAY_ENDPOINT_WITH_AUTH.post('/resources', data);
+  }
 };

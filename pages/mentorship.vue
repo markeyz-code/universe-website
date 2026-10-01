@@ -24,15 +24,20 @@
         </div>
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-1">Area of Interest</label>
-          <select v-model="form.interest" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand focus:border-brand outline-none">
-            <option value="" disabled>Select specialization</option>
-            <option value="Lab Management">Lab Management</option>
-            <option value="Clinical Chemistry">Clinical Chemistry</option>
-            <option value="Operations">Operations</option>
-            <option value="Quality Assurance">Quality Assurance</option>
-          </select>
+          <UiSelect
+            id="interest"
+            v-model="form.interest"
+            :required="true"
+            placeholder="Select specialization"
+            :options="[
+              { label: 'Lab Management', value: 'Lab Management' },
+              { label: 'Clinical Chemistry', value: 'Clinical Chemistry' },
+              { label: 'Operations', value: 'Operations' },
+              { label: 'Quality Assurance', value: 'Quality Assurance' }
+            ]"
+          />
         </div>
-        <button type="submit" :disabled="loading" class="w-full px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-violet-700 transition-colors disabled:opacity-50">
+        <button type="submit" :disabled="loading" class="w-full px-6 py-2.5 bg-brand text-white rounded font-medium hover:bg-opacity-90 transition-colors disabled:opacity-50">
           {{ loading ? 'Submitting...' : 'Request a Mentor' }}
         </button>
       </form>
@@ -53,7 +58,7 @@
         </ul>
         <div class="flex gap-4">
            <button class="px-5 py-2 border border-gray-300 bg-white rounded text-sm font-medium text-gray-700 hover:bg-gray-50">Search</button>
-           <button class="px-5 py-2 text-brand text-sm font-medium hover:text-violet-700 flex items-center gap-1">Browse <ArrowRight class="w-4 h-4"/></button>
+           <button class="px-5 py-2 text-brand text-sm font-medium hover:text-opacity-80 flex items-center gap-1">Browse <ArrowRight class="w-4 h-4"/></button>
         </div>
       </div>
       <div class="md:w-1/2">
@@ -95,7 +100,7 @@
       
       <div class="mt-12">
         <button class="px-5 py-2 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 mr-2">Explore</button>
-        <button class="px-5 py-2 text-brand text-sm font-medium hover:text-violet-700">FAQ &rarr;</button>
+        <button class="px-5 py-2 text-brand text-sm font-medium hover:text-opacity-80">FAQ &rarr;</button>
       </div>
     </section>
 

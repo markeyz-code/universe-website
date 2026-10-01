@@ -17,6 +17,8 @@ export const useLogin = () => {
   const error = ref<string | null>(null);
   const otpError = ref<string | null>(null);
 
+  const showApprovalModal = ref(false);
+
   // Resend cooldown timer (60s)
   const resendCountdown = ref(0);
   let resendInterval: ReturnType<typeof setInterval> | null = null;
@@ -74,6 +76,7 @@ export const useLogin = () => {
     loading.value = true;
     error.value = null;
     otpError.value = null;
+    showApprovalModal.value = false;
 
     try {
       const response = await authApi.login({
@@ -108,12 +111,11 @@ export const useLogin = () => {
 
       return data;
     } catch (err: any) {
-      error.value =
-        err?.response?.data?.message ||
-        err?.data?.message ||
-        err?.data?.error ||
-        err?.message ||
-        'Authentication failed. Please check your credentials.';
+      const errorMessage = err?.response?.data?.message || err?.data?.message || err?.data?.error || err?.message || 'Authentication failed. Please check your credentials.';
+      if (errorMessage.toLowerCase().includes('pending approval')) {
+        showApprovalModal.value = true;
+      }
+      error.value = errorMessage;
       return null;
     } finally {
       loading.value = false;
@@ -212,6 +214,7 @@ export const useLogin = () => {
     resendCountdown,
     otpTimeRemaining,
     isOtpExpired,
+    showApprovalModal,
     login,
     verifyOtp,
     resendOtp,

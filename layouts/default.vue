@@ -23,9 +23,9 @@
             <span>Community</span>
             <div class="absolute -bottom-2 left-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity transform -translate-x-1/2" :class="{ 'opacity-100': $route.path.includes('/community') }"></div>
           </NuxtLink>
-          <NuxtLink to="/vault" class="hover:text-brand transition-colors duration-300 relative group cursor-pointer" active-class="text-brand">
+          <NuxtLink to="/dashboard/vault" class="hover:text-brand transition-colors duration-300 relative group cursor-pointer" active-class="text-brand">
             <span>Vault</span>
-            <div class="absolute -bottom-2 left-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity transform -translate-x-1/2" :class="{ 'opacity-100': $route.path.includes('/vault') }"></div>
+            <div class="absolute -bottom-2 left-1/2 w-1 h-1 rounded-full bg-brand opacity-0 group-hover:opacity-100 transition-opacity transform -translate-x-1/2" :class="{ 'opacity-100': $route.path.includes('/dashboard/vault') }"></div>
           </NuxtLink>
           <NuxtLink to="/career" class="hover:text-brand transition-colors duration-300 relative group cursor-pointer" active-class="text-brand">
             <span>Career</span>
@@ -69,7 +69,7 @@
           <nav class="flex flex-col p-4">
             <NuxtLink to="/" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Home</NuxtLink>
             <NuxtLink to="/community" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Community</NuxtLink>
-            <NuxtLink to="/vault" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Vault</NuxtLink>
+            <NuxtLink to="/dashboard/vault" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Vault</NuxtLink>
             <NuxtLink to="/career" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Career</NuxtLink>
             <NuxtLink to="/mentorship" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Mentors</NuxtLink>
             <NuxtLink to="/pricing" @click="mobileMenuOpen = false" class="px-4 py-3 text-sm font-medium text-gray-700 hover:bg-brand/5 hover:text-brand rounded-xl" active-class="text-brand bg-brand/5">Pricing</NuxtLink>
@@ -119,7 +119,7 @@
             <ul class="space-y-4">
               <li><NuxtLink to="/community" class="text-gray-500 hover:text-brand transition-colors text-sm font-medium">Community</NuxtLink></li>
               <li><NuxtLink to="/mentorship" class="text-gray-500 hover:text-brand transition-colors text-sm font-medium">Find a Mentor</NuxtLink></li>
-              <li><NuxtLink to="/vault" class="text-gray-500 hover:text-brand transition-colors text-sm font-medium">The Vault</NuxtLink></li>
+              <li><NuxtLink to="/dashboard/vault" class="text-gray-500 hover:text-brand transition-colors text-sm font-medium">The Vault</NuxtLink></li>
               <li><NuxtLink to="/career" class="text-gray-500 hover:text-brand transition-colors text-sm font-medium">Career Board</NuxtLink></li>
             </ul>
           </div>

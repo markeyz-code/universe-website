@@ -37,13 +37,18 @@
         </button>
       </div>
       
-      <div class="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1 shadow-sm shrink-0">
-        <button @click="viewMode = 'grid'" :class="viewMode === 'grid' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="Grid View">
-          <LayoutGrid class="w-4 h-4" />
+      <div class="flex items-center gap-4 shrink-0">
+        <button @click="isUploadModalOpen = true" class="px-4 py-2 bg-brand text-white text-xs font-bold rounded-xl shadow-md hover:bg-brand/90 transition-all cursor-pointer">
+          + Offer Premium Course
         </button>
-        <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="List View">
-          <List class="w-4 h-4" />
-        </button>
+        <div class="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1 shadow-sm shrink-0">
+          <button @click="viewMode = 'grid'" :class="viewMode === 'grid' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="Grid View">
+            <LayoutGrid class="w-4 h-4" />
+          </button>
+          <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="List View">
+            <List class="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
 
@@ -82,14 +87,19 @@
               <span class="inline-flex items-center bg-brand/10 text-brand text-[10px] font-extrabold px-2.5 py-1.5 rounded-lg uppercase tracking-wider">
                 {{ resource.category }}
               </span>
-              <span class="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase bg-gray-100 px-2.5 py-1.5 rounded-lg">{{ resource.type }}</span>
+              <span class="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase bg-gray-100 px-2.5 py-1.5 rounded-lg">
+                <span v-if="resource.isPremium" class="text-yellow-600 mr-1">⭐ PREMIUM</span>
+                {{ resource.type }}
+              </span>
             </div>
             <h3 class="text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-brand transition-colors">{{ resource.title }}</h3>
             <p class="text-gray-500 text-sm line-clamp-2" v-if="resource.description">{{ resource.description }}</p>
           </div>
           
           <div class="pt-5 mt-5 border-t border-gray-100 flex justify-between items-center">
-            <span class="text-[11px] font-medium text-gray-400">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
+            <span v-if="resource.isPremium" class="font-bold text-gray-900">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
+            <span v-else class="text-[11px] font-medium text-gray-400">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
+            
             <button 
               @click="openResourceModal(resource)"
               :disabled="accessLoading === resource._id"
@@ -113,7 +123,10 @@
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
                 <h3 class="text-base font-bold text-gray-900 truncate group-hover:text-brand transition-colors">{{ resource.title }}</h3>
-                <span class="inline-flex items-center bg-gray-100 text-gray-500 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shrink-0">{{ resource.type }}</span>
+                <span class="inline-flex items-center bg-gray-100 text-gray-500 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shrink-0">
+                  <span v-if="resource.isPremium" class="text-yellow-600 mr-1">⭐ PREMIUM</span>
+                  {{ resource.type }}
+                </span>
               </div>
               <p class="text-gray-500 text-xs truncate">{{ resource.description }}</p>
             </div>
@@ -121,7 +134,8 @@
                <span class="inline-flex items-center bg-brand/10 text-brand text-[10px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider">
                  {{ resource.category }}
                </span>
-               <span class="text-[11px] font-medium text-gray-400 w-24">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
+               <span v-if="resource.isPremium" class="font-bold text-gray-900 w-24 text-right">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
+               <span v-else class="text-[11px] font-medium text-gray-400 w-24">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
             </div>
           </div>
           <div class="shrink-0 pl-2">
@@ -165,6 +179,61 @@
         </div>
       </div>
     </Teleport>
+
+    <!-- Upload Masterclass Modal -->
+    <Teleport to="body">
+      <div v-if="isUploadModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="isUploadModalOpen = false"></div>
+        <div class="bg-white rounded-2xl w-full max-w-md relative z-10 shadow-2xl flex flex-col overflow-hidden">
+          <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-gray-900">Offer Premium Course</h3>
+            <button @click="isUploadModalOpen = false" class="text-gray-400 hover:text-gray-600">
+              <X class="w-5 h-5" />
+            </button>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1">Title</label>
+              <input v-model="uploadForm.title" type="text" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="Course Title" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1">Description</label>
+              <textarea v-model="uploadForm.description" rows="3" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="What will they learn?"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Category</label>
+                <UiSelect
+                  id="category"
+                  v-model="uploadForm.category"
+                  placeholder="Select Category"
+                  :options="[
+                    { label: 'Video', value: 'Video' },
+                    { label: 'Study Guide', value: 'Study Guide' },
+                    { label: 'Clinical', value: 'Clinical' }
+                  ]"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Price (NGN)</label>
+                <input v-model.number="uploadForm.price" type="number" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="e.g. 5000" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-gray-700 mb-1">Video / Resource URL</label>
+              <input v-model="uploadForm.fileUrl" type="url" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="https://..." />
+              <p class="text-[10px] text-gray-400 mt-1">Paste a link to your hosted video or document (Google Drive, Youtube, Vimeo, etc.)</p>
+            </div>
+          </div>
+          <div class="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
+            <button @click="isUploadModalOpen = false" class="px-5 py-2 text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors">Cancel</button>
+            <button @click="submitUpload" :disabled="isUploading" class="px-5 py-2 bg-brand text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand/90 transition-all disabled:opacity-50">
+              {{ isUploading ? 'Publishing...' : 'Publish Course' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>
 
@@ -174,27 +243,35 @@ import { ref, computed, onMounted } from 'vue';
 import { Search, SearchX as SearchXIcon, ArrowRight, LayoutGrid, List, FileText, Image as ImageIcon, Play, ExternalLink, X } from 'lucide-vue-next';
 import { useGetResources } from '@/composables/modules/vault/useGetResources';
 import { useAccessResource } from '@/composables/modules/vault/useAccessResource';
+import { vaultApi } from '@/api_factory/modules/vault';
+import { useCustomToast } from '@/composables/core/useCustomToast';
 
 useSeoMeta({
   title: 'The Vault - UniVerse',
-  description: 'Access curated clinical resources and study materials.',
-  ogTitle: 'The Vault - UniVerse',
-  ogDescription: 'Access curated clinical resources and study materials.',
-  ogImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop',
-  twitterCard: 'summary_large_image',
 });
 
 definePageMeta({ layout: 'dashboard' });
 
+const { showToast } = useCustomToast();
 const { loading, resources, getResources } = useGetResources();
-const { loading: accessLoading, accessResource } = useAccessResource();
+const { loading: accessLoading, accessResource, buyResource } = useAccessResource();
 
 const searchQuery = ref('');
 const activeCategory = ref('All');
-const viewMode = ref<'grid' | 'list'>('list');
+const viewMode = ref<'grid' | 'list'>('grid');
 
 const activeResourceUrl = ref<string | null>(null);
 const activeResourceTitle = ref<string>('');
+
+const isUploadModalOpen = ref(false);
+const isUploading = ref(false);
+const uploadForm = ref({
+  title: '',
+  description: '',
+  category: 'Video',
+  price: 0,
+  fileUrl: '',
+});
 
 const filteredResources = computed(() => {
   return resources.value.filter(resource => {
@@ -206,12 +283,39 @@ const filteredResources = computed(() => {
 });
 
 const openResourceModal = async (resource: any) => {
-  const url = await accessResource(resource._id);
-  if (url) {
-    activeResourceUrl.value = url;
+  const result = await accessResource(resource._id);
+  if (result?.needsPayment) {
+    initPayment(resource);
+  } else if (result?.url) {
+    activeResourceUrl.value = result.url;
     activeResourceTitle.value = resource.title;
     document.body.style.overflow = 'hidden';
   }
+};
+
+const initPayment = (resource: any) => {
+  const userStr = localStorage.getItem('user');
+  if (!userStr) return;
+  const user = JSON.parse(userStr);
+
+  const handler = (window as any).PaystackPop.setup({
+    key: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_placeholder', 
+    email: user.email,
+    amount: resource.price,
+    currency: 'NGN',
+    callback: async function (response: any) {
+      const url = await buyResource(resource._id, response.reference);
+      if (url) {
+        activeResourceUrl.value = url;
+        activeResourceTitle.value = resource.title;
+        document.body.style.overflow = 'hidden';
+      }
+    },
+    onClose: function () {
+      console.log('Payment closed');
+    }
+  });
+  handler.openIframe();
 };
 
 const closeResourceModal = () => {
@@ -220,5 +324,40 @@ const closeResourceModal = () => {
   document.body.style.overflow = '';
 };
 
-onMounted(() => getResources());
+const submitUpload = async () => {
+  if (!uploadForm.value.title || !uploadForm.value.fileUrl) {
+    showToast({ title: 'Error', message: 'Title and URL are required', type: 'error' });
+    return;
+  }
+  isUploading.value = true;
+  try {
+    await vaultApi.createResource({
+      title: uploadForm.value.title,
+      description: uploadForm.value.description,
+      category: uploadForm.value.category,
+      type: uploadForm.value.category === 'Video' ? 'VIDEO' : 'PDF',
+      fileUrl: uploadForm.value.fileUrl,
+      price: uploadForm.value.price * 100, // convert to kobo
+      isPremium: uploadForm.value.price > 0,
+    });
+    showToast({ title: 'Success', message: 'Premium course published successfully!', type: 'success' });
+    isUploadModalOpen.value = false;
+    uploadForm.value = { title: '', description: '', category: 'Video', price: 0, fileUrl: '' };
+    getResources();
+  } catch (err: any) {
+    showToast({ title: 'Error', message: err.message || 'Failed to publish course', type: 'error' });
+  } finally {
+    isUploading.value = false;
+  }
+};
+
+onMounted(() => {
+  getResources();
+  if (!document.getElementById('paystack-script')) {
+    const script = document.createElement('script');
+    script.id = 'paystack-script';
+    script.src = 'https://js.paystack.co/v1/inline.js';
+    document.head.appendChild(script);
+  }
+});
 </script>
