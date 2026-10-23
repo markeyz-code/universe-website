@@ -50,6 +50,21 @@
       </div>
     </section>
 
+    <!-- Impact / Statistics Section (Dynamically Configured from Admin) -->
+    <section v-if="siteSettings.stats?.enabled || siteSettings.sections?.stats" class="border-y border-gray-200 bg-white py-12 transition-all">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div v-if="siteSettings.stats?.title" class="text-center mb-6">
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ siteSettings.stats.title }}</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:p-8 divide-x divide-gray-100 text-center">
+          <div v-for="(metric, idx) in siteSettings.stats.metrics" :key="idx" class="px-4">
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ metric.value }}</div>
+            <div class="text-sm font-medium text-gray-500 uppercase tracking-wider">{{ metric.label }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Elaborate Features Showcase -->
     <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div class="max-w-7xl mx-auto">
@@ -172,7 +187,7 @@
     </section>
 
     <!-- Testimonial Section -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
+    <section v-if="siteSettings.sections?.testimonials" class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Hear from Our Members</h2>
@@ -238,7 +253,7 @@
     </section>
 
     <!-- Community Highlights Section -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
+    <section v-if="siteSettings.sections?.events" class="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 border-t border-gray-200">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Community Highlights & Events</h2>
@@ -331,8 +346,8 @@
       </div>
     </div>
 
-    <!-- Latest Articles Section (Displayed only when published articles exist) -->
-    <section v-if="!loadingArticles && articles && articles.length > 0" class="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-200">
+    <!-- Latest Articles Section (Displayed only when published articles exist and enabled) -->
+    <section v-if="siteSettings.sections?.articles && !loadingArticles && articles && articles.length > 0" class="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-200">
       <div class="max-w-7xl mx-auto">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">Latest Insights</h2>
@@ -408,7 +423,7 @@
     </section>
 
     <!-- Pricing Section -->
-    <section class="py-24 bg-gray-50 border-t border-gray-200">
+    <section v-if="siteSettings.sections?.pricing" class="py-24 bg-gray-50 border-t border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Simple, Transparent Pricing</h2>
@@ -539,7 +554,9 @@ import { Folder, Users, Briefcase, Check, ChevronDown, ArrowRight, X, Calendar, 
 import { useCreateEnquiry } from '@/composables/modules/enquiries/useCreateEnquiry';
 import { useGetEvents } from '@/composables/modules/events/useGetEvents';
 import { useGetArticles } from '@/composables/modules/articles/useGetArticles';
+import { useSiteSettings } from '@/composables/useSiteSettings';
 
+const { settings: siteSettings } = useSiteSettings('universe');
 const { loading: loadingEvents, events, fetchEvents } = useGetEvents();
 const { loading: loadingArticles, articles, fetchArticles } = useGetArticles();
 
