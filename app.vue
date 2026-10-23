@@ -18,9 +18,9 @@ useHead({
 });
 
 useSeoMeta({
-  description: 'The premier ecosystem and community for University Students.',
-  ogTitle: 'UniVerse Ecosystem',
-  ogDescription: 'The premier ecosystem and community for University Students.',
+  description: 'The premier ecosystem and community for Medical Laboratory Science Students.',
+  ogTitle: 'UniVerse Ecosystem - Medical Laboratory Science Community',
+  ogDescription: 'The premier ecosystem and community for Medical Laboratory Science Students.',
   ogImage: '/images/universe-og.jpg',
   twitterCard: 'summary_large_image',
 });

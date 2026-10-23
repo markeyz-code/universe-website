@@ -22,28 +22,67 @@
           <p class="text-gray-500 mt-4">Loading plans...</p>
         </div>
 
-        <div v-else-if="filteredSubscriptions.length === 0" class="text-center py-12">
+        <div v-else-if="displaySubscriptions.length === 0" class="text-center py-12">
           <p class="text-gray-500 text-lg">No subscription plans available for this billing cycle.</p>
         </div>
 
+        <!-- Mobile Cards View (Visible on Mobile & Tablets) -->
+        <div v-else class="block md:hidden space-y-6 mb-12">
+          <div 
+            v-for="plan in displaySubscriptions" 
+            :key="'mobile-'+plan._id"
+            class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm text-left relative overflow-hidden"
+          >
+            <div v-if="plan.durationMonths === 12" class="absolute top-0 right-0 bg-brand text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg">
+              Best Value
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">{{ plan.name }}</h3>
+            <p class="text-xs text-gray-500 mb-4">{{ plan.description || 'Access all core UniVerse academic resources and study materials.' }}</p>
+            
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-3xl font-extrabold text-gray-900">₦{{ (plan.price / 100).toLocaleString() }}</span>
+              <span class="text-xs text-gray-500 font-medium">/ {{ plan.durationMonths > 1 ? plan.durationMonths + ' months' : 'month' }}</span>
+            </div>
 
+            <div class="p-3 bg-gray-50 rounded-lg text-xs text-gray-600 mb-5 space-y-1">
+              <p><strong class="font-semibold text-gray-900">Duration:</strong> {{ plan.durationMonths }} Month{{ plan.durationMonths > 1 ? 's' : '' }} Full Access</p>
+              <p><strong class="font-semibold text-gray-900">Renewal:</strong> Automatic via Paystack. Cancel anytime before next cycle.</p>
+            </div>
+
+            <ul class="space-y-2.5 mb-6 text-sm text-gray-700">
+              <li v-for="feature in (plan.features || allUniqueFeatures)" :key="feature" class="flex items-start gap-2">
+                <Check class="w-4 h-4 text-brand shrink-0 mt-0.5" />
+                <span class="text-xs leading-relaxed">{{ feature }}</span>
+              </li>
+            </ul>
+
+            <button 
+              @click="handleSubscribe(plan)" 
+              :disabled="paymentLoading"
+              class="w-full py-3 bg-brand text-white text-sm font-bold rounded-xl hover:bg-violet-700 transition-colors shadow-sm disabled:opacity-50"
+            >
+              {{ paymentLoading ? 'Processing...' : 'Subscribe Now' }}
+            </button>
+          </div>
+        </div>
 
         <!-- Desktop: Full comparison table -->
-        <div class="hidden md:block overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+        <div class="hidden md:block overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200 mb-12">
           <table class="w-full text-left border-collapse">
             <thead>
               <tr>
                 <th class="p-6 bg-gray-50 border-b border-gray-200 w-1/4"></th>
-                <th v-for="plan in filteredSubscriptions" :key="'head-'+plan._id" class="p-6 bg-gray-50 border-b border-gray-200 border-l w-1/4 text-center">
+                <th v-for="plan in displaySubscriptions" :key="'head-'+plan._id" class="p-6 bg-gray-50 border-b border-gray-200 border-l w-1/4 text-center">
                   <h4 class="font-bold text-gray-900 mb-1">{{ plan.name }}</h4>
                   <div class="text-2xl font-extrabold text-gray-900 mb-1">₦{{ (plan.price / 100).toLocaleString() }}</div>
-                  <p class="text-xs text-gray-500 mb-4">Per {{ plan.durationMonths > 1 ? plan.durationMonths + ' months' : 'month' }}</p>
+                  <p class="text-xs text-gray-500 mb-1">Per {{ plan.durationMonths > 1 ? plan.durationMonths + ' months' : 'month' }}</p>
+                  <p class="text-[11px] text-brand font-medium mb-4">Auto-renewing • Cancel anytime</p>
                   <button 
                     @click="handleSubscribe(plan)" 
                     :disabled="paymentLoading"
-                    class="w-full py-2 bg-brand text-white text-sm font-medium rounded hover:bg-violet-700 transition-colors"
+                    class="w-full py-2.5 bg-brand text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors shadow-sm disabled:opacity-50"
                   >
-                    Select plan
+                    Select Plan
                   </button>
                 </th>
               </tr>
@@ -54,13 +93,39 @@
               </tr>
               <tr v-for="feature in allUniqueFeatures" :key="feature">
                 <td class="p-4 text-sm text-gray-700 font-medium">{{ feature }}</td>
-                <td v-for="plan in filteredSubscriptions" :key="plan._id+'-'+feature" class="p-4 text-center border-l border-gray-100">
-                  <Check v-if="plan.features.includes(feature)" class="w-5 h-5 text-gray-900 mx-auto" />
+                <td v-for="plan in displaySubscriptions" :key="plan._id+'-'+feature" class="p-4 text-center border-l border-gray-100">
+                  <Check v-if="!plan.features || plan.features.includes(feature)" class="w-5 h-5 text-brand mx-auto" />
                   <span v-else class="text-gray-300">-</span>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Subscription Duration & Renewal Clarity Notice -->
+        <div class="max-w-4xl mx-auto bg-violet-50/60 border border-violet-100 rounded-2xl p-6 sm:p-8 text-left mt-8">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center shrink-0">
+              <Check class="w-5 h-5" />
+            </div>
+            <div class="space-y-3">
+              <h3 class="text-lg font-bold text-gray-900">Subscription Duration & Transparent Renewal Policy</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-gray-700 leading-relaxed">
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-1">⏱ Duration</h4>
+                  <p>Access is active for the precise duration selected (30 days for Monthly, 365 days for Yearly). You retain full access to The Vault and all features for the entire paid window.</p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-1">🔄 Renewal Mechanics</h4>
+                  <p>Subscriptions renew automatically using Paystack's encrypted billing to ensure continuous study access. You will receive an email notice prior to renewal.</p>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-900 mb-1">✋ Easy Cancellation</h4>
+                  <p>You can cancel automatic renewal at any time directly in your Member Dashboard under Settings. No questions asked, and your access continues until the cycle concludes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -203,22 +268,59 @@ const selectedPlanId = ref<string | null>(null);
 const verifying = ref(false);
 const billingCycle = ref<'monthly' | 'yearly'>('monthly');
 
-const filteredSubscriptions = computed(() => {
-  if (!subscriptions.value) return [];
-  if (billingCycle.value === 'monthly') {
-    return subscriptions.value.filter(p => p.durationMonths === 1);
+const DEFAULT_PLANS = [
+  {
+    _id: 'plan-monthly-std',
+    name: 'Monthly Scholar Pass',
+    description: 'Ideal for semester exam revision, test prep, and clinical bench rotations.',
+    price: 250000,
+    durationMonths: 1,
+    features: [
+      'Full access to The Vault (Past questions & Bench protocols)',
+      'Departmental & university cohort access',
+      'Discussion forums and study groups',
+      'Downloadable digital Student Identity verification card',
+      'Standard email & WhatsApp desk support'
+    ]
+  },
+  {
+    _id: 'plan-yearly-pro',
+    name: 'Annual Unlimited Scholar Pass',
+    description: 'Comprehensive 12-month access covering two semesters plus clinical rotations.',
+    price: 2500000,
+    durationMonths: 12,
+    features: [
+      'Everything in Monthly Scholar Pass',
+      '2 months free (Save 17% annually)',
+      'Priority Expert Mentorship matchmaking',
+      'Exclusive Career Hub hospital placement listings',
+      'Offline downloadable study packs & revision decks',
+      'Direct priority support desk access'
+    ]
   }
-  return subscriptions.value.filter(p => p.durationMonths === 12);
+];
+
+const displaySubscriptions = computed(() => {
+  const source = (subscriptions.value && subscriptions.value.length > 0) ? subscriptions.value : DEFAULT_PLANS;
+  if (billingCycle.value === 'monthly') {
+    const list = source.filter(p => p.durationMonths === 1 || p.durationMonths <= 3);
+    return list.length > 0 ? list : source;
+  }
+  const list = source.filter(p => p.durationMonths >= 6);
+  return list.length > 0 ? list : source;
 });
 
 const allUniqueFeatures = computed(() => {
-  if (!filteredSubscriptions.value) return [];
+  if (!displaySubscriptions.value) return [];
   const features = new Set<string>();
-  filteredSubscriptions.value.forEach(plan => {
-    if(plan.features) {
+  displaySubscriptions.value.forEach(plan => {
+    if (plan.features && Array.isArray(plan.features)) {
       plan.features.forEach((f: string) => features.add(f));
     }
   });
+  if (features.size === 0) {
+    DEFAULT_PLANS[1].features.forEach(f => features.add(f));
+  }
   return Array.from(features);
 });
 

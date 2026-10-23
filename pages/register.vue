@@ -36,7 +36,7 @@
 
         <div v-else>
           <h2 class="text-3xl font-medium text-gray-900 mb-2">Apply for Membership</h2>
-          <p class="text-gray-500 mb-8">UniVerse is exclusive to verified University Students.</p>
+          <p class="text-gray-500 mb-8">UniVerse is exclusive to verified Medical Laboratory Science Students.</p>
 
           <!-- Step Indicators -->
           <div class="flex items-center mb-8 gap-2">
@@ -168,9 +168,15 @@
               </div>
             </div>
 
-            <div v-if="error" class="text-red-700 text-sm p-4 bg-red-50 border border-red-200 flex items-start gap-3 rounded">
-              <Lock class="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <span>{{ error }}</span>
+            <div v-if="error" class="text-red-700 text-sm p-4 bg-red-50 border border-red-200 flex flex-col gap-2 rounded">
+              <div class="flex items-start gap-3">
+                <Lock class="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <span>{{ error }}</span>
+              </div>
+              <p class="text-xs text-red-600 pl-8">
+                Need assistance? Contact our student verification desk at
+                <a href="mailto:support@medlabconvo.com" class="font-bold underline">support@medlabconvo.com</a> or WhatsApp <strong class="underline">+234 813 000 0000</strong>.
+              </p>
             </div>
 
             <div class="flex items-center gap-4 mt-4">
@@ -210,10 +216,10 @@
 import { useSeoMeta } from '#imports';
 
 useSeoMeta({
-  title: 'Apply for Membership - UniVerse',
-  description: 'Join the exclusive community of verified University Students.',
-  ogTitle: 'Apply for Membership - UniVerse',
-  ogDescription: 'Join the exclusive community of verified University Students.',
+  title: 'Apply for Membership - UniVerse MLS Community',
+  description: 'Join the exclusive community of verified Medical Laboratory Science Students.',
+  ogTitle: 'Apply for Membership - UniVerse MLS Community',
+  ogDescription: 'Join the exclusive community of verified Medical Laboratory Science Students.',
   ogImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop',
   twitterCard: 'summary_large_image',
 })
@@ -222,6 +228,7 @@ import { ref, onMounted, computed, onUnmounted } from 'vue';
 import { ArrowRight, UploadCloud, CheckCircle2, Lock, Mail } from 'lucide-vue-next';
 import { useRegister } from '@/composables/modules/auth/useRegister';
 import { universeApi } from '@/api_factory/modules/universe';
+import { GATEWAY_ENDPOINT } from '@/api_factory/axios.config';
 import UiInput from '@/components/ui/Input.vue';
 import UiButton from '@/components/ui/Button.vue';
 import UiFileInput from '@/components/ui/FileInput.vue';
@@ -279,22 +286,82 @@ const resendCode = async () => {
 
 onUnmounted(() => clearInterval(countdownInterval));
 
-const universities = ref<any[]>([]);
-const programmes = ref<any[]>([]);
-const plans = ref<any[]>([]);
+const DEFAULT_UNIVERSITIES = [
+  { _id: 'uni-unilag', name: 'University of Lagos (UNILAG)' },
+  { _id: 'uni-ui', name: 'University of Ibadan (UI)' },
+  { _id: 'uni-unn', name: 'University of Nigeria, Nsukka (UNN)' },
+  { _id: 'uni-oau', name: 'Obafemi Awolowo University (OAU)' },
+  { _id: 'uni-uniben', name: 'University of Benin (UNIBEN)' },
+  { _id: 'uni-unical', name: 'University of Calabar (UNICAL)' },
+  { _id: 'uni-aau', name: 'Ambrose Alli University (AAU)' },
+  { _id: 'uni-unizik', name: 'Nnamdi Azikiwe University (UNIZIK)' },
+  { _id: 'uni-unilorin', name: 'University of Ilorin (UNILORIN)' },
+  { _id: 'uni-abu', name: 'Ahmadu Bello University (ABU)' },
+  { _id: 'uni-lasu', name: 'Lagos State University (LASU)' },
+  { _id: 'uni-oou', name: 'Olabisi Onabanjo University (OOU)' },
+  { _id: 'uni-delsu', name: 'Delta State University (DELSU)' },
+  { _id: 'uni-other', name: 'Other Accredited Institution' }
+];
+
+const DEFAULT_PROGRAMMES = [
+  { _id: 'prog-bmls', name: 'Medical Laboratory Science (BMLS)' },
+  { _id: 'prog-micro', name: 'Medical Microbiology & Parasitology' },
+  { _id: 'prog-chem-path', name: 'Chemical Pathology & Clinical Chemistry' },
+  { _id: 'prog-hematology', name: 'Hematology & Blood Transfusion Science' },
+  { _id: 'prog-histo', name: 'Histopathology & Cytopathology' },
+];
+
+const DEFAULT_PLANS = [
+  {
+    _id: 'plan-basic-academic',
+    name: 'Basic Academic Pass',
+    description: 'Complete access to The Vault, past exam archives, and departmental study cohorts.',
+    price: 250000,
+    durationMonths: 1,
+  },
+  {
+    _id: 'plan-full-year',
+    name: 'Annual Scholar Plan',
+    description: '12 months unrestricted access to The Vault, Mentorship matchmaking, and Career Hub.',
+    price: 2500000,
+    durationMonths: 12,
+  }
+];
+
+const universities = ref<any[]>(DEFAULT_UNIVERSITIES);
+const programmes = ref<any[]>(DEFAULT_PROGRAMMES);
+const plans = ref<any[]>(DEFAULT_PLANS);
 
 const fetchUniverseData = async () => {
   try {
-    const [uniRes, progRes, plansRes] = await Promise.all([
-      universeApi.getUniversities(),
-      universeApi.getProgrammes(),
-      universeApi.get('/subscriptions').then((res: any) => res.data || res).catch(() => [])
-    ]);
-    universities.value = uniRes.data || uniRes;
-    programmes.value = progRes.data || progRes;
-    plans.value = plansRes;
+    const uniRes = await universeApi.getUniversities().catch(() => null);
+    if (uniRes && (uniRes.data?.length || uniRes.length)) {
+      universities.value = uniRes.data || uniRes;
+    }
   } catch (err) {
-    console.error('Failed to fetch universe data');
+    console.warn('Using default universities list');
+  }
+
+  try {
+    const progRes = await universeApi.getProgrammes().catch(() => null);
+    if (progRes && (progRes.data?.length || progRes.length)) {
+      programmes.value = progRes.data || progRes;
+    }
+  } catch (err) {
+    console.warn('Using default programmes list');
+  }
+
+  try {
+    const plansRes = await GATEWAY_ENDPOINT.get('/subscriptions').catch(() => null);
+    if (plansRes && (plansRes.data?.length || plansRes.length)) {
+      plans.value = plansRes.data || plansRes;
+    }
+  } catch (err) {
+    console.warn('Using default subscription plans');
+  }
+
+  if (plans.value.length > 0 && !form.value.planId) {
+    form.value.planId = plans.value[0]._id;
   }
 };
 
@@ -303,8 +370,9 @@ onMounted(() => {
 });
 
 const filteredProgrammes = computed(() => {
-  if (!form.value.universityId) return [];
-  return programmes.value.filter(p => p.universityId === form.value.universityId);
+  if (!form.value.universityId) return programmes.value;
+  const matches = programmes.value.filter(p => p.universityId === form.value.universityId);
+  return matches.length > 0 ? matches : programmes.value;
 });
 
 const submitStep = async () => {

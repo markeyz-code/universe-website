@@ -27,32 +27,32 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Contact Method 1 -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <Mail class="w-6 h-6 text-gray-900 mb-4" />
-            <h3 class="font-bold text-gray-900 mb-2">Email</h3>
-            <p class="text-sm text-gray-500 mb-4">Send us your questions and we'll respond within hours.</p>
-            <a href="mailto:support@mls.com" class="text-sm font-medium text-brand hover:underline">support@mls.com</a>
+            <Mail class="w-6 h-6 text-brand mb-4" />
+            <h3 class="font-bold text-gray-900 mb-2">Email Support</h3>
+            <p class="text-sm text-gray-500 mb-4">Drop us an email and our verification team will respond within 2–4 hours.</p>
+            <a href="mailto:support@medlabconvo.com" class="text-sm font-semibold text-brand hover:underline">support@medlabconvo.com</a>
           </div>
           <!-- Contact Method 2 -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <MessageSquare class="w-6 h-6 text-gray-900 mb-4" />
-            <h3 class="font-bold text-gray-900 mb-2">Live chat</h3>
-            <p class="text-sm text-gray-500 mb-4">Talk to someone on our team right now during business hours.</p>
-            <button class="text-sm font-medium text-brand hover:underline">Start conversation</button>
+            <MessageSquare class="w-6 h-6 text-brand mb-4" />
+            <h3 class="font-bold text-gray-900 mb-2">WhatsApp Desk</h3>
+            <p class="text-sm text-gray-500 mb-4">Direct message our community support desk for fast resolution.</p>
+            <a href="https://wa.me/2348130000000" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-brand hover:underline">+234 813 000 0000</a>
           </div>
           <!-- Contact Method 3 -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <Phone class="w-6 h-6 text-gray-900 mb-4" />
-            <h3 class="font-bold text-gray-900 mb-2">Phone</h3>
-            <p class="text-sm text-gray-500 mb-4">Call us during office hours for immediate assistance.</p>
-            <a href="tel:+15550000000" class="text-sm font-medium text-brand hover:underline">+1 (555) 000-0000</a>
+            <Phone class="w-6 h-6 text-brand mb-4" />
+            <h3 class="font-bold text-gray-900 mb-2">Phone Lines</h3>
+            <p class="text-sm text-gray-500 mb-4">Call our student advisory helpline Monday–Friday (8am – 6pm WAT).</p>
+            <a href="tel:+2348130000000" class="text-sm font-semibold text-brand hover:underline">+234 813 000 0000</a>
           </div>
           <!-- Contact Method 4 -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <MapPin class="w-6 h-6 text-gray-900 mb-4" />
-            <h3 class="font-bold text-gray-900 mb-2">Office</h3>
-            <p class="text-sm text-gray-500 mb-4">Visit us in person or check our hours before you come.</p>
-            <address class="text-sm font-medium text-brand hover:underline not-italic cursor-pointer">
-              123 Sample St, Sydney NSW 2000 AU
+            <MapPin class="w-6 h-6 text-brand mb-4" />
+            <h3 class="font-bold text-gray-900 mb-2">Headquarters</h3>
+            <p class="text-sm text-gray-500 mb-4">MedLabConvo Innovation Hub, Victoria Island / Yaba.</p>
+            <address class="text-sm font-semibold text-brand hover:underline not-italic cursor-pointer">
+              Lagos State, Nigeria
             </address>
           </div>
         </div>
@@ -62,19 +62,19 @@
     <!-- Tell us more form -->
     <section id="contact-form" class="py-16 max-w-5xl mx-auto flex flex-col md:flex-row gap-16">
       <div class="md:w-1/3">
-        <span class="text-sm font-semibold text-gray-500 tracking-wider uppercase mb-2 block">Send</span>
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Tell us more</h2>
-        <p class="text-gray-600 mb-8">Fill out the form below and we'll get back to you soon.</p>
+        <span class="text-sm font-semibold text-gray-500 tracking-wider uppercase mb-2 block">Direct Contact</span>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">We're Here to Help</h2>
+        <p class="text-gray-600 mb-8 leading-relaxed">Have a question regarding university credential verification, accessing The Vault, or mentorship matching? Reach out directly.</p>
         
         <div class="space-y-4">
           <div class="flex items-center gap-3 text-sm text-gray-700">
-             <Mail class="w-4 h-4 text-gray-400" /> support@mls.com
+             <Mail class="w-4 h-4 text-brand shrink-0" /> <a href="mailto:support@medlabconvo.com" class="hover:underline">support@medlabconvo.com</a>
           </div>
           <div class="flex items-center gap-3 text-sm text-gray-700">
-             <Phone class="w-4 h-4 text-gray-400" /> +1 (555) 000-0000
+             <Phone class="w-4 h-4 text-brand shrink-0" /> <a href="tel:+2348130000000" class="hover:underline">+234 813 000 0000</a>
           </div>
           <div class="flex items-center gap-3 text-sm text-gray-700">
-             <MapPin class="w-4 h-4 text-gray-400" /> 123 Sample St, Sydney NSW 2000 AU
+             <MapPin class="w-4 h-4 text-brand shrink-0" /> MedLabConvo Hub, Lagos State, Nigeria
           </div>
         </div>
       </div>

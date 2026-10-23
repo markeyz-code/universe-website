@@ -122,46 +122,54 @@
     </section>
 
     <!-- Community Leaders -->
-    <section class="py-24 bg-white">
+    <section class="py-24 bg-white border-t border-gray-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="text-sm font-semibold text-brand tracking-wider uppercase">Meet the</span>
-        <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-16">Community leaders</h2>
+        <span class="text-sm font-semibold text-brand tracking-wider uppercase">Leadership & Preceptors</span>
+        <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-16">Ecosystem Leadership Team</h2>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <!-- Leader 1 -->
-          <div class="flex flex-col items-center">
-            <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center text-gray-500">Img</div>
-            <h4 class="font-bold text-gray-900">Sarah Mitchell</h4>
-            <p class="text-xs text-gray-500 mb-2">Community Director</p>
-            <p class="text-sm text-gray-600">Focuses on inclusive roles and finding the right fit.</p>
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-brand to-violet-500 text-white mb-4 flex items-center justify-center font-bold text-xl shadow-md border-2 border-white">
+              MQ
+            </div>
+            <h4 class="font-bold text-gray-900 text-base">Marquis</h4>
+            <p class="text-xs text-brand font-semibold mb-2">Platform & Community Lead</p>
+            <p class="text-xs text-gray-600 leading-relaxed text-center">Architecting digital infrastructure and academic initiatives for MLS scholars across the federation.</p>
           </div>
           <!-- Leader 2 -->
-          <div class="flex flex-col items-center">
-            <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center text-gray-500">Img</div>
-            <h4 class="font-bold text-gray-900">James Bulligart</h4>
-            <p class="text-xs text-gray-500 mb-2">Forum Moderator</p>
-            <p class="text-sm text-gray-600">Connecting professionals via the Vault resources.</p>
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-violet-600 to-indigo-600 text-white mb-4 flex items-center justify-center font-bold text-xl shadow-md border-2 border-white">
+              OM
+            </div>
+            <h4 class="font-bold text-gray-900 text-base">Oluwamuyiwa</h4>
+            <p class="text-xs text-brand font-semibold mb-2">Clinical Operations & Preceptors</p>
+            <p class="text-xs text-gray-600 leading-relaxed text-center">Coordinates clinical rotation partnerships, hospital preceptor standards, and mock oral examinations.</p>
           </div>
           <!-- Leader 3 -->
-          <div class="flex flex-col items-center">
-            <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center text-gray-500">Img</div>
-            <h4 class="font-bold text-gray-900">Elena Gati</h4>
-            <p class="text-xs text-gray-500 mb-2">Events Coordinator</p>
-            <p class="text-sm text-gray-600">Curates amazing webinars across the continent.</p>
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-purple-600 to-brand text-white mb-4 flex items-center justify-center font-bold text-xl shadow-md border-2 border-white">
+              MR
+            </div>
+            <h4 class="font-bold text-gray-900 text-base">Miracle</h4>
+            <p class="text-xs text-brand font-semibold mb-2">Student Engagement Director</p>
+            <p class="text-xs text-gray-600 leading-relaxed text-center">Curates interactive study webinars, campus ambassador chapters, and community study halls.</p>
           </div>
           <!-- Leader 4 -->
-          <div class="flex flex-col items-center">
-            <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 flex items-center justify-center text-gray-500">Img</div>
-            <h4 class="font-bold text-gray-900">Marcus Thompson</h4>
-            <p class="text-xs text-gray-500 mb-2">Mentorship Lead</p>
-            <p class="text-sm text-gray-600">Ensures you find the exact mentor you need.</p>
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-500 to-brand text-white mb-4 flex items-center justify-center font-bold text-xl shadow-md border-2 border-white">
+              OY
+            </div>
+            <h4 class="font-bold text-gray-900 text-base">Oyindamola</h4>
+            <p class="text-xs text-brand font-semibold mb-2">Academic & Mentorship Lead</p>
+            <p class="text-xs text-gray-600 leading-relaxed text-center">Oversees The Vault syllabus archives, practical bench guidelines, and 1-on-1 mentor pairings.</p>
           </div>
         </div>
 
-        <div class="mt-20">
-          <h3 class="text-xl font-bold mb-4">Join our team</h3>
-          <p class="text-gray-600 mb-6">Help build something that matters to the field.</p>
-          <NuxtLink to="/register" class="px-6 py-2 border border-brand text-brand hover:bg-brand/5 rounded text-sm font-medium transition-colors">See positions</NuxtLink>
+        <div class="mt-16 bg-violet-50/60 rounded-2xl p-8 max-w-2xl mx-auto border border-violet-100">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Contribute to UniVerse</h3>
+          <p class="text-gray-600 text-xs mb-6 leading-relaxed">Are you a high-achieving MLS student, researcher, or senior scientist? Help mentor the next generation or become a campus coordinator.</p>
+          <NuxtLink to="/contact" class="px-6 py-2.5 bg-brand text-white rounded-lg text-xs font-bold hover:bg-violet-700 transition-colors inline-block shadow-sm">Get in Touch with Leadership</NuxtLink>
         </div>
       </div>
     </section>
