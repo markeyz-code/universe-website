@@ -7,14 +7,14 @@ export const usePayments = () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
 
-  const initializePayment = async (subscriptionId: string, callbackUrl: string) => {
+  const initializePayment = async (subscriptionId: string, callbackUrl: string, channels?: string[]) => {
     loading.value = true;
     error.value = null;
     try {
-      const response = await paymentsApi.initialize({ subscriptionId, callbackUrl });
+      const response = await paymentsApi.initialize({ subscriptionId, callbackUrl, channels });
       return response.data;
     } catch (err: any) {
-      error.value = err.response?.data?.message || err.message || 'Failed to initialize payment';
+      error.value = err?.data?.message || err?.response?.data?.message || err?.message || 'Failed to initialize payment';
       showToast({
         title: 'Payment Error',
         message: error.value!,
@@ -33,7 +33,7 @@ export const usePayments = () => {
       const response = await paymentsApi.verify(reference);
       return response.data;
     } catch (err: any) {
-      error.value = err.response?.data?.message || err.message || 'Failed to verify payment';
+      error.value = err?.data?.message || err?.response?.data?.message || err?.message || 'Failed to verify payment';
       return null;
     } finally {
       loading.value = false;

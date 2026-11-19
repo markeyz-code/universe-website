@@ -3,23 +3,23 @@
     <!-- Header & Billing Cycle Selector -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Subscription Plans</h1>
-        <p class="text-gray-500 text-sm mt-0.5">Choose the plan that fits your clinical and academic needs.</p>
+        <h1 class="text-2xl font-bold text-navy-950">Subscription Plans</h1>
+        <p class="text-navy-400 text-sm mt-0.5">Choose the plan that fits your clinical and academic needs.</p>
       </div>
 
       <!-- Billing Cycle Toggle -->
       <div class="flex items-center gap-3 self-start sm:self-auto">
-        <div class="inline-flex bg-gray-100 p-1 rounded-xl border border-gray-200/80 shadow-inner">
+        <div class="inline-flex bg-navy-50 p-1 rounded-xl border border-navy-100/80 shadow-inner">
           <button
             @click="billingCycle = 'monthly'"
-            :class="billingCycle === 'monthly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900 font-medium'"
+            :class="billingCycle === 'monthly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-navy-500 hover:text-navy-950 font-medium'"
             class="px-5 py-2 rounded-lg text-xs transition-all"
           >
             Monthly Billing
           </button>
           <button
             @click="billingCycle = 'yearly'"
-            :class="billingCycle === 'yearly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-gray-600 hover:text-gray-900 font-medium'"
+            :class="billingCycle === 'yearly' ? 'bg-white text-brand font-bold shadow-sm' : 'text-navy-500 hover:text-navy-950 font-medium'"
             class="px-5 py-2 rounded-lg text-xs transition-all flex items-center gap-1.5"
           >
             <span>Annual Billing</span>
@@ -29,43 +29,66 @@
       </div>
     </div>
 
+    <!-- Payment Method Selector -->
+    <div class="bg-white rounded-2xl border border-navy-100/80 shadow-sm p-4 flex flex-col lg:flex-row lg:items-center gap-4 justify-between">
+      <div>
+        <p class="text-xs font-extrabold text-navy-400 uppercase tracking-wider">Payment method</p>
+        <p class="text-xs text-navy-400 mt-0.5">Pay securely through Paystack. Choose how you want to pay.</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <button
+          v-for="method in paymentMethods"
+          :key="method.id"
+          type="button"
+          @click="selectedPaymentMethod = method.id"
+          class="inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-bold transition-all"
+          :class="selectedPaymentMethod === method.id
+            ? 'border-brand bg-brand-50 text-brand-700'
+            : 'border-navy-100 text-navy-500 hover:border-brand-300'"
+        >
+          <component :is="method.icon" class="w-3.5 h-3.5" />
+          {{ method.label }}
+        </button>
+      </div>
+    </div>
+
     <!-- Loading State -->
-    <div v-if="loading" class="text-center py-20 bg-white rounded-2xl border border-gray-200/80 shadow-sm">
+    <div v-if="loading" class="text-center py-20 bg-white rounded-2xl border border-navy-100/80 shadow-sm">
       <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-brand mx-auto"></div>
-      <p class="text-gray-500 text-sm mt-4 font-medium">Loading subscription tiers...</p>
+      <p class="text-navy-400 text-sm mt-4 font-medium">Loading subscription tiers...</p>
     </div>
 
     <!-- Empty State -->
-    <div v-else-if="filteredSubscriptions.length === 0" class="text-center py-16 bg-white rounded-2xl border border-gray-200/80 shadow-sm">
+    <div v-else-if="filteredSubscriptions.length === 0" class="text-center py-16 bg-white rounded-2xl border border-navy-100/80 shadow-sm">
       <div class="w-16 h-16 bg-brand/5 text-brand rounded-2xl flex items-center justify-center mx-auto mb-4">
         <CreditCard class="w-8 h-8 text-brand" />
       </div>
-      <h3 class="text-lg font-bold text-gray-900 mb-1">No plans available</h3>
-      <p class="text-gray-500 text-sm max-w-sm mx-auto mb-4">There are currently no active plans available for the selected billing cycle.</p>
+      <h3 class="text-lg font-bold text-navy-950 mb-1">No plans available</h3>
+      <p class="text-navy-400 text-sm max-w-sm mx-auto mb-4">There are currently no active plans available for the selected billing cycle.</p>
       <button @click="billingCycle = billingCycle === 'monthly' ? 'yearly' : 'monthly'" class="px-4 py-2 bg-brand text-white rounded-xl text-xs font-bold hover:bg-brand/90 transition-all">
         Switch to {{ billingCycle === 'monthly' ? 'Annual' : 'Monthly' }}
       </button>
     </div>
 
     <!-- Unified Comparison Matrix -->
-    <div v-else class="bg-white rounded-2xl shadow-sm border border-gray-200/90 overflow-hidden">
+    <div v-else class="bg-white rounded-2xl shadow-sm border border-navy-100/90 overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse min-w-[700px]">
           <!-- Plan Headers -->
           <thead>
-            <tr class="divide-x divide-gray-100">
+            <tr class="divide-x divide-navy-100">
               <!-- Empty Corner / Context Column -->
-              <th class="p-6 bg-gray-50/70 w-1/4 align-bottom border-b border-gray-200">
-                <span class="text-xs font-extrabold text-violet-600 uppercase tracking-wider block mb-1">UniVerse Membership</span>
-                <h3 class="text-lg font-bold text-gray-900">Compare Plans</h3>
-                <p class="text-xs text-gray-500 mt-1 leading-relaxed">Select the subscription level with the exact resource access you require.</p>
+              <th class="p-6 bg-[#F6F8FB]/70 w-1/4 align-bottom border-b border-navy-100">
+                <span class="text-xs font-extrabold text-brand uppercase tracking-wider block mb-1">UniVerse Membership</span>
+                <h3 class="text-lg font-bold text-navy-950">Compare Plans</h3>
+                <p class="text-xs text-navy-400 mt-1 leading-relaxed">Select the subscription level with the exact resource access you require.</p>
               </th>
 
               <!-- Plan Header Columns -->
               <th
                 v-for="(plan, index) in filteredSubscriptions"
                 :key="'head-' + plan._id"
-                class="p-6 bg-gray-50/70 border-b border-gray-200 text-center relative group transition-colors"
+                class="p-6 bg-[#F6F8FB]/70 border-b border-navy-100 text-center relative group transition-colors"
                 :class="[
                   index === 1 ? 'bg-brand/[0.02]' : '',
                   'w-1/' + (filteredSubscriptions.length + 1)
@@ -73,22 +96,22 @@
               >
                 <!-- Popular Badge (for middle / recommended plan) -->
                 <div v-if="index === 1 || plan.name.toLowerCase().includes('basic') || plan.name.toLowerCase().includes('popular')" class="mb-2">
-                  <span class="inline-flex bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                  <span class="inline-flex bg-gradient-to-r from-brand to-teal-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                     Recommended
                   </span>
                 </div>
                 <div v-else class="h-6"></div>
 
-                <h4 class="text-lg font-bold text-gray-900 mb-1">{{ plan.name }}</h4>
-                <p class="text-xs text-gray-500 mb-3 min-h-[32px] line-clamp-2 px-2">{{ plan.description || 'Full platform access' }}</p>
+                <h4 class="text-lg font-bold text-navy-950 mb-1">{{ plan.name }}</h4>
+                <p class="text-xs text-navy-400 mb-3 min-h-[32px] line-clamp-2 px-2">{{ plan.description || 'Full platform access' }}</p>
 
                 <!-- Pricing Display -->
                 <div class="mb-4">
                   <div class="flex items-baseline justify-center gap-1">
-                    <span class="text-3xl font-extrabold text-gray-900 tracking-tight">₦{{ (plan.price / 100).toLocaleString() }}</span>
-                    <span class="text-xs font-semibold text-gray-500">/{{ plan.durationMonths > 1 ? plan.durationMonths + ' mos' : 'mo' }}</span>
+                    <span class="text-3xl font-extrabold text-navy-950 tracking-tight">₦{{ (plan.price / 100).toLocaleString() }}</span>
+                    <span class="text-xs font-semibold text-navy-400">/{{ plan.durationMonths > 1 ? plan.durationMonths + ' mos' : 'mo' }}</span>
                   </div>
-                  <p class="text-[11px] text-gray-400 mt-0.5 font-medium">Billed {{ plan.durationMonths === 1 ? 'monthly' : 'annually' }}</p>
+                  <p class="text-[11px] text-navy-300 mt-0.5 font-medium">Billed {{ plan.durationMonths === 1 ? 'monthly' : 'annually' }}</p>
                 </div>
 
                 <!-- Action Button -->
@@ -100,8 +123,8 @@
                     getPlanStatus(plan, index) === 'current'
                       ? 'bg-green-100 text-green-700 cursor-default'
                       : getPlanStatus(plan, index) === 'downgrade'
-                      ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
-                      : 'bg-violet-600 text-white hover:bg-violet-700 hover:shadow-md active:scale-95'
+                      ? 'bg-navy-50 text-navy-400 cursor-not-allowed'
+                      : 'bg-brand text-white hover:bg-brand-700 hover:shadow-md active:scale-95'
                   ]"
                 >
                   <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-2">
@@ -122,10 +145,10 @@
           </thead>
 
           <!-- Feature Comparison Matrix -->
-          <tbody class="divide-y divide-gray-100">
+          <tbody class="divide-y divide-navy-100">
             <!-- Section Title -->
-            <tr class="bg-gray-50/90">
-              <td :colspan="filteredSubscriptions.length + 1" class="px-6 py-3 text-xs font-extrabold text-gray-500 uppercase tracking-wider border-y border-gray-200">
+            <tr class="bg-[#F6F8FB]/90">
+              <td :colspan="filteredSubscriptions.length + 1" class="px-6 py-3 text-xs font-extrabold text-navy-400 uppercase tracking-wider border-y border-navy-100">
                 Features & Resource Inclusions
               </td>
             </tr>
@@ -134,9 +157,9 @@
             <tr
               v-for="feature in allUniqueFeatures"
               :key="feature"
-              class="divide-x divide-gray-100 hover:bg-gray-50/50 transition-colors"
+              class="divide-x divide-navy-100 hover:bg-[#F6F8FB]/50 transition-colors"
             >
-              <td class="px-6 py-4 text-xs font-semibold text-gray-700">
+              <td class="px-6 py-4 text-xs font-semibold text-navy-700">
                 {{ feature }}
               </td>
 
@@ -151,15 +174,15 @@
                     <Check class="w-4 h-4 text-brand stroke-[2.5]" />
                   </div>
                 </div>
-                <div v-else class="text-gray-300 font-bold text-sm">
+                <div v-else class="text-navy-300 font-bold text-sm">
                   —
                 </div>
               </td>
             </tr>
 
             <!-- Bottom CTA Row -->
-            <tr class="divide-x divide-gray-100 bg-gray-50/40">
-              <td class="p-6 align-middle font-bold text-xs text-gray-500 uppercase tracking-wider">
+            <tr class="divide-x divide-navy-100 bg-[#F6F8FB]/40">
+              <td class="p-6 align-middle font-bold text-xs text-navy-400 uppercase tracking-wider">
                 Ready to get started?
               </td>
 
@@ -176,8 +199,8 @@
                     getPlanStatus(plan, index) === 'current'
                       ? 'bg-green-100 text-green-700 cursor-default'
                       : getPlanStatus(plan, index) === 'downgrade'
-                      ? 'bg-gray-100 text-gray-500 cursor-not-allowed'
-                      : 'bg-violet-600 text-white hover:bg-violet-700 hover:shadow-md active:scale-95'
+                      ? 'bg-navy-50 text-navy-400 cursor-not-allowed'
+                      : 'bg-brand text-white hover:bg-brand-700 hover:shadow-md active:scale-95'
                   ]"
                 >
                   <span v-if="paymentLoading && selectedPlanId === plan._id" class="flex items-center gap-1.5">
@@ -202,10 +225,10 @@
     <!-- Verification Modal -->
     <Teleport to="body">
       <div v-if="verifying" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl border border-gray-100">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl border border-navy-100">
           <div class="animate-spin rounded-full h-12 w-12 border-2 border-brand border-t-transparent mx-auto mb-4"></div>
-          <h3 class="text-xl font-bold text-gray-900 mb-1">Verifying Payment</h3>
-          <p class="text-gray-500 text-xs">Please wait while we confirm your transaction with Paystack...</p>
+          <h3 class="text-xl font-bold text-navy-950 mb-1">Verifying Payment</h3>
+          <p class="text-navy-400 text-xs">Please wait while we confirm your transaction with Paystack...</p>
         </div>
       </div>
     </Teleport>
@@ -216,7 +239,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useSeoMeta, useHead } from '#imports';
-import { Check, CreditCard } from 'lucide-vue-next';
+import { Check, CreditCard, Landmark, Smartphone, QrCode } from 'lucide-vue-next';
 import { useSubscriptions } from '@/composables/modules/subscriptions/useSubscriptions';
 import { usePayments } from '@/composables/modules/payments/usePayments';
 import { useAuth } from '@/composables/core/useAuth';
@@ -236,6 +259,14 @@ const { confirm, alert: modalAlert } = useCustomModal();
 const selectedPlanId = ref<string | null>(null);
 const verifying = ref(false);
 const billingCycle = ref<'monthly' | 'yearly'>('monthly');
+
+const paymentMethods = [
+  { id: 'card', label: 'Card', icon: CreditCard },
+  { id: 'bank_transfer', label: 'Bank Transfer', icon: Landmark },
+  { id: 'ussd', label: 'USSD', icon: Smartphone },
+  { id: 'qr', label: 'QR Code', icon: QrCode },
+];
+const selectedPaymentMethod = ref('card');
 
 const activeSubscriptionId = computed(() => {
   if (!user.value?.activeSubscription) return null;
@@ -342,7 +373,7 @@ const handleSubscribe = async (plan: any) => {
   selectedPlanId.value = plan._id;
   const callbackUrl = `${window.location.origin}/dashboard/pricing`;
 
-  const result = await initializePayment(plan._id, callbackUrl);
+  const result = await initializePayment(plan._id, callbackUrl, [selectedPaymentMethod.value]);
 
   if (result) {
     // If it's a free plan or auto-activated
@@ -368,15 +399,15 @@ const handleSubscribe = async (plan: any) => {
 
 <style scoped>
 .text-brand {
-  color: #6D28D9;
+  color: #27628C;
 }
 .bg-brand {
-  background-color: #6D28D9;
+  background-color: #27628C;
 }
 .border-brand {
-  border-color: #6D28D9;
+  border-color: #27628C;
 }
 .ring-brand {
-  --tw-ring-color: #6D28D9;
+  --tw-ring-color: #27628C;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-1" ref="dropdownRef">
-    <label v-if="label" :for="id" class="block text-sm font-medium text-gray-700">
+    <label v-if="label" :for="id" class="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-navy-600">
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
     <div class="relative">
@@ -8,16 +8,16 @@
         :id="id"
         type="button"
         @click="toggleDropdown"
-        class="flex w-full items-center justify-between text-sm focus:outline-none transition-colors disabled:opacity-50 disabled:bg-gray-50"
+        class="flex w-full items-center justify-between text-sm focus:outline-none transition-colors disabled:opacity-50 disabled:bg-[#F6F8FB]"
         :class="[
-          inputClass || 'rounded border border-gray-300 bg-white px-4 py-2.5 focus:border-brand focus:ring-1 focus:ring-brand',
-          modelValue === '' && placeholder ? 'text-gray-500' : 'text-gray-900'
+          inputClass || 'rounded-xl border border-navy-100 bg-[#FBFCFE] px-4 py-3 focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10',
+          modelValue === '' && placeholder ? 'text-navy-400' : 'text-navy-950'
         ]"
         :disabled="disabled"
         v-bind="$attrs"
       >
         <span class="truncate">{{ displayValue || placeholder || 'Select option' }}</span>
-        <svg class="size-4 text-gray-500 transition-transform" :class="{'rotate-180': isOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="size-4 text-navy-400 transition-transform" :class="{'rotate-180': isOpen}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
@@ -27,11 +27,11 @@
         leave-from-class="opacity-100"
         leave-to-class="opacity-0"
       >
-        <div v-if="isOpen" class="absolute z-50 mt-1 w-full max-h-60 overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+        <div v-if="isOpen" class="absolute z-50 mt-2 w-full max-h-64 overflow-auto rounded-2xl border border-navy-100 bg-white py-1.5 shadow-soft focus:outline-none sm:text-sm">
           <div
             v-if="placeholder && !required"
             @click="selectOption('')"
-            class="relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-brand/5 text-gray-900"
+            class="relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-brand/5 text-navy-950"
           >
             <span class="block truncate" :class="modelValue === '' ? 'font-semibold text-brand' : 'font-normal'">{{ placeholder }}</span>
           </div>
@@ -39,7 +39,7 @@
             v-for="option in options"
             :key="option.value"
             @click="selectOption(option.value)"
-            class="relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-brand/5 text-gray-900"
+            class="relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-brand/5 text-navy-950"
           >
             <span class="block truncate" :class="modelValue === option.value ? 'font-semibold text-brand' : 'font-normal'">
               {{ option.label }}
@@ -54,7 +54,7 @@
       </transition>
     </div>
     <p v-if="error" class="text-xs text-red-500 mt-1">{{ error }}</p>
-    <p v-else-if="hint" class="text-xs text-gray-500 mt-1">{{ hint }}</p>
+    <p v-else-if="hint" class="text-xs text-navy-400 mt-1">{{ hint }}</p>
   </div>
 </template>
 

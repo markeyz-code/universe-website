@@ -1,9 +1,9 @@
 <template>
   <div class="max-w-6xl mx-auto space-y-6">
     <!-- Header -->
-    <div class="bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white rounded-2xl px-6 py-6 sm:px-8 sm:py-8 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
+    <div class="bg-gradient-to-br from-brand via-brand-700 to-teal-600 text-white rounded-2xl px-6 py-6 sm:px-8 sm:py-8 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
       <!-- Decorative background element -->
-      <div class="absolute -right-20 -top-20 w-64 h-64 bg-fuchsia-400/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -right-20 -top-20 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl pointer-events-none"></div>
       
       <div class="relative z-10 w-full md:w-auto">
         <h1 class="text-2xl sm:text-3xl font-extrabold mb-2 text-white">The Vault</h1>
@@ -11,14 +11,14 @@
       </div>
       <div class="w-full md:w-72 flex-shrink-0 relative z-10">
         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-          <Search class="h-4 w-4 text-gray-400" />
+          <Search class="h-4 w-4 text-navy-300" />
         </div>
         <input
           id="search-vault"
           v-model="searchQuery"
           type="text"
           placeholder="Search resources..."
-          class="w-full pl-10 pr-4 py-2.5 bg-white text-gray-900 border-none shadow-xl rounded-xl focus:ring-4 focus:ring-white/20 outline-none text-sm transition-shadow"
+          class="w-full pl-10 pr-4 py-2.5 bg-white text-navy-950 border-none shadow-xl rounded-xl focus:ring-4 focus:ring-white/20 outline-none text-sm transition-shadow"
         />
       </div>
     </div>
@@ -31,7 +31,7 @@
           :key="cat"
           @click="activeCategory = cat"
           class="px-4 py-2 sm:px-5 sm:py-2 rounded-xl text-xs font-bold transition-all duration-300 border"
-          :class="activeCategory === cat ? 'bg-violet-600 text-white border-violet-600 shadow-md shadow-violet-200' : 'bg-white text-gray-600 border-gray-200 hover:bg-violet-50 hover:border-violet-200 hover:text-violet-700'"
+          :class="activeCategory === cat ? 'bg-brand text-white border-brand shadow-md shadow-brand-200' : 'bg-white text-navy-500 border-navy-100 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-700'"
         >
           {{ cat }}
         </button>
@@ -41,11 +41,11 @@
         <button @click="isUploadModalOpen = true" class="px-4 py-2 bg-brand text-white text-xs font-bold rounded-xl shadow-md hover:bg-brand/90 transition-all cursor-pointer">
           + Offer Premium Course
         </button>
-        <div class="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-1 shadow-sm shrink-0">
-          <button @click="viewMode = 'grid'" :class="viewMode === 'grid' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="Grid View">
+        <div class="flex items-center gap-1 bg-white border border-navy-100 rounded-lg p-1 shadow-sm shrink-0">
+          <button @click="viewMode = 'grid'" :class="viewMode === 'grid' ? 'bg-navy-50 text-brand shadow-sm' : 'text-navy-300 hover:text-navy-500'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="Grid View">
             <LayoutGrid class="w-4 h-4" />
           </button>
-          <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-gray-100 text-brand shadow-sm' : 'text-gray-400 hover:text-gray-600'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="List View">
+          <button @click="viewMode = 'list'" :class="viewMode === 'list' ? 'bg-navy-50 text-brand shadow-sm' : 'text-navy-300 hover:text-navy-500'" class="p-1.5 rounded-md transition-colors cursor-pointer" title="List View">
             <List class="w-4 h-4" />
           </button>
         </div>
@@ -58,12 +58,12 @@
     </div>
 
     <!-- Empty State -->
-    <div v-else-if="filteredResources.length === 0" class="bg-white rounded-3xl p-16 text-center border border-gray-100 shadow-sm">
-      <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-        <SearchXIcon class="w-8 h-8 text-gray-400" />
+    <div v-else-if="filteredResources.length === 0" class="bg-white rounded-3xl p-16 text-center border border-navy-100 shadow-sm">
+      <div class="w-16 h-16 bg-[#F6F8FB] rounded-full flex items-center justify-center mx-auto mb-4">
+        <SearchXIcon class="w-8 h-8 text-navy-300" />
       </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">No resources found</h3>
-      <p class="text-gray-500 mb-6 max-w-sm mx-auto">We couldn't find any materials matching your criteria. Try adjusting your filters or search term.</p>
+      <h3 class="text-xl font-bold text-navy-950 mb-2">No resources found</h3>
+      <p class="text-navy-400 mb-6 max-w-sm mx-auto">We couldn't find any materials matching your criteria. Try adjusting your filters or search term.</p>
       <button v-if="searchQuery || activeCategory !== 'All'" @click="searchQuery = ''; activeCategory = 'All'" class="px-6 py-2.5 bg-brand text-white rounded-xl text-sm font-bold hover:bg-brand/90 transition-all shadow-md shadow-brand/20">
         Clear filters
       </button>
@@ -74,7 +74,7 @@
       <div 
         v-for="resource in filteredResources" 
         :key="resource._id" 
-        class="bg-white rounded-2xl border border-gray-100 hover:shadow-xl hover:shadow-brand/5 transition-all group flex h-full relative overflow-hidden"
+        class="bg-white rounded-2xl border border-navy-100 hover:shadow-xl hover:shadow-brand/5 transition-all group flex h-full relative overflow-hidden"
         :class="viewMode === 'grid' ? 'p-6 flex-col' : 'p-4 items-center justify-between gap-4'"
       >
         <!-- Accent lines -->
@@ -87,18 +87,18 @@
               <span class="inline-flex items-center bg-brand/10 text-brand text-[10px] font-extrabold px-2.5 py-1.5 rounded-lg uppercase tracking-wider">
                 {{ resource.category }}
               </span>
-              <span class="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase bg-gray-100 px-2.5 py-1.5 rounded-lg">
+              <span class="text-[10px] font-extrabold text-navy-400 tracking-wider uppercase bg-navy-50 px-2.5 py-1.5 rounded-lg">
                 <span v-if="resource.isPremium" class="text-yellow-600 mr-1">⭐ PREMIUM</span>
                 {{ resource.type }}
               </span>
             </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-brand transition-colors">{{ resource.title }}</h3>
-            <p class="text-gray-500 text-sm line-clamp-2" v-if="resource.description">{{ resource.description }}</p>
+            <h3 class="text-lg font-bold text-navy-950 mb-2 leading-snug group-hover:text-brand transition-colors">{{ resource.title }}</h3>
+            <p class="text-navy-400 text-sm line-clamp-2" v-if="resource.description">{{ resource.description }}</p>
           </div>
           
-          <div class="pt-5 mt-5 border-t border-gray-100 flex justify-between items-center">
-            <span v-if="resource.isPremium" class="font-bold text-gray-900">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
-            <span v-else class="text-[11px] font-medium text-gray-400">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
+          <div class="pt-5 mt-5 border-t border-navy-100 flex justify-between items-center">
+            <span v-if="resource.isPremium" class="font-bold text-navy-950">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
+            <span v-else class="text-[11px] font-medium text-navy-300">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
             
             <button 
               @click="openResourceModal(resource)"
@@ -122,20 +122,20 @@
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 mb-1">
-                <h3 class="text-base font-bold text-gray-900 truncate group-hover:text-brand transition-colors">{{ resource.title }}</h3>
-                <span class="inline-flex items-center bg-gray-100 text-gray-500 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shrink-0">
+                <h3 class="text-base font-bold text-navy-950 truncate group-hover:text-brand transition-colors">{{ resource.title }}</h3>
+                <span class="inline-flex items-center bg-navy-50 text-navy-400 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase tracking-wider shrink-0">
                   <span v-if="resource.isPremium" class="text-yellow-600 mr-1">⭐ PREMIUM</span>
                   {{ resource.type }}
                 </span>
               </div>
-              <p class="text-gray-500 text-xs truncate">{{ resource.description }}</p>
+              <p class="text-navy-400 text-xs truncate">{{ resource.description }}</p>
             </div>
-            <div class="hidden md:flex items-center gap-4 shrink-0 px-4 border-l border-gray-100">
+            <div class="hidden md:flex items-center gap-4 shrink-0 px-4 border-l border-navy-100">
                <span class="inline-flex items-center bg-brand/10 text-brand text-[10px] font-extrabold px-2.5 py-1 rounded-lg uppercase tracking-wider">
                  {{ resource.category }}
                </span>
-               <span v-if="resource.isPremium" class="font-bold text-gray-900 w-24 text-right">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
-               <span v-else class="text-[11px] font-medium text-gray-400 w-24">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
+               <span v-if="resource.isPremium" class="font-bold text-navy-950 w-24 text-right">₦{{ ((resource.price || 0) / 100).toLocaleString() }}</span>
+               <span v-else class="text-[11px] font-medium text-navy-300 w-24">Added {{ new Date(resource.createdAt).toLocaleDateString('en-GB') }}</span>
             </div>
           </div>
           <div class="shrink-0 pl-2">
@@ -159,21 +159,21 @@
     <!-- Resource Viewer Modal -->
     <Teleport to="body">
       <div v-if="activeResourceUrl" class="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
-        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm" @click="closeResourceModal"></div>
+        <div class="absolute inset-0 bg-navy-950/80 backdrop-blur-sm" @click="closeResourceModal"></div>
         <div class="bg-white rounded-xl sm:rounded-2xl w-full h-full max-w-6xl max-h-[95vh] relative z-10 shadow-2xl flex flex-col overflow-hidden">
-          <div class="px-4 py-3 sm:p-5 border-b border-gray-100 flex items-center justify-between bg-white z-20 shrink-0">
-            <h3 class="text-base sm:text-lg font-bold text-gray-900 truncate pr-4">{{ activeResourceTitle }}</h3>
+          <div class="px-4 py-3 sm:p-5 border-b border-navy-100 flex items-center justify-between bg-white z-20 shrink-0">
+            <h3 class="text-base sm:text-lg font-bold text-navy-950 truncate pr-4">{{ activeResourceTitle }}</h3>
             <div class="flex items-center gap-2">
-              <a :href="activeResourceUrl" target="_blank" class="p-2 text-gray-500 hover:text-brand hover:bg-brand/5 rounded-full transition-all" title="Open in new tab">
+              <a :href="activeResourceUrl" target="_blank" class="p-2 text-navy-400 hover:text-brand hover:bg-brand/5 rounded-full transition-all" title="Open in new tab">
                 <ExternalLink class="w-5 h-5" />
               </a>
-              <button @click="closeResourceModal" class="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-full transition-all" title="Close">
+              <button @click="closeResourceModal" class="p-2 text-navy-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-all" title="Close">
                 <X class="w-5 h-5" />
               </button>
             </div>
           </div>
           
-          <div class="flex-1 bg-gray-50 w-full h-full overflow-hidden relative">
+          <div class="flex-1 bg-[#F6F8FB] w-full h-full overflow-hidden relative">
             <iframe :src="activeResourceUrl" class="w-full h-full border-0 absolute inset-0" allow="fullscreen"></iframe>
           </div>
         </div>
@@ -183,26 +183,26 @@
     <!-- Upload Masterclass Modal -->
     <Teleport to="body">
       <div v-if="isUploadModalOpen" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" @click="isUploadModalOpen = false"></div>
+        <div class="absolute inset-0 bg-navy-950/60 backdrop-blur-sm" @click="isUploadModalOpen = false"></div>
         <div class="bg-white rounded-2xl w-full max-w-md relative z-10 shadow-2xl flex flex-col overflow-hidden">
-          <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-            <h3 class="text-lg font-bold text-gray-900">Offer Premium Course</h3>
-            <button @click="isUploadModalOpen = false" class="text-gray-400 hover:text-gray-600">
+          <div class="px-6 py-4 border-b border-navy-100 flex items-center justify-between">
+            <h3 class="text-lg font-bold text-navy-950">Offer Premium Course</h3>
+            <button @click="isUploadModalOpen = false" class="text-navy-300 hover:text-navy-500">
               <X class="w-5 h-5" />
             </button>
           </div>
           <div class="p-6 space-y-4">
             <div>
-              <label class="block text-sm font-bold text-gray-700 mb-1">Title</label>
-              <input v-model="uploadForm.title" type="text" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="Course Title" />
+              <label class="block text-sm font-bold text-navy-700 mb-1">Title</label>
+              <input v-model="uploadForm.title" type="text" class="w-full px-4 py-2 border border-navy-100 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="Course Title" />
             </div>
             <div>
-              <label class="block text-sm font-bold text-gray-700 mb-1">Description</label>
-              <textarea v-model="uploadForm.description" rows="3" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="What will they learn?"></textarea>
+              <label class="block text-sm font-bold text-navy-700 mb-1">Description</label>
+              <textarea v-model="uploadForm.description" rows="3" class="w-full px-4 py-2 border border-navy-100 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="What will they learn?"></textarea>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Category</label>
+                <label class="block text-sm font-bold text-navy-700 mb-1">Category</label>
                 <UiSelect
                   id="category"
                   v-model="uploadForm.category"
@@ -215,18 +215,18 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-bold text-gray-700 mb-1">Price (NGN)</label>
-                <input v-model.number="uploadForm.price" type="number" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="e.g. 5000" />
+                <label class="block text-sm font-bold text-navy-700 mb-1">Price (NGN)</label>
+                <input v-model.number="uploadForm.price" type="number" class="w-full px-4 py-2 border border-navy-100 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="e.g. 5000" />
               </div>
             </div>
             <div>
-              <label class="block text-sm font-bold text-gray-700 mb-1">Video / Resource URL</label>
-              <input v-model="uploadForm.fileUrl" type="url" class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="https://..." />
-              <p class="text-[10px] text-gray-400 mt-1">Paste a link to your hosted video or document (Google Drive, Youtube, Vimeo, etc.)</p>
+              <label class="block text-sm font-bold text-navy-700 mb-1">Video / Resource URL</label>
+              <input v-model="uploadForm.fileUrl" type="url" class="w-full px-4 py-2 border border-navy-100 rounded-xl focus:ring-2 focus:ring-brand focus:border-brand" placeholder="https://..." />
+              <p class="text-[10px] text-navy-300 mt-1">Paste a link to your hosted video or document (Google Drive, Youtube, Vimeo, etc.)</p>
             </div>
           </div>
-          <div class="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50">
-            <button @click="isUploadModalOpen = false" class="px-5 py-2 text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors">Cancel</button>
+          <div class="px-6 py-4 border-t border-navy-100 flex justify-end gap-3 bg-[#F6F8FB]">
+            <button @click="isUploadModalOpen = false" class="px-5 py-2 text-sm font-bold text-navy-500 hover:text-navy-950 transition-colors">Cancel</button>
             <button @click="submitUpload" :disabled="isUploading" class="px-5 py-2 bg-brand text-white text-sm font-bold rounded-xl shadow-md hover:bg-brand/90 transition-all disabled:opacity-50">
               {{ isUploading ? 'Publishing...' : 'Publish Course' }}
             </button>

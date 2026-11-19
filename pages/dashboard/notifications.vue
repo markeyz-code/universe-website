@@ -4,7 +4,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
       <div>
         <div class="flex items-center gap-3">
-          <h1 class="text-2xl font-bold text-gray-900">Notifications</h1>
+          <h1 class="text-2xl font-bold text-navy-950">Notifications</h1>
           <!-- Real-time WebSocket connection status badge -->
           <div
             class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold"
@@ -14,7 +14,7 @@
             <span>{{ connected ? 'Live' : 'Connecting...' }}</span>
           </div>
         </div>
-        <p class="text-gray-500 text-sm mt-1">Real-time alerts for application status, subscription upgrades, mentorship, and jobs.</p>
+        <p class="text-navy-400 text-sm mt-1">Real-time alerts for application status, subscription upgrades, mentorship, and jobs.</p>
       </div>
 
       <!-- Action Buttons -->
@@ -58,8 +58,8 @@
         class="px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-2 border"
         :class="[
           activeFilter === tab.key
-            ? 'bg-violet-600 text-white border-violet-600 shadow-sm shadow-violet-200'
-            : 'bg-white text-slate-600 hover:bg-violet-50 border-slate-200/80'
+            ? 'bg-brand text-white border-brand shadow-sm shadow-brand-200'
+            : 'bg-white text-slate-600 hover:bg-brand-50 border-slate-200/80'
         ]"
       >
         <span>{{ tab.label }}</span>
@@ -103,7 +103,7 @@
         <div class="flex-1 min-w-0">
           <div class="flex items-start justify-between gap-3 mb-1">
             <div class="flex items-center gap-2 flex-wrap">
-              <h3 class="text-sm font-bold text-gray-900">{{ notif.title }}</h3>
+              <h3 class="text-sm font-bold text-navy-950">{{ notif.title }}</h3>
               <span
                 v-if="!notif.isRead"
                 class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-brand text-white uppercase tracking-wider"
@@ -127,7 +127,7 @@
             <NuxtLink
               v-if="notif.link"
               :to="notif.link"
-              class="inline-flex items-center gap-1 text-xs font-bold text-violet-600 hover:text-violet-800 hover:underline"
+              class="inline-flex items-center gap-1 text-xs font-bold text-brand hover:text-brand-800 hover:underline"
             >
               <span>View Details</span>
               <ArrowRight class="w-3.5 h-3.5" />
@@ -160,14 +160,14 @@
       <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-3xl flex items-center justify-center mx-auto mb-4">
         <BellOff class="w-8 h-8 text-slate-400" />
       </div>
-      <h3 class="text-base font-bold text-gray-900 mb-1">All caught up!</h3>
+      <h3 class="text-base font-bold text-navy-950 mb-1">All caught up!</h3>
       <p class="text-slate-500 text-xs sm:text-sm max-w-sm mx-auto mb-6">
         {{ activeFilter === 'unread' ? 'You have no unread notifications.' : 'There are no notifications in this category.' }}
       </p>
       <button
         v-if="activeFilter !== 'all'"
         @click="activeFilter = 'all'"
-        class="px-4 py-2 bg-violet-600 text-white rounded-xl text-xs font-bold hover:bg-violet-700 transition-colors"
+        class="px-4 py-2 bg-brand text-white rounded-xl text-xs font-bold hover:bg-brand-700 transition-colors"
       >
         View All Notifications
       </button>
@@ -248,9 +248,9 @@ const getTypeStyles = (type: string) => {
     case 'MENTORSHIP':
       return {
         icon: Users,
-        iconBg: 'bg-purple-50 text-purple-600 border border-purple-100',
-        iconColor: 'text-purple-600',
-        badge: 'bg-purple-50 text-purple-700',
+        iconBg: 'bg-brand-50 text-brand-700 border border-brand-100',
+        iconColor: 'text-brand-700',
+        badge: 'bg-brand-50 text-brand-800',
       };
     case 'JOB':
       return {

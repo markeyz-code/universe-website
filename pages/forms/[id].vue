@@ -3,7 +3,7 @@
     <!-- Loading State -->
     <div v-if="loading" class="flex flex-col items-center justify-center py-32">
       <div class="w-12 h-12 border-4 border-brand/20 border-t-brand rounded-full animate-spin mb-4"></div>
-      <p class="text-gray-500 text-sm">Loading form...</p>
+      <p class="text-navy-400 text-sm">Loading form...</p>
     </div>
 
     <!-- Error State -->
@@ -13,8 +13,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
         </svg>
       </div>
-      <h2 class="text-2xl font-bold text-gray-900 mb-2">Form Not Found</h2>
-      <p class="text-gray-500 mb-8">This form may have been removed, closed, or the link is incorrect.</p>
+      <h2 class="text-2xl font-bold text-navy-950 mb-2">Form Not Found</h2>
+      <p class="text-navy-400 mb-8">This form may have been removed, closed, or the link is incorrect.</p>
       <NuxtLink to="/" class="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand/90 transition-colors shadow-sm">
         ← Back to Home
       </NuxtLink>
@@ -35,8 +35,8 @@
           {{ formTypeIcon(form.type) }} {{ form.type?.replace(/-/g, ' ') }}
         </div>
 
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">{{ form.title }}</h1>
-        <p v-if="form.description" class="text-gray-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">{{ form.description }}</p>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-navy-950 tracking-tight mb-3">{{ form.title }}</h1>
+        <p v-if="form.description" class="text-navy-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">{{ form.description }}</p>
 
         <!-- Deadline Warning -->
         <div v-if="form.deadline" class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-200 rounded-full text-sm font-medium text-amber-800">
@@ -51,55 +51,55 @@
       </div>
 
       <!-- Form Fields -->
-      <div v-if="form.status === 'active' && !submitted" class="bg-white border border-gray-200 rounded-2xl shadow-xl shadow-gray-100/50 p-6 sm:p-10">
+      <div v-if="form.status === 'active' && !submitted" class="bg-white border border-navy-100 rounded-2xl shadow-xl shadow-gray-100/50 p-6 sm:p-10">
         <form @submit.prevent="handleSubmit" class="space-y-6">
           <!-- Submitter Info (always required) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pb-6 border-b border-gray-100">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 pb-6 border-b border-navy-100">
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name <span class="text-red-500">*</span></label>
-              <input v-model="submitterName" required type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" placeholder="Enter your full name" />
+              <label class="block text-sm font-semibold text-navy-700 mb-2">Full Name <span class="text-red-500">*</span></label>
+              <input v-model="submitterName" required type="text" class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" placeholder="Enter your full name" />
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address <span class="text-red-500">*</span></label>
-              <input v-model="submitterEmail" required type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" placeholder="you@example.com" />
+              <label class="block text-sm font-semibold text-navy-700 mb-2">Email Address <span class="text-red-500">*</span></label>
+              <input v-model="submitterEmail" required type="email" class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" placeholder="you@example.com" />
             </div>
           </div>
 
           <!-- Dynamic Fields -->
           <div v-for="(field, idx) in form.fields" :key="idx" class="space-y-2">
-            <label class="block text-sm font-semibold text-gray-700">
+            <label class="block text-sm font-semibold text-navy-700">
               {{ field.label }}
               <span v-if="field.required" class="text-red-500">*</span>
             </label>
-            <p v-if="field.helpText" class="text-xs text-gray-400 -mt-1">{{ field.helpText }}</p>
+            <p v-if="field.helpText" class="text-xs text-navy-300 -mt-1">{{ field.helpText }}</p>
 
             <!-- Text -->
             <input v-if="field.type === 'text'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" type="text"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- Email -->
             <input v-else-if="field.type === 'email'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" type="email"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- Phone -->
             <input v-else-if="field.type === 'phone'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" type="tel"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- Number -->
             <input v-else-if="field.type === 'number'" v-model.number="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" type="number"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- Date -->
             <input v-else-if="field.type === 'date'" v-model="formValues[field.label]" :required="field.required" type="date"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- URL -->
             <input v-else-if="field.type === 'url'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder || 'https://...'" type="url"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white" />
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white" />
 
             <!-- Textarea -->
             <textarea v-else-if="field.type === 'textarea'" v-model="formValues[field.label]" :required="field.required" :placeholder="field.placeholder" rows="4"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white resize-y"></textarea>
+              class="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white resize-y"></textarea>
 
             <!-- Rich Text -->
             <UiRichTextEditor v-else-if="field.type === 'rich-text'" v-model="formValues[field.label]" :placeholder="field.placeholder" />
@@ -111,47 +111,47 @@
               :required="field.required"
               :placeholder="field.placeholder || 'Select an option'"
               :options="field.options.map((opt: string) => ({ label: opt, value: opt }))"
-              inputClass="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-gray-50 focus:bg-white"
+              inputClass="w-full px-4 py-3 border border-navy-200 rounded-xl focus:ring-2 focus:ring-brand/30 focus:border-brand text-sm transition-all bg-[#F6F8FB] focus:bg-white"
             />
 
             <!-- Radio -->
             <div v-else-if="field.type === 'radio'" class="space-y-2 pt-1">
-              <label v-for="opt in field.options" :key="opt" class="flex items-center gap-3 px-4 py-3 border border-gray-200 rounded-xl hover:border-brand/40 hover:bg-brand/5 transition-all cursor-pointer"
+              <label v-for="opt in field.options" :key="opt" class="flex items-center gap-3 px-4 py-3 border border-navy-100 rounded-xl hover:border-brand/40 hover:bg-brand/5 transition-all cursor-pointer"
                 :class="{ 'border-brand bg-brand/5 ring-1 ring-brand/20': formValues[field.label] === opt }">
                 <input type="radio" v-model="formValues[field.label]" :value="opt" :name="`field-${idx}`" :required="field.required"
                   class="text-brand focus:ring-brand" />
-                <span class="text-sm text-gray-700 font-medium">{{ opt }}</span>
+                <span class="text-sm text-navy-700 font-medium">{{ opt }}</span>
               </label>
             </div>
 
             <!-- Checkbox -->
             <div v-else-if="field.type === 'checkbox'" class="space-y-2 pt-1">
-              <label v-for="opt in field.options" :key="opt" class="flex items-center gap-3 px-4 py-3 border border-gray-200 rounded-xl hover:border-brand/40 hover:bg-brand/5 transition-all cursor-pointer"
+              <label v-for="opt in field.options" :key="opt" class="flex items-center gap-3 px-4 py-3 border border-navy-100 rounded-xl hover:border-brand/40 hover:bg-brand/5 transition-all cursor-pointer"
                 :class="{ 'border-brand bg-brand/5 ring-1 ring-brand/20': (formValues[field.label] || []).includes(opt) }">
                 <input type="checkbox" :value="opt" @change="toggleCheckbox(field.label, opt)" :checked="(formValues[field.label] || []).includes(opt)"
                   class="rounded text-brand focus:ring-brand" />
-                <span class="text-sm text-gray-700 font-medium">{{ opt }}</span>
+                <span class="text-sm text-navy-700 font-medium">{{ opt }}</span>
               </label>
             </div>
 
             <!-- File Upload -->
             <div v-else-if="field.type === 'file'" class="relative">
-              <div class="border-2 border-dashed border-gray-300 rounded-xl px-4 py-8 text-center hover:border-brand/50 hover:bg-brand/5 transition-all cursor-pointer overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center group"
+              <div class="border-2 border-dashed border-navy-200 rounded-xl px-4 py-8 text-center hover:border-brand/50 hover:bg-brand/5 transition-all cursor-pointer overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center group"
                 @click="($refs[`file-${idx}`] as HTMLInputElement[])?.[0]?.click()">
                 
                 <template v-if="filePreviews[field.label]">
                   <img :src="filePreviews[field.label]" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity" />
-                  <div class="relative z-10 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-sm border border-gray-200 flex flex-col items-center">
+                  <div class="relative z-10 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-sm border border-navy-100 flex flex-col items-center">
                     <img :src="filePreviews[field.label]" class="w-auto h-24 mx-auto rounded object-contain mb-2" />
                     <p class="text-xs font-bold text-brand truncate max-w-[200px]">{{ fileNames[field.label] }}</p>
-                    <p class="text-[10px] text-gray-500 mt-0.5">Click to change image</p>
+                    <p class="text-[10px] text-navy-400 mt-0.5">Click to change image</p>
                   </div>
                 </template>
                 <template v-else>
-                  <svg class="w-10 h-10 text-gray-300 mx-auto mb-3 group-hover:text-brand/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                  <p class="text-sm font-medium text-gray-600" v-if="!fileNames[field.label]">Click to upload or drag and drop</p>
+                  <svg class="w-10 h-10 text-navy-300 mx-auto mb-3 group-hover:text-brand/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                  <p class="text-sm font-medium text-navy-500" v-if="!fileNames[field.label]">Click to upload or drag and drop</p>
                   <p class="text-sm font-medium text-brand" v-else>{{ fileNames[field.label] }}</p>
-                  <p class="text-xs text-gray-400 mt-1">{{ field.accept || 'Any file' }} {{ field.maxFileSize ? `• Max ${field.maxFileSize}MB` : '' }}</p>
+                  <p class="text-xs text-navy-300 mt-1">{{ field.accept || 'Any file' }} {{ field.maxFileSize ? `• Max ${field.maxFileSize}MB` : '' }}</p>
                 </template>
                 <div v-if="uploadingFiles[field.label]" class="absolute inset-0 bg-white/70 backdrop-blur-sm flex flex-col items-center justify-center z-20">
                   <svg class="w-8 h-8 animate-spin text-brand mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -182,8 +182,8 @@
         <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce-once">
           <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
         </div>
-        <h2 class="text-2xl font-bold text-gray-900 mb-3">Submission Received! 🎉</h2>
-        <p class="text-gray-500 text-base max-w-md mx-auto leading-relaxed">{{ form.successMessage || 'Thank you for your submission. We will review and get back to you.' }}</p>
+        <h2 class="text-2xl font-bold text-navy-950 mb-3">Submission Received! 🎉</h2>
+        <p class="text-navy-400 text-base max-w-md mx-auto leading-relaxed">{{ form.successMessage || 'Thank you for your submission. We will review and get back to you.' }}</p>
         <div class="mt-8">
           <NuxtLink to="/" class="px-6 py-3 bg-brand text-white rounded-full font-medium hover:bg-brand/90 transition-colors shadow-sm inline-flex items-center gap-2">
             ← Back to Home
@@ -357,16 +357,16 @@ const handleSubmit = async () => {
 
 const formTypeBadge = (type: string) => {
   const map: Record<string, string> = {
-    'call-for-papers': 'bg-purple-100 text-purple-700',
+    'call-for-papers': 'bg-brand-100 text-brand-800',
     'article-submission': 'bg-blue-100 text-blue-700',
     'comic-strip-contest': 'bg-pink-100 text-pink-700',
     'abstract-submission': 'bg-teal-100 text-teal-700',
     'registration': 'bg-green-100 text-green-700',
     'survey': 'bg-yellow-100 text-yellow-700',
     'feedback': 'bg-orange-100 text-orange-700',
-    'custom': 'bg-gray-100 text-gray-700',
+    'custom': 'bg-navy-50 text-navy-700',
   };
-  return map[type] || 'bg-gray-100 text-gray-700';
+  return map[type] || 'bg-navy-50 text-navy-700';
 };
 
 const formTypeIcon = (type: string) => {

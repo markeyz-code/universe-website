@@ -29,7 +29,7 @@
 
           <!-- Title & Message -->
           <div class="mb-6">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ modalState.title }}</h3>
+            <h3 class="text-xl font-bold text-navy-950 mb-2">{{ modalState.title }}</h3>
             <p class="text-sm text-slate-600 leading-relaxed whitespace-pre-line">{{ modalState.message }}</p>
           </div>
 
@@ -89,7 +89,7 @@ const iconStyles = computed(() => {
       return {
         icon: Info,
         bg: 'bg-blue-50 border border-blue-100',
-        color: 'text-violet-700',
+        color: 'text-brand-700',
       };
   }
 });
@@ -103,7 +103,7 @@ const buttonStyles = computed(() => {
     case 'success':
       return 'bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-500/20';
     default:
-      return 'bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:ring-violet-500/20';
+      return 'bg-brand-700 hover:bg-brand-800 focus:ring-4 focus:ring-brand-500/20';
   }
 });
 

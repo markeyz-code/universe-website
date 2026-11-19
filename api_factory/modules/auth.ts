@@ -8,6 +8,13 @@ export const authApi = {
     email: string;
     password: string;
     verificationFileUrl: string;
+    universityId?: string;
+    programmeId?: string;
+    verificationDocumentType?: string;
+    planId?: string;
+    source?: 'intern' | 'universe';
+    channels?: string[];
+    callbackUrl?: string;
   }) {
     return GATEWAY_ENDPOINT.post('/auth/register', data);
   },

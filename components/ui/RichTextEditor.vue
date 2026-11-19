@@ -1,7 +1,7 @@
 <template>
-  <div class="rich-editor-wrapper border border-gray-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-brand/30 focus-within:border-brand transition-all bg-white flex flex-col relative" :class="{ 'ring-2 ring-brand/30 border-brand': isFocused, 'fullscreen-editor': isFullscreen }">
+  <div class="rich-editor-wrapper border border-navy-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-brand/30 focus-within:border-brand transition-all bg-white flex flex-col relative" :class="{ 'ring-2 ring-brand/30 border-brand': isFocused, 'fullscreen-editor': isFullscreen }">
     <!-- Toolbar Row 1 -->
-    <div class="flex items-center gap-0.5 px-2 pt-2 pb-1 border-b border-gray-100 bg-gray-50/80 flex-wrap relative z-10">
+    <div class="flex items-center gap-0.5 px-2 pt-2 pb-1 border-b border-navy-100 bg-[#F6F8FB]/80 flex-wrap relative z-10">
       <!-- Undo / Redo -->
       <button type="button" @click.prevent="format('undo')" :class="tbtn" title="Undo (Ctrl+Z)">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a5 5 0 015 5v2M3 10l4-4m-4 4l4 4"/></svg>
@@ -18,7 +18,7 @@
           <span class="text-[11px] truncate">{{ currentBlockLabel }}</span>
           <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
-        <div v-if="showBlockDropdown" class="absolute top-full left-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 py-1 z-50 min-w-[160px]">
+        <div v-if="showBlockDropdown" class="absolute top-full left-0 mt-1 bg-white shadow-xl rounded-lg border border-navy-100 py-1 z-50 min-w-[160px]">
           <button v-for="b in blockFormats" :key="b.tag" type="button" @click.prevent="setBlock(b.tag)" class="w-full text-left px-3 py-1.5 hover:bg-brand/5 text-sm transition-colors" :class="b.class">{{ b.label }}</button>
         </div>
       </div>
@@ -29,7 +29,7 @@
           <span class="text-[11px]">Size</span>
           <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
-        <div v-if="showFontSizeDropdown" class="absolute top-full left-0 mt-1 bg-white shadow-xl rounded-lg border border-gray-200 py-1 z-50 min-w-[100px]">
+        <div v-if="showFontSizeDropdown" class="absolute top-full left-0 mt-1 bg-white shadow-xl rounded-lg border border-navy-100 py-1 z-50 min-w-[100px]">
           <button v-for="s in fontSizes" :key="s.value" type="button" @click.prevent="setFontSize(s.value)" class="w-full text-left px-3 py-1.5 hover:bg-brand/5 transition-colors" :style="{ fontSize: s.preview }">{{ s.label }}</button>
         </div>
       </div>
@@ -86,7 +86,7 @@
     </div>
 
     <!-- Toolbar Row 2 -->
-    <div class="flex items-center gap-0.5 px-2 py-1 border-b border-gray-200 bg-gray-50/80 flex-wrap relative z-10">
+    <div class="flex items-center gap-0.5 px-2 py-1 border-b border-navy-100 bg-[#F6F8FB]/80 flex-wrap relative z-10">
       <!-- Lists -->
       <button type="button" @click.prevent="format('insertUnorderedList')" :class="[tbtn, { active: activeStates.insertUnorderedList }]" title="Bullet List">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/></svg>
@@ -169,14 +169,14 @@
       </button>
 
       <!-- Word Count -->
-      <span class="text-[10px] text-gray-400 ml-2 tabular-nums">{{ wordCount }} words</span>
+      <span class="text-[10px] text-navy-300 ml-2 tabular-nums">{{ wordCount }} words</span>
     </div>
 
     <!-- Hidden image input -->
     <input ref="imageInput" type="file" accept="image/*" class="hidden" @change="handleImageUpload" />
 
     <!-- Floating Exit Fullscreen Button -->
-    <button v-if="isFullscreen" type="button" @click.prevent="toggleFullscreen()" class="fixed top-6 right-6 z-[10000] bg-gray-900 text-white px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-gray-800 transition-all font-medium text-sm border border-gray-700">
+    <button v-if="isFullscreen" type="button" @click.prevent="toggleFullscreen()" class="fixed top-6 right-6 z-[10000] bg-navy-950 text-white px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 hover:bg-navy-900 transition-all font-medium text-sm border border-gray-700">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/></svg>
       Exit Fullscreen
     </button>
@@ -185,7 +185,7 @@
     <div
       ref="editor"
       contenteditable="true"
-      class="rich-editor-content p-4 outline-none text-sm text-gray-800 overflow-y-auto"
+      class="rich-editor-content p-4 outline-none text-sm text-navy-900 overflow-y-auto"
       :class="isFullscreen ? 'flex-1' : 'min-h-[250px] max-h-[600px]'"
       :data-placeholder="placeholder"
       @input="handleInput"
@@ -196,7 +196,7 @@
     ></div>
 
     <!-- Status Bar -->
-    <div class="flex items-center justify-between px-3 py-1 border-t border-gray-100 bg-gray-50/50 text-[10px] text-gray-400">
+    <div class="flex items-center justify-between px-3 py-1 border-t border-navy-100 bg-[#F6F8FB]/50 text-[10px] text-navy-300">
       <span>Rich Text Editor</span>
       <span>{{ charCount }} characters</span>
     </div>
@@ -224,7 +224,7 @@ const currentTextColor = ref('#000000');
 const currentHighlight = ref('#FFFF00');
 let isInternalChange = false;
 
-const tbtn = 'p-1.5 text-gray-500 hover:bg-gray-200 hover:text-gray-900 rounded transition-colors inline-flex items-center cursor-pointer';
+const tbtn = 'p-1.5 text-navy-400 hover:bg-navy-100 hover:text-navy-950 rounded transition-colors inline-flex items-center cursor-pointer';
 
 const blockFormats = [
   { tag: 'P', label: 'Paragraph', class: 'text-sm' },

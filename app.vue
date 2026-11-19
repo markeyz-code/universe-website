@@ -12,6 +12,9 @@
 import { useHead, useSeoMeta } from '#imports';
 
 useHead({
+  meta: [
+    { name: 'theme-color', content: '#27628C' },
+  ],
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} | UniVerse Ecosystem` : 'UniVerse Ecosystem';
   }

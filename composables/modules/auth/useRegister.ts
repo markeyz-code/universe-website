@@ -55,8 +55,12 @@ export const useRegister = () => {
     password: string;
     universityId?: string;
     programmeId?: string;
+    verificationDocumentType?: string;
     planId?: string;
     file: File;
+    source?: 'intern' | 'universe';
+    channels?: string[];
+    callbackUrl?: string;
   }) => {
     loading.value = true;
     uploadProgress.value = 0;
@@ -70,8 +74,12 @@ export const useRegister = () => {
         password: payload.password,
         universityId: payload.universityId,
         programmeId: payload.programmeId,
+        verificationDocumentType: payload.verificationDocumentType,
         planId: payload.planId,
         verificationFileUrl,
+        source: payload.source,
+        channels: payload.channels,
+        callbackUrl: payload.callbackUrl,
       });
       showToast({
         title: 'Application Submitted!',
