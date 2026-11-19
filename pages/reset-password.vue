@@ -1,11 +1,11 @@
 <template>
   <div class="min-h-screen bg-white flex">
     <!-- Image Side (Hidden on mobile) -->
-    <div class="hidden lg:block lg:w-1/2 relative bg-gray-100">
+    <div class="hidden lg:block lg:w-1/2 relative bg-navy-50">
       <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2000&auto=format&fit=crop" alt="Laboratory" class="absolute inset-0 w-full h-full object-cover" />
       <div class="absolute inset-0 bg-brand/90 flex flex-col justify-between p-12">
         <NuxtLink to="/">
-          <img src="~/assets/logo.jpg" class="h-10 w-auto rounded-lg" alt="UniVerse Logo" />
+          <BrandLogo variant="white" class="h-10" />
         </NuxtLink>
         <div class="text-white space-y-4 max-w-md">
           <h2 class="text-4xl font-medium leading-tight">Create a new password.</h2>
@@ -19,12 +19,12 @@
       <div class="w-full max-w-md">
         <div class="mb-10 lg:hidden text-center">
           <NuxtLink to="/">
-            <img src="~/assets/logo-icon.png" class="h-8 w-auto rounded-lg mx-auto mb-2" alt="UniVerse Logo" />
+            <BrandLogo variant="brand" class="h-10 mx-auto mb-2" />
           </NuxtLink>
         </div>
         
-        <h2 class="text-3xl font-medium text-gray-900 mb-2">Set New Password</h2>
-        <p class="text-gray-500 mb-8">Enter your new password below.</p>
+        <h2 class="text-3xl font-medium text-navy-950 mb-2">Set New Password</h2>
+        <p class="text-navy-400 mb-8">Enter your new password below.</p>
 
         <div v-if="!token" class="text-red-700 text-sm p-4 bg-red-50 border border-red-200 flex items-start gap-3 rounded">
           <Lock class="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -73,8 +73,8 @@
           </NuxtLink>
         </div>
 
-        <div v-if="!success" class="mt-8 text-center pt-6 border-t border-gray-100">
-          <p class="text-gray-600 text-sm">
+        <div v-if="!success" class="mt-8 text-center pt-6 border-t border-navy-100">
+          <p class="text-navy-500 text-sm">
             <NuxtLink to="/login" class="font-medium text-brand hover:underline">
               Back to login
             </NuxtLink>

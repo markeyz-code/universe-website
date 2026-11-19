@@ -126,12 +126,12 @@ instanceArray.forEach((instance) => {
           type: "ERROR",
           ...err.response,
         });
-      } else if (err.response.status === 500) {
+      } else if (statusCodeStartsWith(err.response.status, 5)) {
         showToast({
-          title: "Error",
-          message: err?.response?.data?.message || err?.response?.data?.error || "An error occured",
+          title: "Service Unavailable",
+          message: err?.response?.data?.message || err?.response?.data?.error || "The service is temporarily unavailable. Please try again.",
           toastType: "error",
-          duration: 3000
+          duration: 6000
         });
         return Promise.reject({
           type: "ERROR",

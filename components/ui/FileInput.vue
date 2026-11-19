@@ -1,13 +1,13 @@
 <template>
   <div>
-    <label v-if="label" class="block text-sm font-medium text-gray-700 mb-2">
+    <label v-if="label" class="block text-[11px] font-extrabold uppercase tracking-[0.1em] text-navy-600 mb-2">
       {{ label }} <span v-if="required" class="text-red-500">*</span>
     </label>
     <div 
-      class="border border-dashed p-6 text-center rounded-lg transition-all"
+      class="border border-dashed p-7 text-center rounded-2xl transition-all"
       :class="[
         isDragging ? 'border-brand bg-brand/5 ring-2 ring-brand/20' : '',
-        props.modelValue ? 'border-brand bg-blue-50/30' : 'border-gray-300 hover:border-gray-400 cursor-pointer bg-gray-50'
+        props.modelValue ? 'border-brand bg-brand-50/60' : 'border-navy-200 hover:border-brand/50 cursor-pointer bg-[#FBFCFE]'
       ]"
       @click="!props.modelValue && triggerFileInput()"
       @dragenter.prevent="isDragging = true"
@@ -25,9 +25,9 @@
       
       <!-- Empty State -->
       <div v-if="!props.modelValue">
-        <component :is="icon" class="mx-auto h-8 w-8 text-gray-400 mb-2" v-if="icon" />
-        <p class="text-sm font-medium text-gray-700">{{ placeholder }}</p>
-        <p v-if="hint" class="text-xs text-gray-500 mt-1">{{ hint }}</p>
+        <component :is="icon" class="mx-auto h-8 w-8 text-navy-300 mb-2" v-if="icon" />
+        <p class="text-sm font-medium text-navy-700">{{ placeholder }}</p>
+        <p v-if="hint" class="text-xs text-navy-400 mt-1">{{ hint }}</p>
       </div>
 
       <!-- File Selected State with Preview -->
@@ -36,7 +36,7 @@
         <div v-if="previewUrl && isImage" class="mb-4 relative group">
           <img 
             :src="previewUrl" 
-            class="max-h-40 rounded-lg shadow-sm border border-gray-200 object-contain mx-auto" 
+            class="max-h-40 rounded-lg shadow-sm border border-navy-100 object-contain mx-auto" 
             alt="Preview" 
           />
           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -48,8 +48,8 @@
         <div v-else-if="isPdf" class="mb-4 flex items-center gap-3 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
           <svg class="w-8 h-8 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/><path d="M8 12h2v2H8v-2zm0 3h2v2H8v-2zm3-3h2v2h-2v-2zm0 3h2v2h-2v-2zm3-3h2v2h-2v-2z"/></svg>
           <div class="text-left">
-            <p class="text-sm font-medium text-gray-900 truncate max-w-[200px]">{{ fileName }}</p>
-            <p class="text-xs text-gray-500">{{ fileSize }}</p>
+            <p class="text-sm font-medium text-navy-950 truncate max-w-[200px]">{{ fileName }}</p>
+            <p class="text-xs text-navy-400">{{ fileSize }}</p>
           </div>
         </div>
 
@@ -58,8 +58,8 @@
           <component :is="successIcon" class="mx-auto h-8 w-8 text-brand mb-2" v-if="successIcon" />
         </div>
 
-        <p class="text-sm font-medium text-gray-900 truncate max-w-full">{{ fileName }}</p>
-        <p class="text-xs text-gray-500 mt-0.5">{{ fileSize }}</p>
+        <p class="text-sm font-medium text-navy-950 truncate max-w-full">{{ fileName }}</p>
+        <p class="text-xs text-navy-400 mt-0.5">{{ fileSize }}</p>
         <button 
           type="button" 
           @click.stop="removeFile" 

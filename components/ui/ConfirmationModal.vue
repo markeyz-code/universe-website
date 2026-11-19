@@ -2,12 +2,12 @@
   <Teleport to="body">
     <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity">
       <div class="bg-white rounded-xl p-6 max-w-sm w-full mx-4 shadow-xl">
-        <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ title }}</h3>
-        <p class="text-sm text-gray-500 mb-6">{{ message }}</p>
+        <h3 class="text-lg font-semibold text-navy-950 mb-2">{{ title }}</h3>
+        <p class="text-sm text-navy-400 mb-6">{{ message }}</p>
         <div class="flex justify-end space-x-3">
           <button
             @click="$emit('cancel')"
-            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 transition-colors"
+            class="px-4 py-2 text-sm font-medium text-navy-700 bg-white border border-navy-200 rounded-lg hover:bg-[#F6F8FB] focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 transition-colors"
           >
             {{ cancelText }}
           </button>

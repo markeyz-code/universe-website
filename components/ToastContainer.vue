@@ -15,11 +15,11 @@
         </div>
         <!-- Content -->
         <div class="flex-1">
-          <p class="text-sm font-semibold text-gray-900">{{ toast.title }}</p>
-          <p class="text-xs text-gray-600 mt-0.5">{{ toast.message }}</p>
+          <p class="text-sm font-semibold text-navy-950">{{ toast.title }}</p>
+          <p class="text-xs text-navy-500 mt-0.5">{{ toast.message }}</p>
         </div>
         <!-- Close -->
-        <button @click="removeToast(toast.id)" class="flex-shrink-0 text-gray-400 hover:text-gray-600 transition">
+        <button @click="removeToast(toast.id)" class="flex-shrink-0 text-navy-300 hover:text-navy-500 transition">
           <X class="w-4 h-4" />
         </button>
       </div>
@@ -40,7 +40,7 @@ const toastClasses = (type?: string) => {
     warning: 'bg-white border-yellow-200',
     info: 'bg-white border-blue-200',
   };
-  return map[type || 'info'] || 'bg-white border-gray-200';
+  return map[type || 'info'] || 'bg-white border-navy-100';
 };
 </script>
 

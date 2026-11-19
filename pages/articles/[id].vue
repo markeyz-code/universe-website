@@ -7,9 +7,9 @@
       </div>
       
       <div v-else-if="error" class="text-center py-24">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Article Not Found</h2>
-        <p class="text-gray-600 mb-8">{{ error }}</p>
-        <NuxtLink to="/" class="bg-brand text-white px-6 py-3 rounded-lg font-medium hover:bg-violet-700 transition-colors">
+        <h2 class="text-2xl font-bold text-navy-950 mb-4">Article Not Found</h2>
+        <p class="text-navy-500 mb-8">{{ error }}</p>
+        <NuxtLink to="/" class="bg-brand text-white px-6 py-3 rounded-lg font-medium hover:bg-brand-700 transition-colors">
           Return Home
         </NuxtLink>
       </div>
@@ -17,7 +17,7 @@
       <article v-else-if="article" class="animate-in fade-in slide-in-from-bottom-4 duration-500">
         <!-- Back Button -->
         <div class="mb-8">
-          <NuxtLink to="/" class="inline-flex items-center text-sm font-medium text-gray-500 hover:text-brand transition-colors">
+          <NuxtLink to="/" class="inline-flex items-center text-sm font-medium text-navy-400 hover:text-brand transition-colors">
             <ArrowLeft class="w-4 h-4 mr-2" />
             Back to Home
           </NuxtLink>
@@ -29,16 +29,16 @@
             <span class="bg-brand/10 text-brand font-bold px-3 py-1 rounded-full uppercase tracking-wider">
               {{ article.category || 'Insight' }}
             </span>
-            <span class="text-gray-500">{{ new Date(article.publishDate || article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
-            <span v-if="article.author" class="text-gray-500 hidden sm:inline-block">&bull;</span>
-            <span v-if="article.author" class="text-gray-700 font-medium hidden sm:inline-block">By {{ article.author }}</span>
+            <span class="text-navy-400">{{ new Date(article.publishDate || article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+            <span v-if="article.author" class="text-navy-400 hidden sm:inline-block">&bull;</span>
+            <span v-if="article.author" class="text-navy-700 font-medium hidden sm:inline-block">By {{ article.author }}</span>
           </div>
           
-          <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight mb-6">
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight mb-6">
             {{ article.title }}
           </h1>
           
-          <p class="text-xl text-gray-600 font-light leading-relaxed mb-8">
+          <p class="text-xl text-navy-500 font-light leading-relaxed mb-8">
             {{ article.excerpt }}
           </p>
           
@@ -47,8 +47,8 @@
               {{ article.author.charAt(0) }}
             </div>
             <div>
-              <p class="text-sm font-medium text-gray-900">{{ article.author }}</p>
-              <p class="text-xs text-gray-500">Author</p>
+              <p class="text-sm font-medium text-navy-950">{{ article.author }}</p>
+              <p class="text-xs text-navy-400">Author</p>
             </div>
           </div>
         </header>
@@ -59,15 +59,15 @@
         </div>
 
         <!-- Article Content -->
-        <div class="prose prose-lg prose-brand max-w-none text-gray-700 leading-loose">
+        <div class="prose prose-lg prose-brand max-w-none text-navy-700 leading-loose">
           <!-- We use v-html if content contains HTML, otherwise just render it -->
           <div v-html="article.content"></div>
         </div>
 
         <!-- Tags -->
-        <div v-if="article.tags && article.tags.length > 0" class="mt-12 pt-8 border-t border-gray-100 flex flex-wrap gap-2">
-          <span class="text-sm font-medium text-gray-500 mr-2 self-center">Tags:</span>
-          <span v-for="tag in article.tags" :key="tag" class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+        <div v-if="article.tags && article.tags.length > 0" class="mt-12 pt-8 border-t border-navy-100 flex flex-wrap gap-2">
+          <span class="text-sm font-medium text-navy-400 mr-2 self-center">Tags:</span>
+          <span v-for="tag in article.tags" :key="tag" class="bg-navy-50 text-navy-700 px-3 py-1 rounded-full text-sm">
             #{{ tag }}
           </span>
         </div>

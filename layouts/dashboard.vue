@@ -1,6 +1,6 @@
 
 <template>
-  <div class="h-screen w-full flex bg-[#FAF5FF] overflow-hidden font-sans text-sm md:text-base">
+  <div class="h-screen w-full flex bg-[#F4F7FA] overflow-hidden font-sans text-sm md:text-base">
     <!-- Mobile Sidebar Backdrop -->
     <div 
       v-if="isMobileSidebarOpen"
@@ -13,7 +13,7 @@
       :class="[
         isSidebarCollapsed ? 'lg:w-20 w-64' : 'w-64',
         isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
-        'fixed lg:relative inset-y-0 left-0 bg-[#0F172A] text-slate-300 flex-shrink-0 flex flex-col z-50 transition-all duration-300 border-r border-slate-800 h-full'
+        'fixed lg:relative inset-y-0 left-0 bg-navy-950 text-slate-300 flex-shrink-0 flex flex-col z-50 transition-all duration-300 border-r border-slate-800 h-full'
       ]"
     >
       <!-- Desktop Collapse Toggle -->
@@ -28,7 +28,8 @@
       <!-- Logo Area -->
       <div class="h-16 flex items-center px-6 border-b border-white/10 relative overflow-hidden" :class="isSidebarCollapsed ? 'lg:justify-center lg:px-0' : ''">
         <NuxtLink to="/dashboard/overview" class="flex items-center gap-3 relative z-10" @click="isMobileSidebarOpen = false">
-          <div class="w-8 h-8 rounded-xl bg-brand flex items-center justify-center shadow-sm shrink-0">
+          <BrandLogo variant="white" class="h-7 shrink-0" :class="isSidebarCollapsed ? 'lg:hidden' : ''" />
+          <div v-if="isSidebarCollapsed" class="hidden lg:flex w-8 h-8 rounded-xl bg-brand items-center justify-center shadow-sm shrink-0">
             <Sparkles class="w-4 h-4 text-white" />
           </div>
           <span :class="isSidebarCollapsed ? 'lg:hidden' : ''" class="text-lg font-bold text-white tracking-tight">UniVerse</span>
@@ -70,10 +71,10 @@
           <NuxtLink to="/dashboard/notifications" class="nav-item group relative" active-class="active-nav" @click="isMobileSidebarOpen = false" :title="isSidebarCollapsed ? 'Notifications' : ''">
             <div class="nav-icon"><Bell class="w-4 h-4 shrink-0" /></div>
             <span :class="isSidebarCollapsed ? 'lg:hidden' : ''" class="font-medium text-sm">Notifications</span>
-            <span v-if="unreadCount > 0 && !isSidebarCollapsed" class="ml-auto px-1.5 py-0.2 min-w-[18px] text-center rounded-full text-[10px] font-extrabold bg-fuchsia-500 text-white animate-pulse">
+            <span v-if="unreadCount > 0 && !isSidebarCollapsed" class="ml-auto px-1.5 py-0.2 min-w-[18px] text-center rounded-full text-[10px] font-extrabold bg-teal-500 text-white animate-pulse">
               {{ unreadCount > 99 ? '99+' : unreadCount }}
             </span>
-            <span v-if="unreadCount > 0 && isSidebarCollapsed" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-fuchsia-500 animate-pulse lg:block hidden"></span>
+            <span v-if="unreadCount > 0 && isSidebarCollapsed" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-teal-500 animate-pulse lg:block hidden"></span>
           </NuxtLink>
           
           <div class="pt-5 pb-1">
@@ -110,32 +111,34 @@
     </aside>
 
     <!-- Main Wrapper -->
-    <div class="flex-1 flex flex-col min-w-0 bg-[#FAF5FF]">
+    <div class="flex-1 flex flex-col min-w-0 bg-[#F4F7FA]">
       
       <!-- Header -->
-      <header class="h-16 bg-white/80 backdrop-blur-md border-b border-violet-100 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
+      <header class="h-16 bg-white/80 backdrop-blur-md border-b border-navy-100 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
         <!-- Mobile Menu Toggle -->
         <div class="flex items-center gap-2 lg:gap-4">
-          <button @click="toggleMobileSidebar" class="lg:hidden p-2 text-slate-600 hover:bg-violet-50 rounded-xl transition-colors shrink-0 cursor-pointer">
+          <button @click="toggleMobileSidebar" class="lg:hidden p-2 text-slate-600 hover:bg-brand-50 rounded-xl transition-colors shrink-0 cursor-pointer">
             <Menu class="w-5 h-5" />
           </button>
           
-          <div class="hidden md:flex items-center bg-violet-50/80 rounded-full px-3 py-1.5 w-48 lg:w-64 border border-violet-200/60 focus-within:border-violet-400 transition-all">
-            <Search class="w-4 h-4 text-violet-400 mr-2" />
-            <input type="text" placeholder="Search anything..." class="bg-transparent border-none outline-none w-full text-xs text-slate-700 placeholder-violet-300" />
+          <div class="hidden md:flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-navy-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+            Member workspace
+            <span class="text-navy-200">/</span>
+            <span class="text-brand">UniVerse</span>
           </div>
         </div>
 
         <div class="flex items-center gap-4">
           <NuxtLink
             to="/dashboard/notifications"
-            class="w-9 h-9 rounded-full border border-violet-200 flex items-center justify-center text-violet-500 hover:bg-violet-50 hover:text-violet-700 transition-colors relative"
+            class="w-9 h-9 rounded-full border border-brand-200 flex items-center justify-center text-brand-500 hover:bg-brand-50 hover:text-brand-700 transition-colors relative"
             title="Notifications"
           >
             <Bell class="w-4 h-4" />
             <span
               v-if="unreadCount > 0"
-              class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-fuchsia-500 text-white rounded-full text-[10px] font-extrabold flex items-center justify-center ring-2 ring-white animate-pulse"
+              class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-teal-500 text-white rounded-full text-[10px] font-extrabold flex items-center justify-center ring-2 ring-white animate-pulse"
             >
               {{ unreadCount > 99 ? '99+' : unreadCount }}
             </span>

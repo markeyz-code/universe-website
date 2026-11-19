@@ -20,7 +20,7 @@
     </div>
 
     <!-- Dynamic Mentorship Status Section -->
-    <div v-if="statusLoading" class="bg-white rounded-lg shadow-sm border border-gray-100 p-8 flex justify-center">
+    <div v-if="statusLoading" class="bg-white rounded-lg shadow-sm border border-navy-100 p-8 flex justify-center">
       <Loader2 class="w-6 h-6 animate-spin text-brand" />
     </div>
 
@@ -35,15 +35,15 @@
             <Check class="w-3 h-3" />
             Active Mentor
           </div>
-          <h2 class="text-xl font-bold text-gray-900">{{ myMentor.firstName }} {{ myMentor.lastName }}</h2>
+          <h2 class="text-xl font-bold text-navy-950">{{ myMentor.firstName }} {{ myMentor.lastName }}</h2>
           <p class="text-brand font-semibold text-sm">{{ myMentor.jobTitle || 'Senior Professional' }}</p>
-          <p class="text-gray-500 text-sm mt-2 line-clamp-2 max-w-2xl">{{ myMentor.bio || 'Your matched mentor is ready to help you navigate your professional journey.' }}</p>
+          <p class="text-navy-400 text-sm mt-2 line-clamp-2 max-w-2xl">{{ myMentor.bio || 'Your matched mentor is ready to help you navigate your professional journey.' }}</p>
         </div>
         <div class="flex flex-col gap-2 w-full sm:w-auto mt-4 sm:mt-0">
           <button class="px-5 py-2.5 bg-brand text-white text-sm font-bold rounded-lg hover:bg-opacity-90 transition-all w-full text-center shadow-sm">
             Message Mentor
           </button>
-          <button class="px-5 py-2.5 bg-white border border-gray-200 text-gray-700 text-sm font-bold rounded-lg hover:bg-gray-50 transition-all w-full text-center">
+          <button class="px-5 py-2.5 bg-white border border-navy-100 text-navy-700 text-sm font-bold rounded-lg hover:bg-[#F6F8FB] transition-all w-full text-center">
             Book Session
           </button>
         </div>
@@ -55,14 +55,14 @@
       <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
         <Loader2 class="w-8 h-8 text-orange-500 animate-spin" />
       </div>
-      <h3 class="text-lg font-bold text-gray-900 mb-2">Match in Progress</h3>
-      <p class="text-gray-600 text-sm max-w-md mx-auto">
+      <h3 class="text-lg font-bold text-navy-950 mb-2">Match in Progress</h3>
+      <p class="text-navy-500 text-sm max-w-md mx-auto">
         We are carefully reviewing your profile and finding the absolute best mentor for your goals. We'll notify you as soon as you're paired!
       </p>
     </div>
 
     <!-- State 1: Request Form (No active/pending request) -->
-    <div v-else class="bg-white rounded-lg shadow-sm border border-gray-100 p-4">
+    <div v-else class="bg-white rounded-lg shadow-sm border border-navy-100 p-4">
       <div v-if="successMessage" class="p-3 bg-green-50 border border-green-200 text-green-800 rounded-md flex items-center gap-2 mb-4">
         <Check class="text-green-600 w-4 h-4 shrink-0"/>
         <p class="text-xs font-medium">{{ successMessage }}</p>
@@ -71,15 +71,15 @@
       <form v-else @submit.prevent="submitMentorshipRequest" class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-gray-700 mb-1">Your Name</label>
-            <input v-model="form.name" required type="text" class="text-xs w-full px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:ring-1 focus:ring-brand focus:bg-white outline-none transition-all" placeholder="John Doe" />
+            <label class="block text-xs font-semibold text-navy-700 mb-1">Your Name</label>
+            <input v-model="form.name" required type="text" class="text-xs w-full px-2.5 py-1.5 bg-[#F6F8FB] border border-navy-100 rounded-md focus:ring-1 focus:ring-brand focus:bg-white outline-none transition-all" placeholder="John Doe" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-700 mb-1">Your Email</label>
-            <input v-model="form.email" required type="email" class="text-xs w-full px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus:ring-1 focus:ring-brand focus:bg-white outline-none transition-all" placeholder="john@example.com" />
+            <label class="block text-xs font-semibold text-navy-700 mb-1">Your Email</label>
+            <input v-model="form.email" required type="email" class="text-xs w-full px-2.5 py-1.5 bg-[#F6F8FB] border border-navy-100 rounded-md focus:ring-1 focus:ring-brand focus:bg-white outline-none transition-all" placeholder="john@example.com" />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-700 mb-1">Area of Interest <span class="text-red-500">*</span></label>
+            <label class="block text-xs font-semibold text-navy-700 mb-1">Area of Interest <span class="text-red-500">*</span></label>
             <div class="relative">
               <!-- Overlay to close dropdown -->
               <div v-if="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-40"></div>
@@ -87,8 +87,8 @@
               <!-- Dropdown Trigger -->
               <div 
                 @click="dropdownOpen = !dropdownOpen" 
-                class="relative z-50 text-xs w-full px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-md focus-within:ring-1 focus-within:ring-brand focus-within:bg-white transition-all cursor-pointer flex justify-between items-center"
-                :class="{ 'text-gray-900': form.interest, 'text-gray-500': !form.interest }"
+                class="relative z-50 text-xs w-full px-2.5 py-1.5 bg-[#F6F8FB] border border-navy-100 rounded-md focus-within:ring-1 focus-within:ring-brand focus-within:bg-white transition-all cursor-pointer flex justify-between items-center"
+                :class="{ 'text-navy-950': form.interest, 'text-navy-400': !form.interest }"
               >
                 <div class="flex items-center gap-1.5">
                   <component 
@@ -98,19 +98,19 @@
                   />
                   <span class="truncate font-medium">{{ form.interest || 'Select specialization' }}</span>
                 </div>
-                <svg class="w-3.5 h-3.5 text-gray-500 shrink-0 transition-transform duration-200" :class="{ 'rotate-180': dropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg class="w-3.5 h-3.5 text-navy-400 shrink-0 transition-transform duration-200" :class="{ 'rotate-180': dropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
               </div>
               
               <!-- Dropdown Menu -->
-              <div v-if="dropdownOpen" class="absolute z-50 w-full mt-1 bg-white border border-gray-100 rounded-md shadow-lg py-1 overflow-hidden">
+              <div v-if="dropdownOpen" class="absolute z-50 w-full mt-1 bg-white border border-navy-100 rounded-md shadow-lg py-1 overflow-hidden">
                 <div 
                   v-for="spec in specializations" 
                   :key="spec.id" 
                   @click="selectInterest(spec.value)"
-                  class="px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50 cursor-pointer flex items-center gap-2 transition-colors"
+                  class="px-3 py-1.5 text-xs text-navy-700 hover:bg-[#F6F8FB] cursor-pointer flex items-center gap-2 transition-colors"
                   :class="{ 'bg-brand/5 text-brand font-semibold': form.interest === spec.value }"
                 >
-                  <component :is="spec.icon" class="w-3.5 h-3.5 text-gray-400" :class="{ 'text-brand': form.interest === spec.value }" />
+                  <component :is="spec.icon" class="w-3.5 h-3.5 text-navy-300" :class="{ 'text-brand': form.interest === spec.value }" />
                   {{ spec.label }}
                 </div>
               </div>
@@ -130,25 +130,25 @@
     <!-- Mentor Directory -->
     <div>
       <div class="mb-2 flex items-center justify-between">
-        <h3 class="text-sm font-bold text-gray-900">Featured Mentors</h3>
+        <h3 class="text-sm font-bold text-navy-950">Featured Mentors</h3>
       </div>
       
       <div v-if="mentorsLoading" class="flex justify-center py-8">
         <Loader2 class="w-6 h-6 animate-spin text-brand" />
       </div>
       
-      <div v-else-if="!mentors || mentors.length === 0" class="py-12 text-center border-2 border-dashed border-gray-100 rounded-xl">
-        <p class="text-gray-500 text-sm font-medium">No mentors available at the moment.</p>
+      <div v-else-if="!mentors || mentors.length === 0" class="py-12 text-center border-2 border-dashed border-navy-100 rounded-xl">
+        <p class="text-navy-400 text-sm font-medium">No mentors available at the moment.</p>
       </div>
 
       <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div v-for="mentor in mentors" :key="mentor.id" class="bg-white rounded-lg p-3 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-          <div class="w-10 h-10 bg-gray-100 rounded-full mb-2 flex items-center justify-center">
-            <User class="text-gray-400 w-5 h-5"/>
+        <div v-for="mentor in mentors" :key="mentor.id" class="bg-white rounded-lg p-3 border border-navy-100 shadow-sm flex flex-col items-center text-center">
+          <div class="w-10 h-10 bg-navy-50 rounded-full mb-2 flex items-center justify-center">
+            <User class="text-navy-300 w-5 h-5"/>
           </div>
-          <h4 class="font-bold text-xs text-gray-900">{{ mentor.firstName }} {{ mentor.lastName }}</h4>
+          <h4 class="font-bold text-xs text-navy-950">{{ mentor.firstName }} {{ mentor.lastName }}</h4>
           <span class="px-2 py-0.5 mt-1 bg-brand/10 text-brand rounded-full text-[9px] font-semibold mb-1.5">{{ mentor.jobTitle || 'Mentor' }}</span>
-          <p class="text-[10px] text-gray-500 line-clamp-2 leading-tight">{{ mentor.bio || 'Experienced professional.' }}</p>
+          <p class="text-[10px] text-navy-400 line-clamp-2 leading-tight">{{ mentor.bio || 'Experienced professional.' }}</p>
         </div>
       </div>
     </div>

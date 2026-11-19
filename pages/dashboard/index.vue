@@ -3,17 +3,17 @@
     <div class="w-full space-y-8">
       
       <!-- Welcome Header -->
-      <div v-if="!loading && profile" class="bg-white rounded-2xl p-8 border border-violet-100 shadow-sm relative overflow-hidden">
-        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-violet-100/60 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-fuchsia-100/40 rounded-full blur-2xl"></div>
+      <div v-if="!loading && profile" class="bg-white rounded-2xl p-8 border border-brand-100 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-brand-100/60 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-teal-100/40 rounded-full blur-2xl"></div>
         <div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 tracking-tight">Welcome back, {{ profile.firstName }}! 👋</h2>
-            <p class="text-gray-500 mt-2 text-sm sm:text-base">Here's an overview of your active subscription and member benefits.</p>
+            <h2 class="text-3xl font-bold text-navy-950 tracking-tight">Welcome back, {{ profile.firstName }}! 👋</h2>
+            <p class="text-navy-400 mt-2 text-sm sm:text-base">Here's an overview of your active subscription and member benefits.</p>
           </div>
-          <div v-if="subscription" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-100 to-fuchsia-100 border border-violet-200 rounded-full">
-            <span class="w-2.5 h-2.5 bg-violet-600 rounded-full animate-pulse"></span>
-            <span class="text-sm font-bold text-violet-700 uppercase tracking-wider">{{ subscription.name }}</span>
+          <div v-if="subscription" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-100 to-teal-100 border border-brand-200 rounded-full">
+            <span class="w-2.5 h-2.5 bg-brand rounded-full animate-pulse"></span>
+            <span class="text-sm font-bold text-brand-700 uppercase tracking-wider">{{ subscription.name }}</span>
           </div>
           <div v-else class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-full text-yellow-700">
             <span class="text-sm font-bold uppercase tracking-wider">No Active Plan</span>
@@ -23,7 +23,7 @@
 
       <!-- Loading State -->
       <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div v-for="i in 3" :key="i" class="h-32 bg-white rounded-xl border border-violet-100 shadow-sm animate-pulse"></div>
+        <div v-for="i in 3" :key="i" class="h-32 bg-white rounded-xl border border-brand-100 shadow-sm animate-pulse"></div>
       </div>
 
       <!-- Main Dashboard Grid -->
@@ -32,62 +32,62 @@
         <!-- Subscription Details (Left Col) -->
         <div class="lg:col-span-2 space-y-8">
           
-          <h3 class="text-lg font-bold text-gray-900">Your Plan Allowances</h3>
+          <h3 class="text-lg font-bold text-navy-950">Your Plan Allowances</h3>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <!-- Mentorship Requests -->
-            <div class="bg-white p-6 rounded-xl border border-violet-100 shadow-sm hover:shadow-md transition-shadow">
-              <div class="w-12 h-12 bg-violet-100 text-violet-600 rounded-lg flex items-center justify-center mb-4">
+            <div class="bg-white p-6 rounded-xl border border-brand-100 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-brand-100 text-brand rounded-lg flex items-center justify-center mb-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
               </div>
-              <p class="text-sm font-medium text-gray-500">Mentorship Requests</p>
+              <p class="text-sm font-medium text-navy-400">Mentorship Requests</p>
               <div class="flex items-baseline gap-2 mt-1">
-                <span class="text-3xl font-black text-gray-900">{{ subscription?.maxMentorshipRequests || 0 }}</span>
-                <span class="text-sm text-gray-500">Max / month</span>
+                <span class="text-3xl font-black text-navy-950">{{ subscription?.maxMentorshipRequests || 0 }}</span>
+                <span class="text-sm text-navy-400">Max / month</span>
               </div>
             </div>
 
             <!-- Event Discount -->
-            <div class="bg-white p-6 rounded-xl border border-violet-100 shadow-sm hover:shadow-md transition-shadow">
-              <div class="w-12 h-12 bg-fuchsia-100 text-fuchsia-600 rounded-lg flex items-center justify-center mb-4">
+            <div class="bg-white p-6 rounded-xl border border-brand-100 shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-lg flex items-center justify-center mb-4">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               </div>
-              <p class="text-sm font-medium text-gray-500">Event Ticket Discount</p>
+              <p class="text-sm font-medium text-navy-400">Event Ticket Discount</p>
               <div class="flex items-baseline gap-2 mt-1">
-                <span class="text-3xl font-black text-gray-900">{{ subscription?.eventDiscountPercentage || 0 }}%</span>
-                <span class="text-sm text-gray-500">Off all paid events</span>
+                <span class="text-3xl font-black text-navy-950">{{ subscription?.eventDiscountPercentage || 0 }}%</span>
+                <span class="text-sm text-navy-400">Off all paid events</span>
               </div>
             </div>
           </div>
 
-          <h3 class="text-lg font-bold text-gray-900 pt-4">Feature Access</h3>
+          <h3 class="text-lg font-bold text-navy-950 pt-4">Feature Access</h3>
           
           <!-- Access Checks -->
-          <div class="bg-white rounded-xl border border-violet-100 shadow-sm overflow-hidden divide-y divide-violet-50">
+          <div class="bg-white rounded-xl border border-brand-100 shadow-sm overflow-hidden divide-y divide-brand-50">
             <div class="p-4 flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="text-lg">🔐</span>
-                <span class="font-medium text-gray-900">Access The Vault</span>
+                <span class="font-medium text-navy-950">Access The Vault</span>
               </div>
-              <span v-if="subscription?.canAccessVault" class="px-3 py-1 bg-violet-100 text-violet-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
+              <span v-if="subscription?.canAccessVault" class="px-3 py-1 bg-brand-100 text-brand-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
               <span v-else class="px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full uppercase">Locked</span>
             </div>
             
             <div class="p-4 flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="text-lg">✍️</span>
-                <span class="font-medium text-gray-900">Post Articles</span>
+                <span class="font-medium text-navy-950">Post Articles</span>
               </div>
-              <span v-if="subscription?.canPostArticles" class="px-3 py-1 bg-violet-100 text-violet-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
+              <span v-if="subscription?.canPostArticles" class="px-3 py-1 bg-brand-100 text-brand-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
               <span v-else class="px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full uppercase">Locked</span>
             </div>
 
             <div class="p-4 flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <span class="text-lg">🌍</span>
-                <span class="font-medium text-gray-900">Global Community</span>
+                <span class="font-medium text-navy-950">Global Community</span>
               </div>
-              <span v-if="subscription?.canAccessGlobalCommunity" class="px-3 py-1 bg-violet-100 text-violet-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
+              <span v-if="subscription?.canAccessGlobalCommunity" class="px-3 py-1 bg-brand-100 text-brand-800 text-xs font-bold rounded-full uppercase">Unlocked</span>
               <span v-else class="px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full uppercase">Locked</span>
             </div>
           </div>
@@ -96,9 +96,9 @@
 
         <!-- Quick Links (Right Col) -->
         <div class="space-y-6">
-          <div class="bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+          <div class="bg-gradient-to-br from-brand via-brand-700 to-teal-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>
-            <div class="absolute bottom-0 left-0 w-24 h-24 bg-fuchsia-400/20 rounded-full blur-xl"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-teal-400/20 rounded-full blur-xl"></div>
             <h3 class="text-xl font-bold mb-2 relative z-10">Ready to explore?</h3>
             <p class="text-white/70 text-sm mb-6 relative z-10">Take advantage of your active plan and start networking, reading, or attending events.</p>
             <div class="space-y-3 relative z-10">
@@ -110,7 +110,7 @@
                 <span class="font-medium">Enter The Vault</span>
                 <span class="group-hover:translate-x-1 transition-transform">→</span>
               </NuxtLink>
-              <NuxtLink to="/dashboard/pricing" v-if="!subscription" class="flex items-center justify-between px-4 py-3 bg-white text-violet-700 hover:bg-gray-50 rounded-lg transition-colors font-bold text-center justify-center">
+              <NuxtLink to="/dashboard/pricing" v-if="!subscription" class="flex items-center justify-between px-4 py-3 bg-white text-brand-700 hover:bg-[#F6F8FB] rounded-lg transition-colors font-bold text-center justify-center">
                 Get a Subscription
               </NuxtLink>
             </div>
